@@ -1,5 +1,6 @@
 # show-v2.0
-
+## 项目启动前需要安装
+node , yarn , vue/cli ,typescript, 默认ide webstorm
 ## Project setup 初始化项目
 ```
 yarn install
@@ -25,9 +26,14 @@ yarn run lint
 yarn run test:unit
 ```
 
-### Run your end-to-end tests 段对端测试 e-to-e
+### Run your end-to-end tests 端对端测试 e-to-e
 ```
 yarn run test:e2e
 ```
 ### 技术选型及组件规划
 ![show-v2.0技术选型及组件规划](./doc/show-v2.0.png)
+
+### TODO
+1. 集成部署shell 编写
+2. 自动文档生成
+3. 测试覆盖或者部署的工作流
