@@ -8,4 +8,4 @@
 3. 在页面中使用定义好的名称组件会根据本地表示挑选显示文字
       `locale: 'zh-CN',    // 语言标识`
       `//this.$i18n.locale // 通过切换locale的值来实现语言切换这个样设置会根据浏览器文字设置选择语言`
-4. 在`component/common/i18n.ts` 实现自动切换和手动切换功能
+4. 在`component/common/Myi18n.ts` 实现自动切换和手动切换功能

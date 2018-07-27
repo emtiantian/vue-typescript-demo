@@ -37,30 +37,11 @@
 </template>
 
 <script lang="ts">
-    import {Component, Prop, Vue} from "vue-property-decorator";
+    import {Component, Prop, Vue} from 'vue-property-decorator';
 
     @Component
     export default class HelloWorld extends Vue {
         @Prop() private msg!: string;
-        // changeLangEvent() {
-        //     this.$confirm("确定切换语言吗?", "提示", {
-        //         confirmButtonText: "确定",
-        //         cancelButtonText: "取消",
-        //         type: "warning"
-        //     }).then(() => {
-        //         if (this.lang === "zh-CN") {
-        //             this.lang = "en-US";
-        //             this.$i18n.locale = this.lang;//关键语句
-        //         } else {
-        //             this.lang = "zh-CN";
-        //             this.$i18n.locale = this.lang;//关键语句
-        //         }
-        //     }).catch(() => {
-        //         this.$message({
-        //             type: "info",
-        //         });
-        //     })
-        // };
     }
 </script>
 
