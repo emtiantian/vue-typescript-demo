@@ -1,6 +1,6 @@
 
 export default  new class Myi18n {
-    //这个方法有问题
+    //这个是在用户自定义了语言，保存在cookies中
     public getCookie(name: string, defaultValue: string) {
         let arr: any;
         const reg = new RegExp('(^| )' + name + '=([^;]*)(;|$)');
@@ -11,23 +11,14 @@ export default  new class Myi18n {
             return defaultValue;
         }
     }
-    //切换语言  主要是修改this.$i18n.locale = this.lang;//关键语句
-    // changeLangEvent() {
-    // this.$confirm('确定切换语言吗?', '提示', {
-    //     confirmButtonText: '确定',
-    //     cancelButtonText: '取消',
-    //     type: 'warning'
-    // }).then(() => {
-    //     if ( this.lang === 'zh-CN' ) {
-    //         this.lang = 'en-US';
-    //         this.$i18n.locale = this.lang;//关键语句
-    //     }else {
-    //         this.lang = 'zh-CN';
-    //         this.$i18n.locale = this.lang;//关键语句
-    //     }
-    // }).catch(() => {
-    //     this.$message({
-    //         type: 'info',
-    //     });
-    // });
+    //获得当前操作系统的语言设置,判断是否有对应语言包，没有则使用第一个语言包
+    public getLocalLanguage(hasLanguage: string[]){
+        // @ts-ignore：隐藏兼容ie时出现的，navigator不存在browserLanguage属性的错误
+        let language = (navigator.language || navigator.browserLanguage).toLowerCase()
+        if(hasLanguage.indexOf(language)<0){
+            language= hasLanguage[0];
+        }
+        return language
+    }
+
 };

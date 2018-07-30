@@ -1,5 +1,5 @@
 export default new class Myi18n {
-    //这个方法有问题
+    //这个是在用户自定义了语言，保存在cookies中
     getCookie(name, defaultValue) {
         let arr;
         const reg = new RegExp('(^| )' + name + '=([^;]*)(;|$)');
@@ -10,6 +10,15 @@ export default new class Myi18n {
         else {
             return defaultValue;
         }
+    }
+    //获得当前操作系统的语言设置,判断是否有对应语言包，没有则使用第一个语言包
+    getLocalLanguage(hasLanguage) {
+        // @ts-ignore：隐藏兼容ie时出现的，navigator不存在browserLanguage属性的错误
+        let language = (navigator.language || navigator.browserLanguage).toLowerCase();
+        if (hasLanguage.indexOf(language) < 0) {
+            language = hasLanguage[0];
+        }
+        return language;
     }
 };
 //# sourceMappingURL=myi18n.js.map

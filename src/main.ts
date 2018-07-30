@@ -5,19 +5,20 @@ import store from './store';
 // 国际化
 import vuei18n from 'vue-i18n';
 // 饿了么ui
-import  element from 'element-ui'
+import element from 'element-ui';
 // 引入自动切换语言和手动切换语言类
-// import myi18n from './components/common/Myi18n';
+import myi18n from './components/common/Myi18n';
 
 Vue.config.productionTip = false;
 
 Vue.use(vuei18n); // 插件形式挂载国际化组件
 Vue.use(element); // 引入饿了么ui
-
+// 定义系统包含的语言，第一个为默认语言
+Vue.prototype.language=['zh-cn','en']
 // 初始化国际化配置
 const i18n = new vuei18n({
-    locale: 'zh-cn',    // 语言标识
-    // this.$i18n.locale // 通过切换locale的值来实现语言切换
+    // locale: 'zh-cn',    // 语言标识
+    locale: myi18n.getLocalLanguage(Vue.prototype.language), // 通过切换locale的值来实现语言切换
     messages: {
         'zh-cn': require('./assets/lang/zh'),   // 中文语言包
         'en': require('./assets/lang/en'),    // 英文语言包
