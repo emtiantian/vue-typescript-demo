@@ -1,17 +1,17 @@
 import axios from 'axios';
-import Vue from 'vue'
+import Vue from 'vue';
 
 const instance = axios.create({
     baseURL: 'http://rap2api.taobao.org/app/mock/224',
-    timeout: 10000
+    timeout: 10000,
 });
-const cacheErr = function (error:any ){
+const cacheErr = (error: any) => {
     if (error.response) {
         switch (error.response.status) {
             case 400:
                 Vue.prototype.$message({
                     message: error.response.data.message || '请求参数异常',
-                    type: 'error'
+                    type: 'error',
                 });
                 break;
             case 401:
@@ -19,7 +19,7 @@ const cacheErr = function (error:any ){
                 Vue.prototype.$message({
                     message: error.response.data.message || '密码错误或账号不存在！',
                     type: 'warning',
-                    onClose: function(){
+                    onClose: function () {
                         location.reload();
                     }
                 });
@@ -42,7 +42,7 @@ const cacheErr = function (error:any ){
 //添加请求头
 instance.defaults.headers.post['Content-Type'] = 'application/json';
 //错误处理
-instance.interceptors.response.use(function(response) {
+instance.interceptors.response.use(function (response) {
     return response;
 }, cacheErr);
 

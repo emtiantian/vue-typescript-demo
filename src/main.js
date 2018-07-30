@@ -24,11 +24,10 @@ const i18n = new vuei18n({
 });
 // 自定义权限指令 需要权限判断的操作均引用这个
 Vue.directive('has', {
-    bind: function (el, binding) {
+    bind: (el, binding) => {
         if (!Vue.prototype.$_has(binding.value)) {
             el.parentNode.removeChild(el);
         }
-        ;
     },
 });
 new Vue({

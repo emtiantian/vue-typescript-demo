@@ -1,6 +1,6 @@
 # show-v2.0
 ## 项目启动前需要安装
-node , yarn , vue/cli ,typescript, 默认ide webstorm
+node, yarn, vue/cli, typescript, tslint, 默认ide webstorm
 ## Project setup 初始化项目
 ```
 yarn install
@@ -32,6 +32,12 @@ yarn run test:e2e
 ```
 ### 技术选型及组件规划
 ![show-v2.0技术选型及组件规划](./doc/show-v2.0.png)
+
+### 登录部分设计
+![登录流程](./doc/登录流程.png)
+
+### 跳转部分设计
+![跳转流程](./doc/跳转说明.jpg)
 
 ### TODO
 1. 集成部署shell 编写

@@ -14,7 +14,7 @@ Vue.config.productionTip = false;
 Vue.use(vuei18n); // 插件形式挂载国际化组件
 Vue.use(element); // 引入饿了么ui
 // 定义系统包含的语言，第一个为默认语言
-Vue.prototype.language=['zh-cn','en']
+Vue.prototype.language = ['zh-cn', 'en'];
 // 初始化国际化配置
 const i18n = new vuei18n({
     // locale: 'zh-cn',    // 语言标识
@@ -27,10 +27,10 @@ const i18n = new vuei18n({
 
 // 自定义权限指令 需要权限判断的操作均引用这个
 Vue.directive('has', {
-    bind: function(el: any, binding: any){
+    bind : (el: any, binding: any) => {
         if (!Vue.prototype.$_has(binding.value)) {
             el.parentNode.removeChild(el);
-        };
+        }
     },
 });
 
