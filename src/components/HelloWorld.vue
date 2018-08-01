@@ -32,16 +32,22 @@
             <li><a href="https://vue-loader.vuejs.org" target="_blank">vue-loader</a></li>
             <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
         </ul>
-        <!--<button v-on:click="alert('111')">{{$t('m.changeLan')}}</button>-->
+        <button @click="changeLanguage">{{$t('m.changeLan')}}</button>
     </div>
 </template>
 
 <script lang="ts">
     import {Component, Prop, Vue} from 'vue-property-decorator';
+    import my18n from './common/Myi18n';
 
     @Component
     export default class HelloWorld extends Vue {
         @Prop() private msg!: string;
+
+        private changeLanguage(): void {
+            // @ts-ignore：隐藏ts不知道i18n默认对象错误 所有组件默认继承根vue的所有属性
+            new my18n().changeLanguage(this.$i18n, 'en');
+        }
     }
 </script>
 

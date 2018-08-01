@@ -16,12 +16,15 @@ Vue.prototype.language = ['zh-cn', 'en'];
 // 初始化国际化配置
 const i18n = new vuei18n({
     // locale: 'zh-cn',    // 语言标识
-    locale: myi18n.getLocalLanguage(Vue.prototype.language),
+    fallbackLocale: 'zh-cn',
+    locale: new myi18n().getLocalLanguage(),
     messages: {
         'zh-cn': require('./assets/lang/zh'),
         'en': require('./assets/lang/en'),
     },
 });
+// 绑定i18n到全局变量上
+Vue.prototype.i18n = i18n;
 // 自定义权限指令 需要权限判断的操作均引用这个
 Vue.directive('has', {
     bind: (el, binding) => {
