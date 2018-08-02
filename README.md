@@ -30,8 +30,6 @@ yarn run test:unit
 ```
 yarn run test:e2e
 ```
-### 技术选型及组件规划
-![show-v2.0技术选型及组件规划](./doc/show-v2.0.png)
 
 ### 登录部分设计
 ![登录流程](./doc/登录流程.png)

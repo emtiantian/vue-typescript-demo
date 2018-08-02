@@ -13,6 +13,7 @@ class Myi18n {
     }
 
     // 获得当前操作系统的语言设置,判断是否有对应语言包，没有则使用第一个语言包
+    // 如果需要保存上次选择语言需要cookies存储
     public getLocalLanguage() {
         // @ts-ignore：隐藏兼容ie时出现的，navigator不存在browserLanguage属性的错误
         return (navigator.language || navigator.browserLanguage).toLowerCase();

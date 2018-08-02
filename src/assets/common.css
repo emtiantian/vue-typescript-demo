@@ -1,0 +1,5 @@
+html,body{
+    padding: 0;
+    margin: 0;
+    font-size: 16px; /*在根节点设置16px防止用户在浏览器中修改了文字大小影响app运行*/
+}
