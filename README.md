@@ -1,6 +1,6 @@
-# show-v2.0
+# vue-typescript-demo
 ## 项目启动前需要安装
-node, yarn, vue/cli, typescript, tslint, 默认ide webstorm
+node, yarn, vue/cli, typescript, 默认ide webstorm
 ## Project setup 初始化项目
 ```
 yarn install
@@ -43,3 +43,6 @@ yarn run test:e2e
 1. 集成部署shell 编写
 2. 自动文档生成
 3. 测试覆盖或者部署的工作流
+
+### license
+[MIT](./LICENSE) 
