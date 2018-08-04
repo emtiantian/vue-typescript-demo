@@ -6,8 +6,11 @@ import store from './store';
 import vuei18n from 'vue-i18n';
 // 饿了么ui
 import element from 'element-ui';
+// 引入饿了么ui的css
+import 'element-ui/lib/theme-chalk/index.css';
 // 引入自动切换语言和手动切换语言类
 import myi18n from './components/common/Myi18n';
+
 
 Vue.config.productionTip = false;
 

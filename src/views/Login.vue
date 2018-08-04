@@ -40,7 +40,7 @@
         private login(): void {
             const params = this.getParams();
             this.isBtnLoading = true;
-            this.$message.error('name' + params.name + 'password' + params.password);
+            this.$message.error('name:' + params.name + 'password:' + params.password);
         }
 
     }
