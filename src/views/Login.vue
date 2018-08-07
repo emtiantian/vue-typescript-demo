@@ -45,7 +45,7 @@
             // 测试别人rap2 怎么实现的根据参数返回不同响应的
             instance.defaults.headers.common['Authorization'] = 'Bearer roottoken';
             loginApi.request.r({
-                Authorization: 'roottoken',
+                Authorization: 'admintoken1',
             }).then((res: any) => {
                 this.$message.error('name:' + res.data.name );
             });

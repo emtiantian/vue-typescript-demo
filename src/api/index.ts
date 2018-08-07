@@ -2,7 +2,8 @@ import axios from 'axios';
 import Vue from 'vue';
 
 const instance = axios.create({
-    baseURL: 'http://rap2api.taobao.org/app/mock/224',
+    // baseURL: 'http://rap2api.taobao.org/app/mock/224',
+    baseURL: 'http://rap2api.taobao.org/app/mock/25126/v1',
     timeout: 10000,
 });
 const cacheErr = (error: any) => {
