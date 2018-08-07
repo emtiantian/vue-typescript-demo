@@ -5,10 +5,10 @@ const preUrlPath = '';
 const request = {
     p: ['get,/login'],
     r: (params: any) => {
-        return instance.get(`${preUrlPath}/login`, {params});
+        return instance.get(`${preUrlPath}/signin`, {params});
     },
 };
-export {
+export default {
     request,
 }
 ;
