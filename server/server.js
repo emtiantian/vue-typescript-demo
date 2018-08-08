@@ -38,11 +38,7 @@ app
 app.use(controller());
 
 
-router
-  .get('*', (ctx, next) => {
-    console.log("请求body"+ctx.body)
-    next();
-  })
+
 
 
 app.listen(3000)

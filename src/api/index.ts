@@ -43,7 +43,7 @@ const cacheErr = (error: any) => {
     return Promise.reject(error);
 };
 // 添加请求头
-// instance.defaults.headers.post['Content-Type'] = 'application/json';
+// instance.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 // 错误处理
 instance.interceptors.response.use((response) => {
     return response;
