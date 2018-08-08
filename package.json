@@ -17,6 +17,7 @@
     "koa-bodyparser": "^4.2.1",
     "koa-logger": "^3.2.0",
     "koa-router": "^7.4.0",
+    "koa2-cors": "^2.0.6",
     "tslint": "^5.11.0",
     "typescript": "^3.0.1",
     "vue": "^2.5.16",

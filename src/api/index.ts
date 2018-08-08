@@ -4,7 +4,7 @@ import Vue from 'vue';
 const instance = axios.create({
     // baseURL: 'http://rap2api.taobao.org/app/mock/224',
     // baseURL: 'http://rap2api.taobao.org/app/mock/25126/v1',
-    baseURL: 'http:127.0.0.1:3000',
+    baseURL: 'http://127.0.0.1:3000',
     timeout: 10000,
 });
 const cacheErr = (error: any) => {
@@ -17,6 +17,7 @@ const cacheErr = (error: any) => {
                 });
                 break;
             case 401:
+                // 错误登录或者登录超时 需要清空session中的user
                 sessionStorage.removeItem('user');
                 Vue.prototype.$message({
                     message: error.response.data.message || '密码错误或账号不存在！',
@@ -42,7 +43,7 @@ const cacheErr = (error: any) => {
     return Promise.reject(error);
 };
 // 添加请求头
-instance.defaults.headers.post['Content-Type'] = 'application/json';
+// instance.defaults.headers.post['Content-Type'] = 'application/json';
 // 错误处理
 instance.interceptors.response.use((response) => {
     return response;

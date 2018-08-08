@@ -7,11 +7,28 @@ const koaBodyparser =require('koa-bodyparser');
 const koaLogger = require('koa-logger');
 // 自定义中间件读取并导入api文件中的接口
 const controller = require("./controller");
+// 引入跨域处理 跨域范围可以自己定义
+const koaCors = require('koa2-cors')
+// app.use(cors({
+//   origin: function(ctx) {
+//     if (ctx.url === '/test') {
+//       return false;
+//     }
+//     return '*';
+//   },
+//   exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
+//   maxAge: 5,
+//   credentials: true,
+//   allowMethods: ['GET', 'POST', 'DELETE'],
+//   allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
+// }));
 
 
 const app = new koa();
 const router = new koaRouter();
 
+
+app.use(koaCors());
 app.use(koaBodyparser());
 app.use(koaLogger());
 app
@@ -22,9 +39,8 @@ app.use(controller());
 
 
 router
-  .get('/', (ctx, next) => {
-    ctx.response.type = 'text/html';
-    ctx.response.body = '<h1>hello</h1>';
+  .get('*', (ctx, next) => {
+    console.log("请求body"+ctx.body)
     next();
   })
 
