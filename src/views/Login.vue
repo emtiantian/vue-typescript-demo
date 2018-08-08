@@ -43,11 +43,15 @@
             this.isBtnLoading = true;
             // this.$message.error('name:' + params.name + 'password:' + params.password);
             // 测试别人rap2 怎么实现的根据参数返回不同响应的
-            instance.defaults.headers.common['Authorization'] = 'Bearer roottoken';
+            // instance.defaults.headers.common['Authorization'] = 'Bearer roottoken';
+            // loginApi.request.r({
+            //     Authorization: 'admintoken1',
+            // }).then((res: any) => {
+            //     this.$message.error('name:' + res.data.name );
+            // });
             loginApi.request.r({
-                Authorization: 'admintoken1',
-            }).then((res: any) => {
-                this.$message.error('name:' + res.data.name );
+                name : params.name,
+                password: params.password,
             });
         }
     }

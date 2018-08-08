@@ -19,22 +19,22 @@ function addMapping (router, mapping) {
     }
   }
 }
-// 读取文件夹下所有js文件读取对应接口
+// 读取api文件夹下所有js文件读取对应接口
 function addControllers (router, dir) {
-  let files = fs.readdirSync(__dirname + dir);
+  let files = fs.readdirSync(__dirname + "/" +dir);
   let js_files = files.filter((f) => {
     return f.endsWith('.js');
   });
 
   for (let f of js_files) {
     console.log(`process controller: ${f}...`);
-    let mapping = require(__dirname + dir + f);
+    let mapping = require(__dirname + "/" + dir + "/" + f);
     addMapping(router, mapping);
   }
 }
 module.exports = function (dir) {
   let
-    controllers_dir = dir || 'api', // 如果不传参数，扫描目录默认为'controllers'
+    controllers_dir = dir || 'api', // 如果不传参数，扫描目录默认为'api'
     router = require('koa-router')();
   addControllers(router, controllers_dir);
   return router.routes();

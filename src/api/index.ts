@@ -3,7 +3,8 @@ import Vue from 'vue';
 
 const instance = axios.create({
     // baseURL: 'http://rap2api.taobao.org/app/mock/224',
-    baseURL: 'http://rap2api.taobao.org/app/mock/25126/v1',
+    // baseURL: 'http://rap2api.taobao.org/app/mock/25126/v1',
+    baseURL: 'http:127.0.0.1:3000',
     timeout: 10000,
 });
 const cacheErr = (error: any) => {

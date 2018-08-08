@@ -4,10 +4,10 @@ const preUrlPath = '';
 // 获取登录信息
 const request = {
     // 在自定义拦截器中使用，定义当前请求所属路由权限
-    p: ['get,/login'],
+    p: ['post,/login'],
     // 这个r方法用来发送请求
     r: (params: any) => {
-        return instance.get(`${preUrlPath}/error/login`, {params});
+        return instance.post(`${preUrlPath}/login`, {params});
     },
 };
 export default {
