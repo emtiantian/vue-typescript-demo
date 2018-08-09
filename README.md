@@ -6,7 +6,7 @@ node, yarn, vue/cli, typescript, 默认ide webstorm
 yarn install
 ```
 
-### Compiles and hot-reloads for development  开发时启用本地服务器
+### Compiles and hot-reloads for development  开发时启用本地静态服务器
 ```
 yarn run serve
 ```
@@ -30,6 +30,18 @@ yarn run test:unit
 ```
 yarn run test:e2e
 ```
+
+### Run your node-server 启动本地api服务器
+```
+yarn run node-server
+```
+
+
+### Run your node-server-debug debug启动本地api服务器(需要webstorm支持)
+```
+yarn run node-server-debug
+```
+
 
 ### 登录部分设计
 ![登录流程](./doc/登录流程.png)

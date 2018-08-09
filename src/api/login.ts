@@ -11,7 +11,7 @@ const request = {
         // 参考
         // https://laravel-china.org/topics/6321/the-problem-of-sending-post-requests-to-options-when-axios-cross-domain-is-solved
         // 设置自定义server允许跨域就解决 options 请求类型问题
-        // 这里给params加上大括号变成对象才能对应{"params":{params}}?
+        // 这里给params加上大括号变成对象才能对应{"params":{params}}
         // es6的对象扩展
         // const foo = 'bar';
         // const baz = {foo};

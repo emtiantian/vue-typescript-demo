@@ -10,4 +10,8 @@
 `const controller = require("controller");`
 5. 引入跨域处理 跨域范围可以自己定义
 `const koaCors = require('koa2-cors')`
+### TODO
+6. 添加统一的错误处理
+
+
 ## 使用mock自动生成对应数据

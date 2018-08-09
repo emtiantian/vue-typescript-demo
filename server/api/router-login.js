@@ -14,16 +14,16 @@ let login = async (ctx, next) => {
       next()
       return
     }
-    console.log('拿到的data' + obj.name)
+
     if (obj.name == 'admin' && obj.password == '123456') {
       ctx.response.type = 'application/json'
       ctx.response.body = {'token': '123456'}
-      // next()
+      next()
     } else {
       ctx.status = 401
       ctx.response.type = 'text/html'
       ctx.response.body = '<h1>账号或密码不正确</h1>'
-      // next()
+      next()
     }
   })
 }
