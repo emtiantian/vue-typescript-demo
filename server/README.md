@@ -8,4 +8,6 @@
 `const koaLogger = require('koa-logger');`
 4. 自定义中间件读取并导入api文件中的接口
 `const controller = require("controller");`
+5. 引入跨域处理 跨域范围可以自己定义
+`const koaCors = require('koa2-cors')`
 ## 使用mock自动生成对应数据

@@ -8,7 +8,9 @@ const koaLogger = require('koa-logger');
 // 自定义中间件读取并导入api文件中的接口
 const controller = require("./controller");
 // 引入跨域处理 跨域范围可以自己定义
-const koaCors = require('koa2-cors')
+const koaCors = require('koa2-cors');
+
+// 自定义跨域规则
 // app.use(cors({
 //   origin: function(ctx) {
 //     if (ctx.url === '/test') {

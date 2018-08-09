@@ -5,9 +5,11 @@ const instance = axios.create({
     // baseURL: 'http://rap2api.taobao.org/app/mock/224',
     // baseURL: 'http://rap2api.taobao.org/app/mock/25126/v1',
     baseURL: 'http://127.0.0.1:3000',
-    timeout: 10000,
+    timeout: 1000,
 });
 const cacheErr = (error: any) => {
+
+
     if (error.response) {
         switch (error.response.status) {
             case 400:
@@ -39,11 +41,15 @@ const cacheErr = (error: any) => {
                     type: 'error',
                 });
         }
+    } else {
+        // 请求超时处理
+        Vue.prototype.$message({
+            message: error.response.data.message || '网络连接超时',
+            type: 'error',
+        });
     }
     return Promise.reject(error);
 };
-// 添加请求头
-// instance.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 // 错误处理
 instance.interceptors.response.use((response) => {
     return response;

@@ -23,7 +23,7 @@
 <script lang="ts">
     import {Component, Prop, Vue} from 'vue-property-decorator';
     import loginApi from '../api/login';
-    import instance from '../api/index';
+
     @Component
     export default class Login extends Vue {
         // !:是表示必须参数 ?:是表示非必须
