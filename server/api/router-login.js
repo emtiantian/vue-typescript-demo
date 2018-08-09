@@ -2,7 +2,10 @@
 const myDelay = require('../delay')
 
 let login = async (ctx, next) => {
-  let obj = ctx.request.params
+  // 获取post方式的传参
+  //let obj = ctx.request.body
+  // 获取get方式的传参
+  let obj = ctx.request.query
   // 模拟网络延迟或者服务器繁忙
   await myDelay(5000).then(() => {
     console.log('实际处理流程')
