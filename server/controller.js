@@ -8,7 +8,7 @@ function addMapping (router, mapping) {
   for (let url in mapping) {
     if (url.startsWith('GET ')) {
       let path = url.substring(4);
-      router.get(path,  [url]);
+      router.get(path, mapping[url]);
       console.log(`register URL mapping: GET ${path}`);
     } else if (url.startsWith('POST ')) {
       let path = url.substring(5);
@@ -34,8 +34,11 @@ function addControllers (router, dir) {
 }
 module.exports = function (dir = 'api') {
   let
-    controllers_dir = dir,  // 如果不传参数，扫描目录默认为'api'
+    controllers_dir = dir , // 如果不传参数，扫描目录默认为'api'
     router = require('koa-router')();
   addControllers(router, controllers_dir);
-  return router.routes();
+  // 返回路由可访问对象
+  // return router.routes();
+  // 返回路由完整对象
+  return router;
 };

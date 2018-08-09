@@ -27,17 +27,19 @@ const koaCors = require('koa2-cors');
 
 
 const app = new koa();
-const router = new koaRouter();
-
+const route  = controller();
 
 app.use(koaCors());
 app.use(koaBodyparser());
 app.use(koaLogger());
-app
-  .use(router.routes())
-  .use(router.allowedMethods());
+// app
+//   .use(router.routes())
+//   .use(router.allowedMethods());
+
 // 导入自定义接口
-app.use(controller());
+app.use(route.routes())
+  // 调用route的aip在执行完所有next函数判断是否添加正确函数头，没有则添加
+.use(route.allowedMethods())
 
 
 
