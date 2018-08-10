@@ -1,5 +1,4 @@
 import instance from './index';
-import json = Mocha.reporters.json;
 const preUrlPath = '';
 // 获取登录信息
 const request = {

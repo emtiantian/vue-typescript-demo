@@ -32,5 +32,5 @@ let login = async (ctx, next) => {
 }
 // 导出模块格式要注意下 这个格式和controller中解析有关系 当前解析还不支持get 和post之外的请求
 module.exports = {
-  'GET /login': login
+  'GET /public/login': login
 }
