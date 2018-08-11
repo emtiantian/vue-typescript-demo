@@ -11,12 +11,13 @@ const controller = require('./controller')
 const koaCors = require('koa2-cors')
 // 引入jwt进行实现jwt规范
 const koaJwt = require('koa-jwt')
-// 引入jsonwebtoken实现token生成
-const jwtCreate = require('jsonwebtoken')
+
+// 引入jwt配置文件
+const  jwtConfig = require('./jwtConfig')
 // 自定义jwt秘钥内容
-const secretKey = 'xiaotou?'
+const secretKey = jwtConfig.secretKey
 // 自定义不校验的路径数组
-const alowUrl = [/^\/public/]
+const alowUrl = jwtConfig.alowUrl
 
 // 自定义跨域规则
 // app.use(cors({
@@ -34,6 +35,7 @@ const alowUrl = [/^\/public/]
 // }));
 
 const app = new koa()
+// 自动化载入api中的所有路由
 const route = controller()
 
 app.use(koaCors())
@@ -44,7 +46,8 @@ app.use(koaLogger())
 app.use(koaJwt({secretKey}).unless({
   path: alowUrl,
 }))
-// 自定义token检查错误处理 如果出错就不进入下方真实地址
+
+// 自定义token检查错误处理 如果出错就不进入下方处理流程
 app.use(function (ctx, next) {
   return next().cache((err) => {
     if (err.status == '401') {
@@ -62,6 +65,7 @@ app.use(function (ctx, next) {
 app.use(route.routes())
 // 调用route的aip在执行完所有next函数判断是否添加正确函数头，没有则添加
   .use(route.allowedMethods())
+// 全部接口的自定义错误处理
 
 app.listen(3000)
 console.log('1 started at 3000')

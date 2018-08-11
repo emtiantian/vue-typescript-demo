@@ -53,6 +53,7 @@ yarn run node-server-debug
 1. 集成部署shell 编写
 2. 自动文档生成
 3. 测试覆盖或者部署的工作流
+4. server 部分可以独立出来为以后编写测试server提供基础支撑 
 
 ### license
 [MIT](./LICENSE) 
