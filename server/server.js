@@ -1,3 +1,8 @@
+/**
+ * koa主文件，实现jwt校验，token错误处理，加载全部路由，加载全局错误处理。
+ *
+ */
+
 const koa = require('koa')
 // 路由中间件
 const koaRouter = require('koa-router')

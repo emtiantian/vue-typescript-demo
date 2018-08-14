@@ -10,6 +10,12 @@
 `const controller = require("controller");`
 5. 引入跨域处理 跨域范围可以自己定义
 `const koaCors = require('koa2-cors')`
+6. 引入jwt进行实现jwt规范
+`const koaJwt = require('koa-jwt')`
+7. 引入jsonwebtoken实现token生成
+`const jwtCreate = require('jsonwebtoken')`
+
+
 ### TODO
 6. 添加统一的错误处理
 
