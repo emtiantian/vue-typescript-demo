@@ -47,7 +47,7 @@ app.use(koaCors())
 app.use(koaBodyparser())
 app.use(koaLogger())
 
-// 使用jwt实现路由检查是否有权限
+// 使用jwt实现路由检查是否有权限 是否是使用私有秘钥可以解密即认为token正确
 app.use(koaJwt({secretKey}).unless({
   path: alowUrl,
 }))

@@ -4,7 +4,9 @@
  */
 
 // 自定义服务器睡眠时间
-const myDelay = require('../delay')
+const myDelay = require('../util').delay()
+// 判断对象是否在数据库中
+const isInDB = require('../util').isInDB()
 // 引入jsonwebtoken实现token生成
 const jwtCreate = require('jsonwebtoken')
 // 引入jwt配置文件
@@ -13,6 +15,8 @@ const jwtConfig = require('../jwtConfig')
 const secretKey = jwtConfig.secretKey
 // 自定义jwt过期时间
 const expires = jwtConfig.expiresTime
+// 模拟数据
+const  users = require('../Database/user')
 
 let login = async (ctx, next) => {
   // 获取post方式的传参
@@ -31,13 +35,28 @@ let login = async (ctx, next) => {
       return
     }
 
-    if (obj.name == 'admin' && obj.password == '123456') {
+    if (isInDB(obj,users)) {
       ctx.response.type = 'application/json'
       // ctx.response.body = {'token': '123456'}
       // 使用jsonwebtoken生成真正的token 并且设置超时时间
       // 被加密部分 这个被加密部分在正式环境可以和数据库中作比较作为验证token是否真实的依据
-      // 定义个死数据来试验
-      const userToken = {name : obj.name}
+      // {
+      //   "iss": "John Wu JWT",
+      //   "iat": 1441593502,
+      //   "exp": 1441594722,
+      //   "aud": "www.example.com",
+      //   "sub": "jrocket@example.com",
+      //   "from_user": "B",
+      //   "target_user": "A"
+      // }
+      // iss: 该JWT的签发者
+      // sub: 该JWT所面向的用户
+      // aud: 接收该JWT的一方
+      // exp(expires): 什么时候过期，这里是一个Unix时间戳
+      // iat(issued at): 在什么时候签发的
+      // 这里可以加入可访问路由 就不需要每次去数据库中查找了 或者添加用户身份
+      const payload ={name: obj.name}
+
 
     } else {
       ctx.status = 401
