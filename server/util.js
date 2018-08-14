@@ -1,6 +1,7 @@
 /**
  * 方法是自定义一个中间件 用来遍历对应文件夹下面的所有接口定义
  * 参考 https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/001471133885340dad9058705804899b1cc2d0a10e7dc80000
+ * 在node中进行数据处理时 应该引用 Underscore.js 或lazy.js 或 Lo-Dash
  */
 const fs = require('fs')
 
@@ -76,15 +77,55 @@ const delay = (times = 2000) => {
 //     }
 //   }
 // }
+// 深度拷贝
+const deepCopy = function(o) {
+  if (o instanceof Array) {
+    let n = [];
+    for (let i = 0; i < o.length; ++i) {
+      n[i] = deepCopy(o[i]);
+    }
+    return n;
 
-// 判断对象数组中是否有对应值并且其他值也一样
-const isInDB = (obj,DB)=>{
-return DB.some((ele,index,arr)=>{
-
-})
+  } else if (o instanceof Object) {
+    let n = {}
+    for (let i in o) {
+      n[i] = deepCopy(o[i]);
+    }
+    return n;
+  } else {
+    return o;
+  }
 }
+
+// 判断对象数组中是否有对应值并且其他值也一样,任意key没有匹配到相应的值则返回fasle
+
+const isInDB = (obj,DB)=>{
+  return DB.some((ele,index,arr)=>{
+    let  a =  false;
+    for(let key in obj){
+      if(ele[key] == obj[key]){
+        a =  true
+      }else{
+        a = false
+      }
+    }
+    return a
+  })
+}
+
+// 测试isInDB是否可用
+function testIsInDB (){
+  const user1 = {name:"3",pwd:"4"}
+  const user = {name:"3",pwd:"4",id:"123"}
+  const  userArr = [{name:"123",pwd:"456"},{name:"1",pwd:"2"},{name:"3",pwd:"4"},{name:"5",pwd:"6"}]
+  console.log(isInDB(user,userArr))
+  console.log(isInDB(user1,userArr))
+}
+
 
 module.exports = {
   delay,
   controller,
+  isInDB,
+  deepCopy,
 }
