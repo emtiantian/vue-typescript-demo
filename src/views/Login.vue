@@ -35,6 +35,7 @@
         private isBtnLoading: boolean = false;
 
         private getParams(): {name: string, password: string} {
+            // 这里应该对密码加密
             return {name : this.username, password : this.password};
         }
 

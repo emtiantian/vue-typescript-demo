@@ -79,33 +79,37 @@ const delay = (times = 2000) => {
 // }
 
 // 深度拷贝
-const deepCopy = function(o) {
+const deepCopy = function (o) {
   if (o instanceof Array) {
-    let n = [];
+    let n = []
     for (let i = 0; i < o.length; ++i) {
-      n[i] = deepCopy(o[i]);
+      n[i] = deepCopy(o[i])
     }
-    return n;
+    return n
 
   } else if (o instanceof Object) {
     let n = {}
     for (let i in o) {
-      n[i] = deepCopy(o[i]);
+      n[i] = deepCopy(o[i])
     }
-    return n;
+    return n
   } else {
-    return o;
+    return o
   }
 }
 
 // 判断对象数组中是否有对应值并且其他值也一样,任意key没有匹配到相应的值则返回fasle
-const isInDB = (obj,DB)=>{
-  return DB.some((ele,index,arr)=>{
-    let  a =  false;
-    for(let key in obj){
-      if(ele[key] == obj[key]){
-        a =  true
-      }else{
+const isInDB = (obj, DB) => {
+  // 这里应该严谨一点判断具体类型 ，catch 错误
+  if(!obj||!DB){
+    return
+  }
+  return DB.some((ele, index, arr) => {
+    let a = false
+    for (let key in obj) {
+      if (ele[key] == obj[key]) {
+        a = true
+      } else {
         a = false
       }
     }
@@ -114,14 +118,13 @@ const isInDB = (obj,DB)=>{
 }
 
 // 测试isInDB是否可用
-function testIsInDB (){
-  const user1 = {name:"3",pwd:"4"}
-  const user = {name:"3",pwd:"4",id:"123"}
-  const  userArr = [{name:"123",pwd:"456"},{name:"1",pwd:"2"},{name:"3",pwd:"4"},{name:"5",pwd:"6"}]
-  console.log(isInDB(user,userArr))
-  console.log(isInDB(user1,userArr))
+function testIsInDB () {
+  const user1 = {name: '3', pwd: '4'}
+  const user = {name: '3', pwd: '4', id: '123'}
+  const userArr = [{name: '123', pwd: '456'}, {name: '1', pwd: '2'}, {name: '3', pwd: '4'}, {name: '5', pwd: '6'}]
+  console.log(isInDB(user, userArr))
+  console.log(isInDB(user1, userArr))
 }
-
 
 module.exports = {
   delay,

@@ -11,7 +11,7 @@ const koaBodyparser = require('koa-bodyparser')
 // 日志中间件
 const koaLogger = require('koa-logger')
 // 自定义中间件读取并导入api文件中的接口
-const controller = require('./controller')
+const controller = require('./util').controller
 // 引入跨域处理 跨域范围可以自己定义
 const koaCors = require('koa2-cors')
 // 引入jwt进行实现jwt规范
@@ -52,7 +52,7 @@ app.use(koaJwt({secretKey}).unless({
   path: alowUrl,
 }))
 
-// 自定义token检查错误处理 如果出错就不进入下方处理流程
+// 自定义状态码处理 如果出错就不进入下方处理流程 并执行错误处理
 app.use(function (ctx, next) {
   return next().cache((err) => {
     if (err.status == '401') {
@@ -65,6 +65,7 @@ app.use(function (ctx, next) {
     }
   })
 })
+// 自定义错误处理
 
 // 导入自定义接口
 app.use(route.routes())

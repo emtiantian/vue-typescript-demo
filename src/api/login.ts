@@ -3,7 +3,7 @@ const preUrlPath = '';
 // 获取登录信息
 const request = {
     // 在自定义拦截器中使用，定义当前请求所属路由权限
-    p: ['post,/login'],
+    p: ['post,/public/login'],
     // 这个r方法用来发送请求
     r: (params: any) => {
         // 问题1：
@@ -22,7 +22,8 @@ const request = {
         // 问题3：
         // aoxis 出现 Provisional headers are shown 错误
         // 是测试超时时候 处理超时的回调函数出错导致没有接受服务器响应值
-        return instance.get(`${preUrlPath}/login`, {params});
+        // public下所有请求不经过jwt
+        return instance.get(`${preUrlPath}/public/login`, {params});
     },
 };
 export default {

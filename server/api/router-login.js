@@ -4,17 +4,19 @@
  */
 
 // 自定义服务器睡眠时间
-const myDelay = require('../util').delay()
+const myDelay = require('../util').delay
 // 判断对象是否在数据库中
-const isInDB = require('../util').isInDB()
+const isInDB = require('../util').isInDB
 // 引入jsonwebtoken实现token生成
 const jwtCreate = require('jsonwebtoken')
 // 引入jwt配置文件
 const jwtConfig = require('../jwtConfig')
-// 自定义jwt秘钥内容
+// 自定义的jwt秘钥内容
 const secretKey = jwtConfig.secretKey
-// 自定义jwt过期时间
-const expires = jwtConfig.expiresTime
+// 自定义的jwt过期时间
+const expiresIn = jwtConfig.expiresTime
+// 自定义的加密方式
+const  algorithm = jwtConfig.algorithm
 // 模拟数据
 const  users = require('../Database/user')
 
@@ -30,11 +32,11 @@ let login = async (ctx, next) => {
     // 实际的处理流程
     if (!obj) {
       ctx.status = 400
-      ctx.response.type = 'text/html'
+      //返回错误信息，国际化的话还应该有对应的错误码 前台根据错误码对应显示错误信息
       ctx.response.body = '<h1>账号密码不能为空</h1>'
+      next()
       return
     }
-
     if (isInDB(obj,users)) {
       ctx.response.type = 'application/json'
       // ctx.response.body = {'token': '123456'}
@@ -53,19 +55,25 @@ let login = async (ctx, next) => {
       // sub: 该JWT所面向的用户
       // aud: 接收该JWT的一方
       // exp(expires): 什么时候过期，这里是一个Unix时间戳
-      // iat(issued at): 在什么时候签发的
-      // 这里可以加入可访问路由 就不需要每次去数据库中查找了 或者添加用户身份
+      // // iat(issued at): 在什么时候签发的
+      // jti token的唯一id ,防止重放攻击
+      // nbf (Not Before)：如果当前时间在nbf里的时间之前，则Token不被接受；一般都会留一些余地，比如几分钟；，是否使用是可选的；
+      // 这里可以加入可访问路由 就不需要每次去数据库中查找了 或者添加用角色
       const payload ={name: obj.name}
-
+      const token = jwtCreate.sign(payload,secretKey,{algorithm,expiresIn });
+      ctx.body ={
+        token:token,
+      }
+      next();
 
     } else {
       ctx.status = 401
-      ctx.response.type = 'text/html'
-      ctx.response.body = '<h1>账号或密码不正确</h1>'
+      ctx.response.body= '<h1>账号或密码不正确</h1>'
+      next();
     }
   })
 }
-// 导出模块格式要注意下 这个格式和controller中解析有关系 当前解析还不支持get 和post之外的请求
+// 导出模块格式要注意下 这个格式和controller中解析有关系
 module.exports = {
   'GET /public/login': login
 }
