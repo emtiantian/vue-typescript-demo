@@ -16,6 +16,8 @@ const cacheErr = (error: any) => {
                 Vue.prototype.$message({
                     message: error.response.data.message || '请求参数异常',
                     type: 'error',
+                    duration: 0,// 不自动关闭
+                    showClose : true, // 显示关闭按钮
                 });
                 break;
             case 401:
@@ -24,31 +26,39 @@ const cacheErr = (error: any) => {
                 Vue.prototype.$message({
                     message: error.response.data.message || '密码错误或账号不存在！',
                     type: 'warning',
-                    onClose : () => {
+                    onClose: () => {
                         location.reload();
                     },
+                    duration: 0,// 不自动关闭
+                    showClose : true, // 显示关闭按钮
                 });
                 break;
             case 403:
                 Vue.prototype.$message({
                     message: error.response.data.message || '无访问权限，请联系企业管理员',
                     type: 'warning',
+                    duration: 0,// 不自动关闭
+                    showClose : true, // 显示关闭按钮
                 });
                 break;
             default:
                 Vue.prototype.$message({
                     message: error.response.data.message || '服务端异常，请联系技术支持',
                     type: 'error',
+                    duration: 0,// 不自动关闭
+                    showClose : true, // 显示关闭按钮
                 });
         }
     } else {
         // 请求超时处理
         Vue.prototype.$message({
-            message:  '网络连接超时请稍后重试',
+            message: '网络连接超时请稍后重试',
             type: 'error',
-            onClose : () => {
+            onClose: () => {
                 location.reload();
             },
+            duration: 0,// 不自动关闭
+            showClose : true, // 显示关闭按钮
         });
     }
     return Promise.reject(error);

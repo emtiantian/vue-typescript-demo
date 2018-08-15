@@ -47,31 +47,49 @@ app.use(koaCors())
 app.use(koaBodyparser())
 app.use(koaLogger())
 
+
+
 // 使用jwt实现路由检查是否有权限 是否是使用私有秘钥可以解密即认为token正确
 app.use(koaJwt({secretKey}).unless({
   path: alowUrl,
 }))
 
-// 自定义状态码处理 如果出错就不进入下方处理流程 并执行错误处理
-app.use(function (ctx, next) {
-  return next().cache((err) => {
-    if (err.status == '401') {
-      ctx.status = 401;
-      ctx.body = {
-        error : err.originalError ? err.originalError.message : err.message
-      };
-    }else{
-      throw  err
-    }
-  })
-})
-// 自定义错误处理
+
 
 // 导入自定义接口
 app.use(route.routes())
 // 调用route的aip在执行完所有next函数判断是否添加正确函数头，没有则添加
   .use(route.allowedMethods())
+
+// 自定义状态码处理 如果出错就不进入下方处理流程 并执行错误处理
+app.use(function (ctx, next) {
+  if(ctx.status == '401'|| ctx.status == '400' ){
+    ctx.response.body = ctx.response.body ? ctx.response.body : "<h1>认证信息不正确</h1>"
+    next()
+  }else if(ctx.status == '200'){
+    next()
+  }else if(ctx.status == '404'){
+    ctx.response.body = ctx.response.body ? ctx.response.body : "<h1>路由不存在</h1> "
+    next()
+  }
+  else{
+    throw error("未知状态码错误")
+  }
+})
+
+
 // 全部接口的自定义错误处理
+app.use(async (ctx,next)=>{
+  try{
+    await next();
+  }catch (err) {
+    // will only respond with JSON
+    ctx.status = err.statusCode || err.status || 500;
+    ctx.body = {
+      error: err.message
+    };
+  }
+})
 
 app.listen(3000)
 console.log('1 started at 3000')

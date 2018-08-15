@@ -30,10 +30,10 @@ let login = async (ctx, next) => {
   // 模拟网络延迟或者服务器繁忙
   await myDelay(5000).then(() => {
     // 实际的处理流程
-    if (!obj) {
+    if (!obj.name && !obj.password) {
       ctx.status = 400
       //返回错误信息，国际化的话还应该有对应的错误码 前台根据错误码对应显示错误信息
-      ctx.response.body = '<h1>账号密码不能为空</h1>'
+      ctx.response.body = '<h1>账号或密码不能为空</h1>'
       next()
       return
     }
@@ -60,10 +60,11 @@ let login = async (ctx, next) => {
       // nbf (Not Before)：如果当前时间在nbf里的时间之前，则Token不被接受；一般都会留一些余地，比如几分钟；，是否使用是可选的；
       // 这里可以加入可访问路由 就不需要每次去数据库中查找了 或者添加用角色
       const payload ={name: obj.name}
-      const token = jwtCreate.sign(payload,secretKey,{algorithm,expiresIn });
-      ctx.body ={
+      const token = jwtCreate.sign(payload,secretKey,{algorithm,expiresIn },()=>{});
+      ctx.status = 200
+      ctx.response.body =JSON.stringify({
         token:token,
-      }
+      })
       next();
 
     } else {
@@ -75,5 +76,5 @@ let login = async (ctx, next) => {
 }
 // 导出模块格式要注意下 这个格式和controller中解析有关系
 module.exports = {
-  'GET /public/login': login
+  'POST /public/login': login
 }
