@@ -4,8 +4,6 @@
  */
 
 const koa = require('koa')
-// 路由中间件
-const koaRouter = require('koa-router')
 // 参数解析中间件
 const koaBodyparser = require('koa-bodyparser')
 // 日志中间件
@@ -49,10 +47,35 @@ app.use(koaLogger())
 
 
 
+// 全部接口的自定义错误处理
+app.use(async (ctx,next)=>{
+  try{
+    await next();
+  }catch (err) {
+    ctx.status = err.statusCode || err.status || 500;
+    ctx.body = {
+      error: err.message || '服务器错误'
+    };
+  }
+})
+
 // 使用jwt实现路由检查是否有权限 是否是使用私有秘钥可以解密即认为token正确
 app.use(koaJwt({secretKey}).unless({
   path: alowUrl,
 }))
+
+// 自定义token验证 ，比如说访问权限，是否超出最长时间，是否是重放攻击等
+
+// app.use(async (ctx,next)=>{
+//   let token =  ctx.header.authorization // 获取jwt,token
+//   if(token){
+//     // 解密载荷 // 获取载荷
+//     let payload = await verify(token.split('')[1] ,secretKey)
+//     console.dir(payload);
+//   }else{
+//     throw  error("token 不存在")
+//   }
+// })
 
 
 
@@ -63,33 +86,23 @@ app.use(route.routes())
 
 // 自定义状态码处理 如果出错就不进入下方处理流程 并执行错误处理
 app.use(function (ctx, next) {
-  if(ctx.status == '401'|| ctx.status == '400' ){
+  if(ctx.status === 401 || ctx.status === 400 ){
     ctx.response.body = ctx.response.body ? ctx.response.body : "<h1>认证信息不正确</h1>"
     next()
-  }else if(ctx.status == '200'){
+  }else if(ctx.status === 200){
     next()
-  }else if(ctx.status == '404'){
+  }else if(ctx.status === 404){
     ctx.response.body = ctx.response.body ? ctx.response.body : "<h1>路由不存在</h1> "
     next()
   }
   else{
-    throw error("未知状态码错误")
+    ctx.throw("500")
+    // throw error("未知状态码错误")
   }
 })
 
 
-// 全部接口的自定义错误处理
-app.use(async (ctx,next)=>{
-  try{
-    await next();
-  }catch (err) {
-    // will only respond with JSON
-    ctx.status = err.statusCode || err.status || 500;
-    ctx.body = {
-      error: err.message
-    };
-  }
-})
+
 
 app.listen(3000)
 console.log('1 started at 3000')
