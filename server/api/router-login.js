@@ -16,9 +16,9 @@ const secretKey = jwtConfig.secretKey
 // 自定义的jwt过期时间
 const expiresIn = jwtConfig.expiresTime
 // 自定义的加密方式
-const  algorithm = jwtConfig.algorithm
+const algorithm = jwtConfig.algorithm
 // 模拟数据
-const  users = require('../Database/user')
+const users = require('../Database/user')
 
 let login = async (ctx, next) => {
   // 获取post方式的传参
@@ -37,7 +37,7 @@ let login = async (ctx, next) => {
       next()
       return
     }
-    if (isInDB(obj,users)) {
+    if (isInDB(obj, users)) {
       ctx.response.type = 'application/json'
       // ctx.response.body = {'token': '123456'}
       // 使用jsonwebtoken生成真正的token 并且设置超时时间
@@ -59,18 +59,26 @@ let login = async (ctx, next) => {
       // jti token的唯一id ,防止重放攻击
       // nbf (Not Before)：如果当前时间在nbf里的时间之前，则Token不被接受；一般都会留一些余地，比如几分钟；，是否使用是可选的；
       // 这里可以加入可访问路由 就不需要每次去数据库中查找了 或者添加用角色
-      const payload ={name: obj.name}
-      const token = jwtCreate.sign(payload,secretKey,{algorithm,expiresIn },()=>{});
+      const payload = {name: obj.name}
+      // const token = jwtCreate.sign(payload, secretKey, {algorithm: algorithm, expiresIn: expiresIn}, (err,token) => {
+      //   console.log(err);
+      //   console.log(token);
+      // })
+      // 如果定义了回调函数那么 就没有返回token了 坑！
+      const token = jwtCreate.sign(payload, secretKey, {algorithm: algorithm, expiresIn: expiresIn})
       ctx.status = 200
-      ctx.response.body =JSON.stringify({
-        token:token,
-      })
-      next();
+      // ctx.response.body = JSON.stringify({
+      //   token: token,
+      // })
+      ctx.response.body = {
+        token: token,
+      }
+      next()
 
     } else {
       ctx.status = 401
-      ctx.response.body= '<h1>账号或密码不正确</h1>'
-      next();
+      ctx.response.body = '<h1>账号或密码不正确</h1>'
+      next()
     }
   })
 }

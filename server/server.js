@@ -48,16 +48,33 @@ app.use(koaLogger())
 
 
 // 全部接口的自定义错误处理
-app.use(async (ctx,next)=>{
-  try{
-    await next();
-  }catch (err) {
-    ctx.status = err.statusCode || err.status || 500;
-    ctx.body = {
-      error: err.message || '服务器错误'
-    };
-  }
-})
+// app.use(async (ctx,next)=>{
+//   try{
+//     await next().then((ctx,next)=>{
+//       console.log(ctx.response.body)
+//     });
+//
+//   }catch (err) {
+//     ctx.status = err.statusCode || err.status || 500;
+//     ctx.body = {
+//       error: err.message || '服务器错误'
+//     };
+//   }
+// })
+
+// Custom 401 handling (first middleware)
+app.use(function (ctx, next) {
+  return next().catch((err) => {
+    if (err.status === 401) {
+      ctx.status = 401;
+      ctx.body = {
+        error: err.originalError ? err.originalError.message : err.message
+      };
+    } else {
+      throw err;
+    }
+  });
+});
 
 // 使用jwt实现路由检查是否有权限 是否是使用私有秘钥可以解密即认为token正确
 app.use(koaJwt({secretKey}).unless({

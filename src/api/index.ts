@@ -5,7 +5,7 @@ const instance = axios.create({
     // baseURL: 'http://rap2api.taobao.org/app/mock/224',
     // baseURL: 'http://rap2api.taobao.org/app/mock/25126/v1',
     baseURL: 'http://127.0.0.1:3000',
-    timeout: 10000,
+    timeout: 100000,
 });
 const cacheErr = (error: any) => {
 
@@ -45,6 +45,9 @@ const cacheErr = (error: any) => {
                 Vue.prototype.$message({
                     message: error.response.data.message || '服务端异常，请联系技术支持',
                     type: 'error',
+                    onClose: () => {
+                        location.reload();
+                    },
                     duration: 0,// 不自动关闭
                     showClose : true, // 显示关闭按钮
                 });

@@ -40,10 +40,11 @@
         }
 
         private login(): void {
+            let _this  = this
             const params = this.getParams();
             this.isBtnLoading = true;
             if(!params.name && !params.password){
-                this.$message({
+                _this.$message({
                     message:  '账号或密码不能为空',
                     type: 'error',
                     duration: 0,// 不自动关闭
@@ -55,7 +56,13 @@
                 name : params.name,
                 password: params.password,
             }).then((obj)=>{
-
+                _this.$message({
+                    message:  '登录成功',
+                    type: 'success',
+                    duration: 0,// 不自动关闭
+                    showClose : true, // 显示关闭按钮
+                })
+                _this.isBtnLoading = false;
             });
 
         }
