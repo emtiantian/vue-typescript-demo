@@ -3,7 +3,7 @@ import Router from 'vue-router';
 import Home from './views/Home.vue';
 import About from './views/About.vue';
 import Login from './views/Login.vue';
-// import Vue404 from './views/404.vue'
+import Vue404 from './views/common/Error.vue';
 
 
 Vue.use(Router);
@@ -26,9 +26,12 @@ export default new Router({
             component: Login,
         },
         {
-            path: '/404',
+            path: '*',
             name: '404',
-            component: About,
+            component: Vue404,
+            meta: {
+                errormassage: '404',
+            },
         },
     ],
 });

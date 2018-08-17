@@ -14,7 +14,7 @@ const cacheErr = (error: any) => {
                 Vue.prototype.$message({
                     message: error.response.data.message || '请求参数异常',
                     type: 'error',
-                    duration: 0,// 不自动关闭
+                    duration: 0, // 不自动关闭
                     showClose : true, // 显示关闭按钮
                 });
                 break;
@@ -27,7 +27,7 @@ const cacheErr = (error: any) => {
                     onClose: () => {
                         location.reload();
                     },
-                    duration: 0,// 不自动关闭
+                    duration: 0, // 不自动关闭
                     showClose : true, // 显示关闭按钮
                 });
                 break;
@@ -35,7 +35,7 @@ const cacheErr = (error: any) => {
                 Vue.prototype.$message({
                     message: error.response.data.message || '无访问权限，请联系企业管理员',
                     type: 'warning',
-                    duration: 0,// 不自动关闭
+                    duration: 0, // 不自动关闭
                     showClose : true, // 显示关闭按钮
                 });
                 break;
@@ -46,7 +46,7 @@ const cacheErr = (error: any) => {
                     onClose: () => {
                         location.reload();
                     },
-                    duration: 0,// 不自动关闭
+                    duration: 0, // 不自动关闭
                     showClose : true, // 显示关闭按钮
                 });
         }
@@ -58,7 +58,7 @@ const cacheErr = (error: any) => {
             onClose: () => {
                 location.reload();
             },
-            duration: 0,// 不自动关闭
+            duration: 0, // 不自动关闭
             showClose : true, // 显示关闭按钮
         });
     }
