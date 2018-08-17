@@ -28,7 +28,7 @@ let login = async (ctx, next) => {
   // let obj = ctx.request.query
 
   // 模拟网络延迟或者服务器繁忙
-  await myDelay(5000).then(() => {
+  await myDelay(1000).then(() => {
     // 实际的处理流程
     if (!obj.name && !obj.password) {
       ctx.status = 400
@@ -67,9 +67,8 @@ let login = async (ctx, next) => {
       // 如果定义了回调函数那么 就没有返回token了 坑！
       const token = jwtCreate.sign(payload, secretKey, {algorithm: algorithm, expiresIn: expiresIn})
       ctx.status = 200
-      // ctx.response.body = JSON.stringify({
-      //   token: token,
-      // })
+      // 当使用刷新token的时候需要设置 httponly 并且把reftoken 存在cookie中。
+      // 这里直接传对象就可以，json序列化不需要
       ctx.response.body = {
         token: token,
       }

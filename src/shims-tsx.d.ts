@@ -1,5 +1,6 @@
 import Vue, { VNode } from 'vue';
 
+// 定义全局类型
 declare global {
   namespace JSX {
     // tslint:disable no-empty-interface

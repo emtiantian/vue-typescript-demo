@@ -34,7 +34,7 @@ const i18n = new vuei18n({
 // 绑定i18n到全局变量上
 Vue.prototype.i18n = i18n;
 
-// 自定义权限指令 需要权限判断的操作均引用这个
+// 自定义权限指令 需要权限判断的操作均引用这个  实现操作监听
 Vue.directive('has', {
     bind : (el: any, binding: any) => {
         if (!Vue.prototype.$_has(binding.value)) {

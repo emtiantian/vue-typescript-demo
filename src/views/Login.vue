@@ -63,6 +63,8 @@
                     showClose : true, // 显示关闭按钮
                 })
                 _this.isBtnLoading = false;
+                // 不应该使用cookie 保存token 可以使用sessionStorage和localStorge
+
             });
 
         }

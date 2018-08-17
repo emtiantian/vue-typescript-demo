@@ -8,8 +8,6 @@ const instance = axios.create({
     timeout: 100000,
 });
 const cacheErr = (error: any) => {
-
-
     if (error.response) {
         switch (error.response.status) {
             case 400:
