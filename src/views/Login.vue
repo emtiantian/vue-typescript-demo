@@ -28,8 +28,8 @@
     export default class Login extends Vue {
         // !:是表示必须参数 ?:是表示非必须
         // 可以使用拼接字符串的模式使用i18n
-        @Prop() private appname?: string = 'appname';
-        @Prop() private btnText?: string = '登录';
+        @Prop({default: 'appname'}) private appname?: string ;
+        @Prop({default: '登录'}) private btnText?: string ;
         private username: string = '';
         private password: string = '';
         private isBtnLoading: boolean = false;

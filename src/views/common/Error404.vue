@@ -1,6 +1,8 @@
 <template>
-    <Error>{{$t('m.'+errormassage)}}</Error>
-    <h1>{{time+'s后跳转'}}</h1>
+    <div>
+        <Error>{{$t('m.'+errormassage)}}</Error>
+        <h1>{{time}}s后跳转</h1>
+    </div>
 </template>
 
 <script lang="ts">
@@ -10,15 +12,15 @@
 
     @Component
     export default class Error extends Vue {
-        @Prop() public errormassage?: string = '404';
-        @Prop() public time?: number = 5;
+        @Prop({default: '404'}) private errormassage?: string;
+        @Prop(Number) private time?: number = 5;
         // 这里应该有接口定义
-        @Prop() public routerPath?: any = this.$router;
+        // @Prop() public routerPath?: any = this.$router;
 
 
         private reRouter() {
-            const thisF = this;
-            let timeMy = this.time;
+            // const thisF = this;
+            // let timeMy = this.time;
             // thisF.$message({
             //     message: this.errormassage,
             //     type: 'error',
