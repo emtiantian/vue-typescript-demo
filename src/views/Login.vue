@@ -53,7 +53,7 @@
                 return;
             }
 
-            loginApi.request.r({
+            loginApi.login.r({
                 name: params.name,
                 password: params.password,
             }).then((obj) => {
@@ -65,8 +65,8 @@
                 });
                 thisF.isBtnLoading = false;
                 // 不应该使用cookie 保存token 可以使用sessionStorage和localStorge
-                // sessionStorage.setItem('user-token', obj.data.token);
-                this.$emit('login');
+                sessionStorage.setItem('user-token', obj.data.token);
+                this.$emit('login',this.$router.currentRoute.query);
             });
         }
     }

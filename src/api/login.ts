@@ -1,7 +1,7 @@
 import instance from './index';
 const preUrlPath = '';
 // 获取登录信息
-const request = {
+const login = {
     // 在自定义拦截器中使用，定义当前请求所属路由权限
     p: ['post,/public/login'],
     // 这个r方法用来发送请求
@@ -28,6 +28,6 @@ const request = {
     },
 };
 export default {
-    request,
+    login,
 }
 ;
