@@ -13,7 +13,7 @@
 </template>
 <script lang="ts">
     import {Component, Prop, Vue} from 'vue-property-decorator';
-    import sigin from './api/signIn';
+    import signin from './api/signin';
     import instance from './api/index';
 
     @Component
@@ -38,7 +38,7 @@
             // console.log('token：' + sessionStorage.getItem('user-token'));
             // 绑定token到拦截器上
             // 通过token获得 动态路由和动态菜单
-            sigin.sigin.r({}).then((data) => {
+            signin.signin.r({}).then((data) => {
                 this.$message({
                     message: '获取到了内容',
                     type: 'success',

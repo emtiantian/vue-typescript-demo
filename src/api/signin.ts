@@ -2,12 +2,12 @@ import instance from './index';
 
 const preurl = '';
 
-const sigin = {
-    p: ['get,/sigin'],
+const signin = {
+    p: ['get,/signin'],
     r: (params: any) => {
-        return instance.get('/sigin', {params});
+        return instance.get('/signin', {params});
     },
 };
 export default {
-    sigin,
+    signin,
 };

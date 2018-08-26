@@ -77,7 +77,8 @@ app.use(function (ctx, next) {
 });
 
 // 使用jwt实现路由检查是否有权限 是否是使用私有秘钥可以解密即认为token正确
-app.use(koaJwt({secretKey}).unless({
+// 这里就体现出ts的好处 使用的时候没有强制检查 不知道这里要传一个对象 示例中 使用的是es6 的简化模式 {secret} 这个表示 {secret: secret}
+app.use(koaJwt({secret: secretKey}).unless({
   path: alowUrl,
 }))
 
@@ -101,22 +102,22 @@ app.use(route.routes())
 // 调用route的aip在执行完所有next函数判断是否添加正确函数头，没有则添加
   .use(route.allowedMethods())
 
-// 自定义状态码处理 如果出错就不进入下方处理流程 并执行错误处理
-app.use(function (ctx, next) {
-  if(ctx.status === 401 || ctx.status === 400 ){
-    ctx.response.body = ctx.response.body ? ctx.response.body : "<h1>认证信息不正确</h1>"
-    next()
-  }else if(ctx.status === 200){
-    next()
-  }else if(ctx.status === 404){
-    ctx.response.body = ctx.response.body ? ctx.response.body : "<h1>路由不存在</h1> "
-    next()
-  }
-  else{
-    ctx.throw("500")
-    // throw error("未知状态码错误")
-  }
-})
+// // 自定义状态码处理 如果出错就不进入下方处理流程 并执行错误处理
+// app.use(function (ctx, next) {
+//   if(ctx.status === 401 || ctx.status === 400 ){
+//     ctx.response.body = ctx.response.body ? ctx.response.body : "<h1>认证信息不正确</h1>"
+//     next()
+//   }else if(ctx.status === 200){
+//     next()
+//   }else if(ctx.status === 404){
+//     ctx.response.body = ctx.response.body ? ctx.response.body : "<h1>路由不存在</h1> "
+//     next()
+//   }
+//   else{
+//     ctx.throw("500")
+//     // throw error("未知状态码错误")
+//   }
+// })
 
 
 

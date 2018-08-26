@@ -1,7 +1,7 @@
 /* 模拟实现获取动态路由和动态菜单，用户名，用户id
  *
  */
-const singin = async (cxt, next) => {
+const signin = async (cxt, next) => {
       //这里正常是应该根据payload中的userid来获取
     cxt.response.body={
       "name": "管理端",
@@ -36,5 +36,5 @@ const singin = async (cxt, next) => {
     }
 }
 module.exports = {
-  'GET /singin': singin
+  'GET /signin': signin
 }
