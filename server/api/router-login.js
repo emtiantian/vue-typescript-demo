@@ -66,6 +66,9 @@ let login = async (ctx, next) => {
       // })
       // 如果定义了回调函数那么 就没有返回token了 坑！
       const token = jwtCreate.sign(payload, secretKey, {algorithm: algorithm, expiresIn: expiresIn})
+      // 写在文件头或者 cookie中
+      // 设置http only 防止前端读取cookie
+
       ctx.status = 200
       // 当使用刷新token的时候需要设置 httponly 并且把reftoken 存在cookie中。
       // 这里直接传对象就可以，json序列化不需要

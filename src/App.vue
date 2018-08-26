@@ -14,10 +14,10 @@
 <script lang="ts">
     import {Component, Prop, Vue} from 'vue-property-decorator';
     import sigin from './api/signIn';
-    import instance from './api/index'
+    import instance from './api/index';
 
     @Component
-    export default class app extends Vue {
+    export default class App extends Vue {
         // private userData: object = null;
         // private menuData: object = null;
 
@@ -28,28 +28,25 @@
             //     duration: 0, // 不自动关闭
             //     showClose: true, // 显示关闭按钮
             // })
-            let localUser = sessionStorage.getItem('user-token');
+            const localUser = sessionStorage.getItem('user-token');
             if (!localUser) {
-                return this.$router.push({ path: '/login', query: { from: this.$router.currentRoute.path } });
+                return this.$router.push({path: '/login', query: {from: this.$router.currentRoute.path}});
             }
-            //设置请求头统一携带token
+            // 设置请求头统一携带token
+            // instance.defaults.headers.common['Authorization'] = 'Bearer token';
             instance.defaults.headers.common['Authorization'] = 'Bearer ' + localUser;
-            if (sessionStorage.getItem('user-token')) {
-                // console.log('token：' + sessionStorage.getItem('user-token'));
-                // 绑定token到拦截器上
-                // 通过token获得 动态路由和动态菜单
-                sigin.sigin.r({}).then((data)=>{
-                    this.$message({
-                        message: '获取到了内容',
-                        type: 'success',
-                        duration: 0, // 不自动关闭
-                        showClose: true, // 显示关闭按钮
-                    })
-                    console.log(data);
-                })
-            } else {
-                this.$router.replace('/login');
-            }
+            // console.log('token：' + sessionStorage.getItem('user-token'));
+            // 绑定token到拦截器上
+            // 通过token获得 动态路由和动态菜单
+            sigin.sigin.r({}).then((data) => {
+                this.$message({
+                    message: '获取到了内容',
+                    type: 'success',
+                    duration: 0, // 不自动关闭
+                    showClose: true, // 显示关闭按钮
+                });
+                console.log(data);
+            });
         }
 
         private logoutAss() {

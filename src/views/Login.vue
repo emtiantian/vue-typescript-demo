@@ -66,7 +66,7 @@
                 thisF.isBtnLoading = false;
                 // 不应该使用cookie 保存token 可以使用sessionStorage和localStorge
                 sessionStorage.setItem('user-token', obj.data.token);
-                this.$emit('login',this.$router.currentRoute.query);
+                this.$emit('login', this.$router.currentRoute.query);
             });
         }
     }
