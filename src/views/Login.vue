@@ -1,6 +1,6 @@
 <template>
     <div class="login">
-        <h1>{{$t('m.'+ appName)}}</h1>
+        <h1>{{$t('m.'+appName)}}</h1>
         <el-form class="login-form">
             <el-form-item>
                 <el-input :autofocus="true"
@@ -23,7 +23,6 @@
 <script lang="ts">
     import {Component, Prop, Vue} from 'vue-property-decorator';
     import loginApi from '../api/login';
-
     @Component
     export default class Login extends Vue {
         // !:是表示必须参数 ?:是表示非必须

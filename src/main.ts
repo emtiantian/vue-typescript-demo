@@ -10,6 +10,10 @@ import element from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 // 引入自动切换语言和手动切换语言类
 import myi18n from './components/common/Myi18n';
+//
+import zh from './assets/lang/zh';
+//
+import en from './assets/lang/en';
 
 
 Vue.config.productionTip = false;
@@ -24,7 +28,11 @@ Vue.prototype.language = ['zh-cn', 'en'];
 const i18n = new vuei18n({
     // locale: 'zh-cn',    // 语言标识
     fallbackLocale: 'zh-cn', // 默认语言
-    locale:  new myi18n().getLocalLanguage(), // 通过切换locale的值来实现语言切换
+    locale: new myi18n().getLocalLanguage(), // 通过切换locale的值来实现语言切换
+    // messages: {
+    //     'zh-cn': zh,   // 中文语言包
+    //     'en': en,    // 英文语言包
+    // },
     messages: {
         'zh-cn': require('./assets/lang/zh'),   // 中文语言包
         'en': require('./assets/lang/en'),    // 英文语言包
@@ -36,7 +44,7 @@ Vue.prototype.i18n = i18n;
 
 // 自定义权限指令 需要权限判断的操作均引用这个  实现操作监听
 Vue.directive('has', {
-    bind : (el: any, binding: any) => {
+    bind: (el: any, binding: any) => {
         if (!Vue.prototype.$_has(binding.value)) {
             el.parentNode.removeChild(el);
         }
