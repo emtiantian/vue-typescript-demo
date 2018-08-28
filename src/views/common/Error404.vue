@@ -1,24 +1,44 @@
 <template>
     <div>
-        <Error>{{$t('m.'+errormassage)}}</Error>
-        <h1>{{time}}s后跳转</h1>
+        <h1>{{$t('m.'+errormassage)}}</h1>
+        <h1>{{time}}s后跳转到首页</h1>
     </div>
 </template>
 
 <script lang="ts">
 
     import {Component, Prop, Vue} from 'vue-property-decorator';
-    // import Router from 'vue-router'
 
     @Component
     export default class Error extends Vue {
-        @Prop({default: '404'}) private errormassage?: string;
-        @Prop(Number) private time?: number = 5;
+        @Prop({default: 'notfound'}) private errormassage!: string;
+        // 这里要注意在创建组件的时候 传参设置
+        @Prop({default: 5}) private time!: number;
+
+        // private time: number = 5;
         // 这里应该有接口定义
         // @Prop() public routerPath?: any = this.$router;
 
+        // vue中渲染完成自动执行
+        private mounted() {
+            this.change();
+        }
 
-        private reRouter() {
+        private changeRouter(): void {
+            this.$router.push('/');
+        }
+
+        private changeTimer(): void {
+            this.time --;
+        }
+
+        private change(): void {
+            let a: any;
+            let b: any;
+            a = setTimeout(() => this.changeRouter(), this.time * 1000);
+
+            b = setInterval(() => this.changeTimer(), 1000);
+
             // const thisF = this;
             // let timeMy = this.time;
             // thisF.$message({
@@ -39,6 +59,8 @@
             //     },
             // });
         }
+
+
     }
 
 </script>

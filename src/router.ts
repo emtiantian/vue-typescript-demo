@@ -24,10 +24,6 @@ export default new Router({
             path: '/login',
             name: 'login',
             component: Login,
-            meta: {
-                appname: 'appname',
-                btnText: '登录1',
-            },
         },
         {
             path: '*',

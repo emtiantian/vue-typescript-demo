@@ -78,6 +78,7 @@ app.use(function (ctx, next) {
 
 // 使用jwt实现路由检查是否有权限 是否是使用私有秘钥可以解密即认为token正确
 // 这里就体现出ts的好处 使用的时候没有强制检查 不知道这里要传一个对象 示例中 使用的是es6 的简化模式 {secret} 这个表示 {secret: secret}
+// 出现错错误 最好是找源代码 查看错误定义
 app.use(koaJwt({secret: secretKey}).unless({
   path: alowUrl,
 }))

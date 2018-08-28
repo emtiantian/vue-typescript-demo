@@ -21,7 +21,7 @@
         // private userData: object = null;
         // private menuData: object = null;
 
-        private loginAss() {
+        private loginAss(newPath: string) {
             // this.$message({
             //     message: '准备获取ass',
             //     type: 'success',
@@ -45,7 +45,13 @@
                     duration: 0, // 不自动关闭
                     showClose: true, // 显示关闭按钮
                 });
-                console.log(data);
+                // 判断newPath是否存在或者是否有权限没有权限替换为404
+                // console.log(data);
+                localStorage.setItem('menuData', data.data.menus);
+                localStorage.setItem('userData', data.data.user);
+                localStorage.setItem('routerData', data.data.resources);
+
+                this.$router.replace({path: newPath || '/'});
             });
         }
 
@@ -78,6 +84,7 @@
     //     }
     //
     // })
+
 </script>
 <style lang="less">
     @import "assets/common.css";
