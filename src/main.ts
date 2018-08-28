@@ -29,13 +29,9 @@ const i18n = new vuei18n({
     // locale: 'zh-cn',    // 语言标识
     fallbackLocale: 'zh-cn', // 默认语言
     locale: new myi18n().getLocalLanguage(), // 通过切换locale的值来实现语言切换
-    // messages: {
-    //     'zh-cn': zh,   // 中文语言包
-    //     'en': en,    // 英文语言包
-    // },
     messages: {
-        'zh-cn': require('./assets/lang/zh'),   // 中文语言包
-        'en': require('./assets/lang/en'),    // 英文语言包
+        'zh-cn': zh,   // 中文语言包
+        'en': en,    // 英文语言包
     },
 });
 

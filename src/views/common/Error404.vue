@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>{{$t("m."+errormassages)}}</h1>
+        <h1>{{$t(errormassages)}}</h1>
         <h1>{{timeing}}s后跳转到首页</h1>
     </div>
 </template>

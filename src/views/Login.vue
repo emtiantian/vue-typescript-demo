@@ -1,6 +1,6 @@
 <template>
     <div class="login">
-        <h1>{{$t('m.'+appName)}}</h1>
+        <h1>{{$t(appName)}}</h1>
         <el-form class="login-form">
             <el-form-item>
                 <el-input :autofocus="true"
