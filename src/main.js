@@ -11,9 +11,9 @@ import 'element-ui/lib/theme-chalk/index.css';
 // 引入自动切换语言和手动切换语言类
 import myi18n from './components/common/Myi18n';
 // 引入中文语言包
-import zh from './assets/lang/zh';
+import zh from './lang/zh';
 // 引入英文语言包
-import en from './assets/lang/en';
+import en from './lang/en';
 Vue.config.productionTip = false;
 Vue.use(vuei18n); // 插件形式挂载国际化组件
 Vue.use(element); // 引入饿了么ui

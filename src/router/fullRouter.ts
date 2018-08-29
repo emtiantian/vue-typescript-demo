@@ -35,7 +35,8 @@ const fullRouter = {
             // },
         },
     ],
-}
+};
+
 export default {
     fullRouter,
 };

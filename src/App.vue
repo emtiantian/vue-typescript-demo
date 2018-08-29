@@ -15,7 +15,7 @@
     import {Component, Vue} from 'vue-property-decorator';
     import signin from './api/signin';
     import instance from './api/index';
-    import util from './assets/util/util';
+    import util from './util/util';
 
     @Component
     export default class App extends Vue {
@@ -48,11 +48,13 @@
                 localStorage.setItem('routerData', data.data.resources);
 
                 // 判断newPath是否存在
-                // 是否有权限没有权限替换为404,
-                if(newPath == null){
-                    // util.isAllow(newPath,localStorage.getItem('routerData'))
-                }else{
-                    // newPath = util.isAllow(newPath,localStorage.getItem('routerData'))?newPath:"404";
+                // 是否有权限没有权限替换为404, ts的校验太严格了~
+                let routerData = localStorage.getItem('routerData') || "";
+                newPath = util.isAllow(newPath,routerData)?newPath:"404";
+
+                if (newPath == null) {
+
+                } else {
                 }
                 // 动态注入路由
 
