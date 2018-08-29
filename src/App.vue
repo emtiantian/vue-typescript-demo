@@ -12,22 +12,17 @@
     </div>
 </template>
 <script lang="ts">
-    import {Component, Prop, Vue} from 'vue-property-decorator';
+    import {Component, Vue} from 'vue-property-decorator';
     import signin from './api/signin';
     import instance from './api/index';
+    import util from './assets/util/util';
 
     @Component
     export default class App extends Vue {
         // private userData: object = null;
         // private menuData: object = null;
 
-        private loginAss(newPath: string) {
-            // this.$message({
-            //     message: '准备获取ass',
-            //     type: 'success',
-            //     duration: 0, // 不自动关闭
-            //     showClose: true, // 显示关闭按钮
-            // })
+        private loginAss(newPath: any) {
             const localUser = sessionStorage.getItem('user-token');
             if (!localUser) {
                 return this.$router.push({path: '/login', query: {from: this.$router.currentRoute.path}});
@@ -39,18 +34,35 @@
             // 绑定token到拦截器上
             // 通过token获得 动态路由和动态菜单
             signin.signin.r({}).then((data) => {
-                this.$message({
-                    message: '获取到了内容',
-                    type: 'success',
-                    duration: 0, // 不自动关闭
-                    showClose: true, // 显示关闭按钮
-                });
-                // 判断newPath是否存在或者是否有权限没有权限替换为404
-                // console.log(data);
+                // 调试用代码
+                // this.$message({
+                //     message: '获取到了内容',
+                //     type: 'success',
+                //     duration: 0, // 不自动关闭
+                //     showClose: true, // 显示关闭按钮
+                // });
+
+
                 localStorage.setItem('menuData', data.data.menus);
                 localStorage.setItem('userData', data.data.user);
                 localStorage.setItem('routerData', data.data.resources);
 
+                // 判断newPath是否存在
+                // 是否有权限没有权限替换为404,
+                if(newPath == null){
+                    // util.isAllow(newPath,localStorage.getItem('routerData'))
+                }else{
+                    // newPath = util.isAllow(newPath,localStorage.getItem('routerData'))?newPath:"404";
+                }
+                // 动态注入路由
+
+                // 动态生成菜单 在首页中生成
+
+                // 路由守护
+
+                // 请求拦截
+
+                // 默认跳转首页
                 this.$router.replace({path: newPath || '/'});
             });
         }

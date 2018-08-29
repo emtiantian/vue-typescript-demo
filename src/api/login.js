@@ -5,7 +5,7 @@ const login = {
     // 在自定义拦截器中使用，定义当前请求所属路由权限, 根据后台传过来的权限信息判断是否可以访问对应接口
     p: ['post,/public/login'],
     // 这个r方法用来发送请求
-    r: (data: any) => {
+    r: (data) => {
         // 问题1：
         // 设置请求头 跨域的post请求要求是simple request 如果不是简单请求 则需要先请求options类型 确定服务器支持请求头
         // 参考
@@ -29,5 +29,5 @@ const login = {
 };
 export default {
     login,
-}
-;
+};
+//# sourceMappingURL=login.js.map

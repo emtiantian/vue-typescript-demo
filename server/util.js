@@ -48,12 +48,12 @@ const controller = (dir = 'api') => {
   return router
 }
 
-//实现koa2 模拟服务器睡眠
+//实现koa2 模拟服务器延迟
 const delay = (times = 2000) => {
   return new Promise((resolve, reject) => {
-    console.log('开始服务器睡眠')
+    console.log('模拟服务器延迟')
     setTimeout(() => {
-      console.log('结束服务器睡眠')
+      console.log('模拟服务器延迟')
       resolve()
     }, times)
   })
@@ -101,7 +101,7 @@ const deepCopy = function (o) {
 // 判断对象数组中是否有对应值并且其他值也一样,任意key没有匹配到相应的值则返回fasle
 const isInDB = (obj, DB) => {
   // 这里应该严谨一点判断具体类型 ，catch 错误
-  if(!obj||!DB){
+  if (!obj || !DB) {
     return
   }
   return DB.some((ele, index, arr) => {
