@@ -1,6 +1,8 @@
 // 判断路径是否有权限访问
+import {Route, RouteConfig} from "vue-router";
+
 const isAllow = (newPath: string, routerData: string) => {
-    if (newPath === null ||routerData == null ) {
+    if (!newPath || !routerData) {
         return false;
     }
     const pathArr = newPath.split('/');
@@ -31,6 +33,23 @@ const isInDB = (obj: object, DB: object[]) => {
         return a;
     });
 };
+
+// 根据允许访问url获得对应路由
+const getRouter = (fullRouter: object, routerData: string): object => {
+    const router = JSON.parse(routerData);
+    let allowRouter = []
+    //@ts-ignore
+    const routes = fullRouter.routes
+    for (let a in router) {
+        //@ts-ignore
+        if(isInDB({url: a.url},routes)){
+            allowRouter.push()
+        }
+    }
+
+
+    return {};
+}
 
 
 // const arr = [{

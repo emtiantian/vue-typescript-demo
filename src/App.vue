@@ -22,7 +22,7 @@
         // private userData: object = null;
         // private menuData: object = null;
 
-        private loginAss(newPath: any) {
+        private loginAss(newPath: string) {
             const localUser = sessionStorage.getItem('user-token');
             if (!localUser) {
                 return this.$router.push({path: '/login', query: {from: this.$router.currentRoute.path}});
@@ -52,10 +52,8 @@
                 let routerData = localStorage.getItem('routerData') || "";
                 newPath = util.isAllow(newPath,routerData)?newPath:"404";
 
-                if (newPath == null) {
+                // 对应路由表取出允许访问路由
 
-                } else {
-                }
                 // 动态注入路由
 
                 // 动态生成菜单 在首页中生成
