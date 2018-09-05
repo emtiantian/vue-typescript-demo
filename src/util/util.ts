@@ -40,14 +40,13 @@ const getRouter = (fullRouter: object, routerData: string): object => {
     let allowRouter = []
     //@ts-ignore
     const routes = fullRouter.routes
-    for (let a in router) {
+    // @ts-ignore
+    for (const a: RouterData.RouterDataOne in router) {
         //@ts-ignore
-        if(isInDB({url: a.url},routes)){
+        if (isInDB({url: a.url}, routes)) {
             allowRouter.push()
         }
     }
-
-
     return {};
 }
 
