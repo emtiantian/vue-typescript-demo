@@ -1,5 +1,4 @@
 // 判断路径是否有权限访问
-import full from "../router/fullRouter";
 const isAllow = (newPath: string, routerData: string) => {
     if (!newPath || !routerData) {
         return false;
@@ -8,7 +7,7 @@ const isAllow = (newPath: string, routerData: string) => {
     if (pathArr[1] === 'public') {
         return true;
     } else {
-        return isInDB({url: newPath}, JSON.parse(routerData));
+        return isInDB({path: newPath}, JSON.parse(routerData));
     }
 };
 
@@ -35,11 +34,12 @@ const isInDB = (obj: object, DB: object[]): boolean => {
     });
 };
 
+// 如果对象数组中包含对象则返回对象数组相应的对象
 const isInDBWho = (obj: object, DB: object[]): object[] => {
     // 这里应该严谨一点判断具体类型 ，catch 错误
     if (!obj || !DB) {
         console.log('判断对象是否在对象数组中错误');
-        return []
+        return [];
     }
     return DB.filter((ele, index, arr) => {
         let a = false;
@@ -59,51 +59,56 @@ const isInDBWho = (obj: object, DB: object[]): object[] => {
 };
 
 // 根据允许访问url获得对应路由
-const getRouter = (fullRouter: object[], routerData: string): object => {
+const getRouter = (fullRouter: object[], routerData: string): object[] => {
     const router: RouterData.RouterData = JSON.parse(routerData);
-    let allowRouter:any[] = [];
-    router.forEach(function (element: RouterData.RouterDataOne) {
-        allowRouter.push(isInDBWho({path: element.url}, fullRouter))
-    });
+    const allowRouter: any[] = [];
+    console.dir(router);
+    console.dir(fullRouter);
+    router.forEach((element: RouterData.RouterDataOne) => {
+        const arrayrouter = isInDBWho({path: element.path}, fullRouter);
+        if (arrayrouter.length > 0) {
+            allowRouter.push(arrayrouter[0]);
+        }
+    })
+    ;
     return allowRouter;
-}
+};
 
 
-const arr = [{
-    'id': '4028811a5e1820d9015e1824acf20000',
-    'name': '登录',
-    'summary': null,
-    'url': '/login',
-    'method': 'GET'
-}, {
-    'id': '12300',
-    'name': '主页',
-    'summary': null,
-    'url': '/',
-    'method': 'GET'
-},
-]
-const  str = "[{\n" +
-    "    'id': '4028811a5e1820d9015e1824acf20000',\n" +
-    "    'name': '登录',\n" +
-    "    'summary': null,\n" +
-    "    'url': '/login',\n" +
-    "    'method': 'GET'\n" +
-    "}, {\n" +
-    "    'id': '12300',\n" +
-    "    'name': '主页',\n" +
-    "    'summary': null,\n" +
-    "    'url': '/',\n" +
-    "    'method': 'GET'\n" +
-    "},\n" +
-    "]"
+// const arr = [{
+//     'id': '4028811a5e1820d9015e1824acf20000',
+//     'name': '登录',
+//     'summary': null,
+//     'url': '/login',
+//     'method': 'GET'
+// }, {
+//     'id': '12300',
+//     'name': '主页',
+//     'summary': null,
+//     'url': '/',
+//     'method': 'GET'
+// },
+// ];
+// const str = "[{\n" +
+//     "    'id': '4028811a5e1820d9015e1824acf20000',\n" +
+//     "    'name': '登录',\n" +
+//     "    'summary': null,\n" +
+//     "    'url': '/login',\n" +
+//     "    'method': 'GET'\n" +
+//     "}, {\n" +
+//     "    'id': '12300',\n" +
+//     "    'name': '主页',\n" +
+//     "    'summary': null,\n" +
+//     "    'url': '/',\n" +
+//     "    'method': 'GET'\n" +
+//     "},\n" +
+//     "]";
 
-const  testgetRouter =()=>{
+// const testgetRouter = () => {
+//     const allowRouter = getRouter(full.fullRouter.routes, str);
+// };
 
-  const allowRouter = getRouter(full.fullRouter.routes,str);
-}
-
-testgetRouter();
+// testgetRouter();
 // const testARR = (arr: object[]) => {
 //     console.log('结果是' + isInDB({url: '/'}, arr));
 // }
@@ -112,5 +117,7 @@ testgetRouter();
 export default {
     isAllow,
     isInDB,
+    getRouter,
+    isInDBWho,
 };
 

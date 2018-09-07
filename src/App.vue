@@ -16,6 +16,8 @@
     import signin from './api/signin';
     import instance from './api/index';
     import util from './util/util';
+    import fullRouter from './router/fullRouter';
+    import defaultRouter from './router/defaultRouter';
 
     @Component
     export default class App extends Vue {
@@ -29,7 +31,8 @@
             }
             // 设置请求头统一携带token
             // instance.defaults.headers.common['Authorization'] = 'Bearer token';
-            instance.defaults.headers.common['Authorization'] = 'Bearer ' + localUser;
+            // instance.defaults.headers.common['Authorization'] = 'Bearer ' + localUser;
+            instance.defaults.headers.common.Authorization = 'Bearer ' + localUser;
             // console.log('token：' + sessionStorage.getItem('user-token'));
             // 绑定token到拦截器上
             // 通过token获得 动态路由和动态菜单
@@ -42,17 +45,27 @@
                 //     showClose: true, // 显示关闭按钮
                 // });
 
+                // localStorage 不能存储对象，并且localStorage不能设置存储时间
+                localStorage.setItem('menuData', JSON.stringify(data.data.menus));
+                localStorage.setItem('userData', JSON.stringify(data.data.user));
+                localStorage.setItem('routerData', JSON.stringify(data.data.resources));
+                const routerData = localStorage.getItem('routerData') || '';
 
-                localStorage.setItem('menuData', data.data.menus);
-                localStorage.setItem('userData', data.data.user);
-                localStorage.setItem('routerData', data.data.resources);
 
-                // 判断newPath是否存在
-                // 是否有权限没有权限替换为404, ts的校验太严格了~
-                let routerData = localStorage.getItem('routerData') || "";
-                newPath = util.isAllow(newPath,routerData)?newPath:"404";
 
                 // 对应路由表取出允许访问路由
+                const Router = util.getRouter(fullRouter.fullRouter.routes, routerData);
+
+                // 拼接允许路由和默认路由
+                const allowRouter = Router.concat(defaultRouter.defaultRouter.routes);
+                console.dir(allowRouter);
+                // 判断newPath是否存在
+                if (newPath) {
+                    // 是否有权限没有权限替换为404, ts的校验太严格了~
+                    newPath = util.isAllow(newPath, JSON.stringify(allowRouter)) ? newPath : '404';
+                } else {
+                    newPath = '/';
+                }
 
                 // 动态注入路由
 
@@ -63,7 +76,7 @@
                 // 请求拦截
 
                 // 默认跳转首页
-                this.$router.replace({path: newPath || '/'});
+                this.$router.replace({path: newPath });
             });
         }
 

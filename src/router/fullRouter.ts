@@ -9,7 +9,9 @@ const fullRouter = {
         {
             path: '/',
             name: 'home',
-            component: Home,
+            component: () => {
+                return Home;
+            },
         },
         {
             path: '/about',

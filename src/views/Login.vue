@@ -23,12 +23,13 @@
 <script lang="ts">
     import {Component, Prop, Vue} from 'vue-property-decorator';
     import loginApi from '../api/login';
+
     @Component
     export default class Login extends Vue {
         // !:是表示必须参数 ?:是表示非必须
         // 可以使用拼接字符串的模式使用i18n
-        @Prop({default: 'appname'}) private appName!: string ;
-        @Prop({default: '登录'}) private btnText!: string ;
+        @Prop({default: 'appname'}) private appName!: string;
+        @Prop({default: '登录'}) private btnText!: string;
         private username: string = '';
         private password: string = '';
         private isBtnLoading: boolean = false;
@@ -65,7 +66,9 @@
                 thisF.isBtnLoading = false;
                 // 不应该使用cookie 保存token 可以使用sessionStorage和localStorge
                 sessionStorage.setItem('user-token', obj.data.token);
-                this.$emit('login', this.$router.currentRoute.query);
+                // TODO 这个获取上一路径方法不对
+                // this.$emit('login', this.$router.currentRoute.query);
+                this.$emit('login', '/');
             });
         }
     }

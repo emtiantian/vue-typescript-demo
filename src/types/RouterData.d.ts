@@ -9,7 +9,7 @@ declare namespace RouterData {
         id: string,
         name: string,
         summary: string,
-        url: string,
+        path: string,
         method: string,
     }
 

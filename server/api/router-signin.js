@@ -10,15 +10,22 @@ const signin = async (cxt, next) => {
         'id': '4028811a5e1820d9015e1824acf20000',
         'name': '登录',
         'summary': null,
-        'url': '/signin',
+        'path': '/login',
         'method': 'GET'
       },{
         'id' : '4028811a5e1820d9015e1824acf20001',
         'name': '监控',
         'summary': null,
-        'url': '/monitor',
+        'path': '/monitor',
+        'method': 'GET'
+      },{
+        'id' : '4028811a5e1820d9015e1824acf20002',
+        'name': '首页',
+        'summary': null,
+        'path': '/',
         'method': 'GET'
       }
+
     ],
     'id': '2c9180895e172348015e1740805d000d',
     'user': {
