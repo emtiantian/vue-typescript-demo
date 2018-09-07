@@ -14,7 +14,7 @@ declare namespace RouterData {
     }
 
     // 请求接口数据
-    export interface RouterData {
+    export interface RouterData extends Array<RouterDataOne>{
         [index: number]: RouterDataOne
     }
 }
