@@ -62,9 +62,10 @@ const isInDBWho = (obj: object, DB: object[]): object[] => {
 const getRouter = (fullRouter: object[], routerData: string): object[] => {
     const router: RouterData.RouterData = JSON.parse(routerData);
     const allowRouter: any[] = [];
-    console.dir(router);
-    console.dir(fullRouter);
+    // console.dir(router);
+    // console.dir(fullRouter);
     router.forEach((element: RouterData.RouterDataOne) => {
+        // TODO 这里实现的是路由的完全匹配， 正常情况下应该要实现正则匹配
         const arrayrouter = isInDBWho({path: element.path}, fullRouter);
         if (arrayrouter.length > 0) {
             allowRouter.push(arrayrouter[0]);

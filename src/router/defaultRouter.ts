@@ -21,7 +21,7 @@ const defaultRouter = {
             component: Login,
         },
         {
-            path: '*',
+            path: '/404',
             name: '404',
             component: Vue404,
             // meta: {

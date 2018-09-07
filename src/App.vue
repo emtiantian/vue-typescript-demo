@@ -19,13 +19,14 @@
     import fullRouter from './router/fullRouter';
     import defaultRouter from './router/defaultRouter';
 
+    //TODO vue 刷新会重新实例化 是否需要判断sessionStorage中是否有路由信息
     @Component
     export default class App extends Vue {
         // private userData: object = null;
         // private menuData: object = null;
-
         private loginAss(newPath: string) {
             const localUser = sessionStorage.getItem('user-token');
+            const that = this;
             if (!localUser) {
                 return this.$router.push({path: '/login', query: {from: this.$router.currentRoute.path}});
             }
@@ -46,11 +47,10 @@
                 // });
 
                 // localStorage 不能存储对象，并且localStorage不能设置存储时间
-                localStorage.setItem('menuData', JSON.stringify(data.data.menus));
-                localStorage.setItem('userData', JSON.stringify(data.data.user));
-                localStorage.setItem('routerData', JSON.stringify(data.data.resources));
-                const routerData = localStorage.getItem('routerData') || '';
-
+                sessionStorage.setItem('menuData', JSON.stringify(data.data.menus));
+                sessionStorage.setItem('userData', JSON.stringify(data.data.user));
+                sessionStorage.setItem('routerData', JSON.stringify(data.data.resources));
+                const routerData = sessionStorage.getItem('routerData') || '';
 
 
                 // 对应路由表取出允许访问路由
@@ -58,16 +58,21 @@
 
                 // 拼接允许路由和默认路由
                 const allowRouter = Router.concat(defaultRouter.defaultRouter.routes);
-                console.dir(allowRouter);
+
                 // 判断newPath是否存在
                 if (newPath) {
                     // 是否有权限没有权限替换为404, ts的校验太严格了~
-                    newPath = util.isAllow(newPath, JSON.stringify(allowRouter)) ? newPath : '404';
+                    newPath = util.isAllow(newPath, JSON.stringify(allowRouter)) ? newPath : '/404';
                 } else {
                     newPath = '/';
                 }
 
                 // 动态注入路由
+                console.dir(Router);
+                debugger;
+                // 最后在添加默认路由 不然动态路由在默认路由之后不会被访问到
+                console.dir(Router.concat([{path: '*', redirect: '/404'}]));
+                const a = that.$router.addRoutes(Router.concat([{path: '*', redirect: '/404'}]) as any);
 
                 // 动态生成菜单 在首页中生成
 
@@ -76,7 +81,7 @@
                 // 请求拦截
 
                 // 默认跳转首页
-                this.$router.replace({path: newPath });
+                that.$router.push({path: newPath});
             });
         }
 
