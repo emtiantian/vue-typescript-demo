@@ -24,10 +24,7 @@ const defaultRouter = {
             path: '/404',
             name: '404',
             component: Vue404,
-            // meta: {
-            //     errormassage: '404',
-            // },
-        },
+        }
     ],
 };
 export default {

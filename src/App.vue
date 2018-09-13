@@ -19,7 +19,7 @@
     import fullRouter from './router/fullRouter';
     import defaultRouter from './router/defaultRouter';
 
-    //TODO vue 刷新会重新实例化 是否需要判断sessionStorage中是否有路由信息
+    // TODO vue 刷新会重新实例化 是否需要判断sessionStorage中是否有路由信息
     @Component
     export default class App extends Vue {
         // private userData: object = null;
@@ -52,7 +52,6 @@
                 sessionStorage.setItem('routerData', JSON.stringify(data.data.resources));
                 const routerData = sessionStorage.getItem('routerData') || '';
 
-
                 // 对应路由表取出允许访问路由
                 const Router = util.getRouter(fullRouter.fullRouter.routes, routerData);
 
@@ -68,11 +67,16 @@
                 }
 
                 // 动态注入路由
-                console.dir(Router);
-                debugger;
-                // 最后在添加默认路由 不然动态路由在默认路由之后不会被访问到
-                console.dir(Router.concat([{path: '*', redirect: '/404'}]));
-                const a = that.$router.addRoutes(Router.concat([{path: '*', redirect: '/404'}]) as any);
+                // 最后在添加默认路由 不然动态路由在默认路由之后不会被访问到 这个问题不存在了 官方已经在代码中吧*路由自动放在最后了
+                // that.$router.addRoutes(Router.concat([{path: '*', redirect: '/404'}]) as any);
+                // that.$router.addRoutes(Router as any);
+
+                const arr = [{
+                    path: '/monitor',
+                    name: 'monitor',
+                    component: { template: '<div>监控页面</div>' },
+                }];
+                that.$router.addRoutes(Router as Array)
 
                 // 动态生成菜单 在首页中生成
 

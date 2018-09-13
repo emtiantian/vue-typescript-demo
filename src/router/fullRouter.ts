@@ -9,9 +9,7 @@ const fullRouter = {
         {
             path: '/',
             name: 'home',
-            component: () => {
-                return Home;
-            },
+            component: Home,
         },
         {
             path: '/about',
@@ -26,15 +24,13 @@ const fullRouter = {
         {
             path: '/monitor',
             name: 'monitor',
-            component: { template: '<div>监控页面</div>' },
+            component: Monitor,
+            //component: { template: '<div>监控页面</div>' },
         },
         {
-            path: '*',
+            path: '/404',
             name: '404',
             component: Vue404,
-            // meta: {
-            //     errormassage: '404',
-            // },
         },
     ],
 };
