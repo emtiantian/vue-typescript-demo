@@ -24,8 +24,7 @@ const fullRouter = {
         {
             path: '/monitor',
             name: 'monitor',
-            component: Monitor,
-            //component: { template: '<div>监控页面</div>' },
+            component:Monitor,
         },
         {
             path: '/404',

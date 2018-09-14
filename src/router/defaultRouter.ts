@@ -21,10 +21,10 @@ const defaultRouter = {
             component: Login,
         },
         {
-            path: '/404',
+            path: '*',
             name: '404',
             component: Vue404,
-        }
+        },
     ],
 };
 export default {

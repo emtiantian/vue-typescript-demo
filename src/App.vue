@@ -6,6 +6,8 @@
             <router-link to="/about">About</router-link>
             |
             <router-link to="/login">login</router-link>
+            |
+            <router-link to="/monitor">monitor</router-link>
         </div>
         <!-- 触发器要写在路由引入部分上面 -->
         <router-view @login="loginAss" @logout="logoutAss"/>
@@ -55,6 +57,8 @@
                 // 对应路由表取出允许访问路由
                 const Router = util.getRouter(fullRouter.fullRouter.routes, routerData);
 
+                // 把对应的路由存储在sessionStorage中
+
                 // 拼接允许路由和默认路由
                 const allowRouter = Router.concat(defaultRouter.defaultRouter.routes);
 
@@ -69,15 +73,14 @@
                 // 动态注入路由
                 // 最后在添加默认路由 不然动态路由在默认路由之后不会被访问到 这个问题不存在了 官方已经在代码中吧*路由自动放在最后了
                 // that.$router.addRoutes(Router.concat([{path: '*', redirect: '/404'}]) as any);
-                // that.$router.addRoutes(Router as any);
-
-                const arr = [{
-                    path: '/monitor',
-                    name: 'monitor',
-                    component: { template: '<div>监控页面</div>' },
-                }];
-                that.$router.addRoutes(Router as Array)
-
+                that.$router.addRoutes(Router as any);
+                // debugger;
+                // const arr = [{
+                //     path: '/monitor',
+                //     name: 'monitor',
+                //     component:monitor,
+                // }];
+                // that.$router.addRoutes(arr)
                 // 动态生成菜单 在首页中生成
 
                 // 路由守护
