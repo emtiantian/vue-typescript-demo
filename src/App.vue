@@ -40,6 +40,7 @@
             // 绑定token到拦截器上
             // 通过token获得 动态路由和动态菜单
             signin.signin.r({}).then((data) => {
+
                 // 调试用代码
                 // this.$message({
                 //     message: '获取到了内容',
@@ -48,7 +49,8 @@
                 //     showClose: true, // 显示关闭按钮
                 // });
 
-                // localStorage 不能存储对象，并且localStorage不能设置存储时间
+                // localStorage 不能存储对象，并且localStorage不能设置存储时间 会一直存储直到手动删除
+                // 这里选用sessionStorage，当需要保持登录状态的时候使用localStorage 并在退出的时候删除token
                 sessionStorage.setItem('menuData', JSON.stringify(data.data.menus));
                 sessionStorage.setItem('userData', JSON.stringify(data.data.user));
                 sessionStorage.setItem('routerData', JSON.stringify(data.data.resources));
@@ -57,7 +59,6 @@
                 // 对应路由表取出允许访问路由
                 const Router = util.getRouter(fullRouter.fullRouter.routes, routerData);
 
-                // 把对应的路由存储在sessionStorage中
 
                 // 拼接允许路由和默认路由
                 const allowRouter = Router.concat(defaultRouter.defaultRouter.routes);

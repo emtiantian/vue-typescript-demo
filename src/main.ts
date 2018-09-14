@@ -14,7 +14,10 @@ import myi18n from './components/common/Myi18n';
 import zh from './lang/zh';
 // 引入英文语言包
 import en from './lang/en';
-
+// 引入全部路由用作匹配
+import fullRouter from  './router/fullRouter';
+// 引入util
+import  util from './util/util';
 
 Vue.config.productionTip = false;
 
@@ -46,6 +49,13 @@ Vue.directive('has', {
         }
     },
 });
+// 为防止页面刷新动态添加的路由失效
+// 如果sessionStorage 中有允许路由，添加到当前路由中
+if ( sessionStorage.getItem('routerData') ) {
+    const routerData = sessionStorage.getItem('routerData');
+    const Router = util.getRouter(fullRouter.fullRouter.routes, routerData);
+    router.addRoutes(Router as any);
+}
 
 new Vue({
     router,
