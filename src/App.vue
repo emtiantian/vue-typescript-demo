@@ -68,6 +68,7 @@
                     // 是否有权限没有权限替换为404, ts的校验太严格了~
                     newPath = util.isAllow(newPath, JSON.stringify(allowRouter)) ? newPath : '/404';
                 } else {
+                    // 默认跳转首页
                     newPath = '/';
                 }
 
@@ -84,11 +85,9 @@
                 // that.$router.addRoutes(arr)
                 // 动态生成菜单 在首页中生成
 
-                // 路由守护
+                // 路由守护 路由守护和请求拦截
 
-                // 请求拦截
-
-                // 默认跳转首页
+                // 跳转页面
                 that.$router.push({path: newPath});
             });
         }
@@ -102,27 +101,6 @@
             });
         }
     }
-
-    // @Component({
-    //     data(){
-    //         return {
-    //             userData:null,
-    //             menuData:null,
-    //         }
-    //     },
-    //     methods:{
-    //         loginAss: function ():void {
-    //             this.$message({
-    //                 message: '登录成功',
-    //                 type: 'success',
-    //                 duration: 0, // 不自动关闭
-    //                 showClose: true, // 显示关闭按钮
-    //             })
-    //         }
-    //     }
-    //
-    // })
-
 </script>
 <style lang="less">
     @import "assets/common.css";
