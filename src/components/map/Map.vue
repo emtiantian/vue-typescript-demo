@@ -1,5 +1,5 @@
 <template>
-
+    <Map auto-change="auto-change" name="name" map-type="map-type" map-style="map-style" ></Map>
 </template>
 
 <script>
