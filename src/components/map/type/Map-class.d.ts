@@ -1,16 +1,16 @@
 
 export = map;
-
 declare class map{
-    constructor(mapOption: Map.mapOption) // 构造器
+
+    constructor(mapOption: Maplib.mapOption) // 构造器
     update:()=>boolean;
     reSize:()=>void;
     Zoom:()=>void;
     private mapEvents; // 地图事件 只能get events 在组件内只出发这个events 在组件外放入vuex中
     private markEvents; // mark事件
-
 }
-declare namespace Map {
+
+declare namespace Maplib {
     // 自定义map配置类型
     export interface mapOption {
         name: string, // map名称
@@ -19,10 +19,11 @@ declare namespace Map {
         type?: mapType[], // map切换列表（切换顺序为数组下标）
         autoChange?: boolean, // 是否自动切换
         style?: string, // 地图美化css
-        marks?: string[], // 地图标记
+        marks?: marks, // 地图标记
         draggable?: boolean, // 是否可以拖动
         autoMarks?: boolean, // 是否自动放置mark位置（保持markcontent 在地图可见区域）
     }
+
     // maptype的枚举类型
     enum mapType {
         google = "google",
