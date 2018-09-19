@@ -1,5 +1,9 @@
 
-export = map;
+// umd 规范
+declare module "map"{
+    export = map;
+}
+
 declare class map{
 
     constructor(mapOption: Maplib.mapOption) // 构造器
@@ -21,7 +25,10 @@ declare namespace Maplib {
         style?: string, // 地图美化css
         marks?: marks, // 地图标记
         draggable?: boolean, // 是否可以拖动
-        autoMarks?: boolean, // 是否自动放置mark位置（保持markcontent 在地图可见区域）
+        autoMarksContent?: boolean, // 是否自动放置mark位置（保持markcontent 在地图可见区域）
+        hideLogo?: boolean, // 是否显示地图logo
+        width?: string, // 宽度，px单位
+        height?: string, // 高度，px单位
     }
 
     // maptype的枚举类型
