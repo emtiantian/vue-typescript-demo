@@ -21,7 +21,9 @@
     import fullRouter from './router/fullRouter';
     import defaultRouter from './router/defaultRouter';
 
-    // TODO vue 刷新会重新实例化 是否需要判断sessionStorage中是否有路由信息
+    // FIXED vue 刷新会重新实例化 是否需要判断sessionStorage中是否有路由信息
+    // TODO vue 在现有路由下添加子路由会有问题
+    // https://github.com/vuejs/vue-router/issues/1156
     @Component
     export default class App extends Vue {
         // private userData: object = null;

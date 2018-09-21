@@ -38,6 +38,7 @@ declare namespace Maplib {
     export interface mapKey {
         key: string, // 地图授权key
         type: mapType, // map切换列表（切换顺序为数组下标）
+        className: string, // 地图对象名称（用于判断地图是否加载成功）
         ordered: number, // 优先顺序
         loadCN?: boolean, // 是否加载中国google
         apiUrl?:string,

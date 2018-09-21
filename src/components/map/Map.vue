@@ -1,12 +1,15 @@
 <template>
-    <Map mapAutoChange="autoChange" mapName="name" mapType="type" mapStyle="style" mapZoom="zoom"></Map>
+    <div></div>
 </template>
 
 <script lang="ts">
     import {Component, Prop, Vue} from 'vue-property-decorator';
     // 全局错误处理
-    import err from './components/errorHandler'
+    import err from './components/errorHandler';
+    // 加载不同地图api
+    import loadMap from './components/loadMap';
     // TODO 暂时先把所有的方法写在一起,后面分成模块可使用option来配置是否启用
+
     @Component
     export default class map extends Vue {
         // @Prop private mapsOption!: Maplib.mapOption;
@@ -28,7 +31,12 @@
         @Prop({default: ''}) private marks: Maplib.mark[];
         @Prop({default: true}) private autoMarksContent: boolean;
 
+        // 全局错误处理
+
+
         // 引入google地图api或者百度地图aip 返回一个promise对象
+
+        //loadMap(mapKey, allowTime, autoChange);
 
         // 初始化地图及地图事件
 
