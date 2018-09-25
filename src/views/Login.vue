@@ -23,10 +23,8 @@
 <script lang="ts">
     import {Component, Prop, Vue} from 'vue-property-decorator';
     import loginApi from '../api/login';
-
     @Component
     export default class Login extends Vue {
-        // !:是表示必须参数 ?:是表示非必须
         // 可以使用拼接字符串的模式使用i18n
         @Prop({default: 'appname'}) private appName!: string;
         @Prop({default: '登录'}) private btnText!: string;

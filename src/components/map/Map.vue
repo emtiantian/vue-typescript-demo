@@ -1,5 +1,5 @@
 <template>
-    <div></div>
+    <div :name=name :zoom=zoom :center=center :mapkey=mapkey></div>
 </template>
 
 <script lang="ts">
@@ -7,19 +7,23 @@
     // 全局错误处理
     import err from './components/errorHandler';
     // 加载不同地图api
-    import loadMap from './components/loadMap';
+    import loadMaps from './components/loadMap';
+
+
+    // 测试
     // TODO 暂时先把所有的方法写在一起,后面分成模块可使用option来配置是否启用
 
     @Component
-    export default class map extends Vue {
+    export default class Map extends Vue {
         // @Prop private mapsOption!: Maplib.mapOption;
         // @Prop private marksOption!: Maplib.markOption;
+
         // 基础参数部分
         @Prop private zoom!: number;
         @Prop private name!: string;
-        @Prop private conter!: object;
-        @Prop private  mapKey!:Maplib.mapKey[];
-        @Prop({default: 5}) private allowTime!:number;
+        @Prop private center!: Maplib.latLng;
+        @Prop private mapkey!: Maplib.mapKey[];
+        @Prop({default: 5}) private allowTime!: number;
         @Prop({default: '100%'}) private width: string;
         @Prop({default: '100%'}) private height: string;
         @Prop({default: true}) private autoChange: boolean;
@@ -31,12 +35,27 @@
         @Prop({default: ''}) private marks: Maplib.mark[];
         @Prop({default: true}) private autoMarksContent: boolean;
 
+        private loadMap: Promise;
+
+        // 生命周期钩子 在页面加载完成是触发
+        public mounted() {
+            this.loadMap = loadMaps.loadMap(this.mapkey, this.allowTime, this.autoChange);
+            console.log('开始加载地图');
+            //  implements 实现抽象类
+            throw new class implements Error {
+                public message: string = '测试错误';
+                public name: string = 'DevError';
+                public stack: string = (new Error()).stack;
+            };
+        }
+
         // 全局错误处理
 
-
+        // err
         // 引入google地图api或者百度地图aip 返回一个promise对象
 
-        //loadMap(mapKey, allowTime, autoChange);
+
+        // loadMap(mapKey, allowTime, autoChange);
 
         // 初始化地图及地图事件
 
@@ -56,6 +75,6 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="less">
 
 </style>

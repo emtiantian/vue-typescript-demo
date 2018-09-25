@@ -15,9 +15,9 @@ import zh from './lang/zh';
 // 引入英文语言包
 import en from './lang/en';
 // 引入全部路由用作匹配
-import fullRouter from  './router/fullRouter';
+import fullRouter from './router/fullRouter';
 // 引入util
-import  util from './util/util';
+import util from './util/util';
 
 Vue.config.productionTip = false;
 
