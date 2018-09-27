@@ -1,8 +1,8 @@
-const loadMap = (mapKey: Maplib.mapKey[], allowTime: number, autoChange: boolean): Promise<any> => {
+const loadMap = (mapKey: Maplib.MapKey[], allowTime: number, autoChange: boolean): Promise<any> => {
     if (mapKey.length > 0) {
         // 排序
         mapKey.sort((a, b) => {
-            return a.ordered > b.ordered? 1:-1;
+            return a.ordered > b.ordered ? 1 : -1;
         });
         // 创建script
         if (typeof document === undefined) {

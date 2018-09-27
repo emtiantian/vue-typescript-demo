@@ -1,5 +1,5 @@
 <template>
-    <div :name=name :zoom=zoom :center=center :mapkey=mapkey></div>
+    <div></div>
 </template>
 
 <script lang="ts">
@@ -21,8 +21,8 @@
         // 基础参数部分
         @Prop(Number) private zoom!: number;
         @Prop(String) private name!: string;
-        @Prop(Maplib) private center!: Maplib.latLng;
-        @Prop(Maplib) private mapkey!: Maplib.mapKey[];
+        @Prop() private center!: Maplib.LatLng;
+        @Prop() private mapKey!: Maplib.MapKey[];
         @Prop({default: 5}) private allowTime!: number;
         @Prop({default: '100%'}) private width: string;
         @Prop({default: '100%'}) private height: string;
@@ -32,21 +32,16 @@
         @Prop({default: false}) private hideLogo: boolean;
         @Prop({default: true}) private loadCN: boolean;
         // mark 参数部分
-        @Prop({default: ''}) private marks: Maplib.mark[];
+        @Prop({default: ''}) private marks: Maplib.Mark[];
         @Prop({default: true}) private autoMarksContent: boolean;
 
-        private loadMap: Promise;
+        private loadMap: Promise<any>;
 
-        // 生命周期钩子 在页面加载完成是触发
+        // 生命周期钩子 在页面加载完成时触发
         public mounted() {
-            this.loadMap = loadMaps.loadMap(this.mapkey, this.allowTime, this.autoChange);
+            this.loadMap = loadMaps.loadMap(this.mapKey, this.allowTime, this.autoChange);
             console.log('开始加载地图');
-            //  implements 实现抽象类
-            throw new class implements Error {
-                public message: string = '测试错误';
-                public name: string = 'DevError';
-                public stack: string = (new Error()).stack;
-            };
+            throw new Error('测试错误');
         }
 
         // 全局错误处理

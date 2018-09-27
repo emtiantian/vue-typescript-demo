@@ -1,4 +1,3 @@
-
 // umd 规范
 // declare module "map"{
 //     export = map;
@@ -17,78 +16,78 @@
 
 declare namespace Maplib {
     // 自定义map配置类型
-    export interface mapOptions{
+    interface mapOptions {
         // mapsOption: Maplib.mapOption;
         // marksOption: Maplib.markOption;
-        mapKey: mapKey;
-        name: string, // map名称
-        center: latLng, // 中心点
-        zoom: number, // 缩放级别
-        changeTime?: number, // 允许google加载时间
-        autoChange?: boolean, // 是否自动切换
-        style?: string, // 地图美化css
-        draggable?: boolean, // 是否可以拖动
-        hideLogo?: boolean, // 是否显示地图logo
-        width?: string, // 宽度，px单位
-        height?: string, // 高度，px单位
-        [index:number]:mark; // marks 数组
-        autoMarksContent?: boolean, // 是否自动放置mark位置（保持markcontent 在地图可见区域）
+        mapKey: MapKey;
+        name: string; // map名称
+        center: LatLng; // 中心点
+        zoom: number; // 缩放级别
+        changeTime?: number; // 允许google加载时间
+        autoChange?: boolean; // 是否自动切换
+        style?: string; // 地图美化css
+        draggable?: boolean; // 是否可以拖动
+        hideLogo?: boolean; // 是否显示地图logo
+        width?: string; // 宽度，px单位
+        height?: string; // 高度，px单位
+        [index: number]: Mark; // marks 数组
+        autoMarksContent?: boolean; // 是否自动放置mark位置（保持markcontent 在地图可见区域）
     }
 
-    export interface mapKey {
-        key: string, // 地图授权key
-        type: mapType, // map切换列表（切换顺序为数组下标）
-        className: string, // 地图对象名称（用于判断地图是否加载成功）
-        ordered: number, // 优先顺序
-        loadCN?: boolean, // 是否加载中国google
-        apiUrl?:string,
-        apiUrlCn?: string,
+    interface MapKey {
+        key: string; // 地图授权key
+        type: mapType; // map切换列表（切换顺序为数组下标）
+        className: string; // 地图对象名称（用于判断地图是否加载成功）
+        ordered: number; // 优先顺序
+        loadCN?: boolean; // 是否加载中国google
+        apiUrl?: string;
+        apiUrlCn?: string;
     }
 
     // maptype的枚举类型
     enum mapType {
-        google = "google",
-        baidu = "baidu",
+        google = 'google',
+        baidu = 'baidu',
     }
 
     // 地理位置信息
-    export interface latLng {
-        lat:number, // 纬度
-        lng:number, // 经度
+    interface LatLng {
+        lat: number; // 纬度
+        lng: number; // 经度
     }
 
     // marks需要包含内容
-    export  interface markOption {
-       [index:number]:mark; // marks 数组
-        autoMarksContent?: boolean, // 是否自动放置mark位置（保持markcontent 在地图可见区域）
+    interface markOption {
+        [index: number]: Mark; // marks 数组
+        autoMarksContent?: boolean; // 是否自动放置mark位置（保持markcontent 在地图可见区域）
     }
 
     // mark 需要包含的内容
-    export  interface mark {
-        id:string, // 唯一标识
-        position:latLng, // 标记位置
-        content?: Document, // mark的解释内容
-        icon?: string,  // mark图片或者样式
-        onTouch?:()=>void, // 点击事件
-        onMouseOver?:()=>void, // 悬停事件
-        draggable?: boolean, // mark 是否可以被拖动
+    interface Mark {
+        id: string; // 唯一标识
+        position: LatLng; // 标记位置
+        content?: Document; // mark的解释内容
+        icon?: string;  // mark图片或者样式
+        onTouch?: () => void; // 点击事件
+        onMouseOver?: () => void; // 悬停事件
+        draggable?: boolean; // mark 是否可以被拖动
     }
 
     // 地图初始化信息
-    export interface mapOption {
-        key: string, // 地图授权key
-        name: string, // map名称
-        center: latLng, // 中心点
-        zoom: number, // 缩放级别
-        changeTime?: number, // 允许google加载时间
-        type?: mapType[], // map切换列表（切换顺序为数组下标）
-        autoChange?: boolean, // 是否自动切换
-        style?: string, // 地图美化css
-        draggable?: boolean, // 是否可以拖动
-        hideLogo?: boolean, // 是否显示地图logo
-        width?: string, // 宽度，px单位
-        height?: string, // 高度，px单位
-        loadCN?: boolean, // 是否加载中国google
+    interface mapOption {
+        key: string; // 地图授权key
+        name: string; // map名称
+        center: LatLng; // 中心点
+        zoom: number; // 缩放级别
+        changeTime?: number; // 允许google加载时间
+        type?: mapType[]; // map切换列表（切换顺序为数组下标）
+        autoChange?: boolean; // 是否自动切换
+        style?: string; // 地图美化css
+        draggable?: boolean; // 是否可以拖动
+        hideLogo?: boolean; // 是否显示地图logo
+        width?: string; // 宽度，px单位
+        height?: string; // 高度，px单位
+        loadCN?: boolean; // 是否加载中国google
     }
 
 }

@@ -1,4 +1,3 @@
-
 // // 本类参考 https://segmentfault.com/a/1190000011481099#articleHeader11
 // // 自定义错误处理类
 // function DevError(message: string = '未知错误') {
@@ -25,14 +24,15 @@ function errorHandler(error: Error) {
     // }
     error.message += ` https://stackoverflow.com/questions?q=${encodeURI(error.message)}`;
     console.error(error.message);
+    console.error(error.message);
 }
-
+// @ts-ignore 没弄懂的错误 TODO 没弄懂的错误
 window.onerror = (msg, url, line, col, err: Error) => {
-    if(typeof err === "object"){
+    if (typeof err === 'object') {
         errorHandler(err);
-    }else{
-        console.log("接到一个不是error的")
-        errorHandler(new Error(err||"未知错误"));
+    } else {
+        console.log('接到一个不是error的');
+        errorHandler(new Error(err || '未知错误'));
     }
 
 };
