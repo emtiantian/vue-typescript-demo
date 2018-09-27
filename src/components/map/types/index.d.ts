@@ -1,19 +1,19 @@
 
 // umd 规范
-declare module "map"{
-    export = map;
-}
+// declare module "map"{
+//     export = map;
+// }
 
-declare class map{
-
-    constructor(mapOption: Maplib.mapOptions) // 构造器
-    update:()=>boolean; // 更新
-    reSize:()=>void; // 重绘
-    Zoom:()=>void; // 修改缩放等级
-    private mapEvents; // 地图事件 只能get events 在组件内只出发这个events 在组件外放入vuex中
-    private markEvents; // mark事件
-    panTO:()=>boolean; // 移动中心点
-}
+// declare class map{
+//
+//     // constructor(mapOption: Maplib.mapOptions) // 构造器
+//     update:()=>boolean; // 更新
+//     reSize:()=>void; // 重绘
+//     Zoom:()=>void; // 修改缩放等级
+//     private mapEvents; // 地图事件 只能get events 在组件内只出发这个events 在组件外放入vuex中
+//     private markEvents; // mark事件
+//     panTO:()=>boolean; // 移动中心点
+// }
 
 declare namespace Maplib {
     // 自定义map配置类型

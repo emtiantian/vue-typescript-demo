@@ -1,8 +1,8 @@
-const loadMap = (mapKey: Maplib.mapKey[], allowTime: number, autoChange: boolean): Promise => {
+const loadMap = (mapKey: Maplib.mapKey[], allowTime: number, autoChange: boolean): Promise<any> => {
     if (mapKey.length > 0) {
         // 排序
         mapKey.sort((a, b) => {
-            return a.ordered > b.ordered;
+            return a.ordered > b.ordered? 1:-1;
         });
         // 创建script
         if (typeof document === undefined) {
@@ -11,7 +11,7 @@ const loadMap = (mapKey: Maplib.mapKey[], allowTime: number, autoChange: boolean
 
 
         // 根据允许时间切换api对象
-        const timePromise: Promise = new Promise((resolve, reject) => {
+        const timePromise: Promise<any> = new Promise((resolve, reject) => {
             mapKey.forEach((value, index) => {
 
                 const mapScrpit = document.createElement('script');
@@ -31,12 +31,7 @@ const loadMap = (mapKey: Maplib.mapKey[], allowTime: number, autoChange: boolean
                     // 未在给定时间内加载成功的地图api视为不可用
                     setTimeout(() => {
                         if (Object.keys(value.className).length === 0) {
-                            // 对于接口的实现
-                            throw  new class implements Error {
-                                public message: string = '给定时间未找到地图api' + value.type;
-                                public name: string;
-                                public stack: string;
-                            };
+                            throw new Error('给定时间未找到地图api' + value.type);
                         } else {
                             // 返回选用地图api的属性
                             resolve(value);
@@ -46,11 +41,7 @@ const loadMap = (mapKey: Maplib.mapKey[], allowTime: number, autoChange: boolean
                     // 如果不允许直接切换只对第一个map做处理，每300毫秒判一次是否加载成功，成功返回
                     const timer = setInterval(() => {
                         if (Object.keys(value.className).length === 0) {
-                            throw  new class implements Error {
-                                public message: '300 毫秒没有找到api';
-                                public name: string;
-                                public stack: string;
-                            };
+                            throw new Error('300 毫秒没有找到api');
                         } else {
                             // 清除定时器
                             clearInterval(timer);

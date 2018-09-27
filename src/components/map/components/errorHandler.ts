@@ -27,8 +27,14 @@ function errorHandler(error: Error) {
     console.error(error.message);
 }
 
-window.onerror = (msg, url, line, col, err:Error) => {
-    errorHandler(err);
+window.onerror = (msg, url, line, col, err: Error) => {
+    if(typeof err === "object"){
+        errorHandler(err);
+    }else{
+        console.log("接到一个不是error的")
+        errorHandler(new Error(err||"未知错误"));
+    }
+
 };
 
 // 获取promise的错误 这里ts报错

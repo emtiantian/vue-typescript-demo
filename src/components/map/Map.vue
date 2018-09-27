@@ -19,10 +19,10 @@
         // @Prop private marksOption!: Maplib.markOption;
 
         // 基础参数部分
-        @Prop private zoom!: number;
-        @Prop private name!: string;
-        @Prop private center!: Maplib.latLng;
-        @Prop private mapkey!: Maplib.mapKey[];
+        @Prop(Number) private zoom!: number;
+        @Prop(String) private name!: string;
+        @Prop(Maplib) private center!: Maplib.latLng;
+        @Prop(Maplib) private mapkey!: Maplib.mapKey[];
         @Prop({default: 5}) private allowTime!: number;
         @Prop({default: '100%'}) private width: string;
         @Prop({default: '100%'}) private height: string;
