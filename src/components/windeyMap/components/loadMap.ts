@@ -1,4 +1,4 @@
-const loadMap = (mapKey: Maplib.MapKey[], allowTime: number, autoChange: boolean): Promise<any> => {
+const loadMap = (mapKey: Maplib.MapKey[], allowTime: number | undefined, autoChange: boolean | undefined): Promise<any> => {
     if (mapKey.length > 0) {
         // 排序
         mapKey.sort((a, b) => {
@@ -36,7 +36,7 @@ const loadMap = (mapKey: Maplib.MapKey[], allowTime: number, autoChange: boolean
                             // 返回选用地图api的属性
                             resolve(value);
                         }
-                    }, (index + 1) * allowTime);
+                    }, (index + 1) * (allowTime || 5));
                 } else {
                     // 如果不允许直接切换只对第一个map做处理，每300毫秒判一次是否加载成功，成功返回
                     const timer = setInterval(() => {

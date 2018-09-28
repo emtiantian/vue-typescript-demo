@@ -1,9 +1,9 @@
 // umd 规范
-// declare module "map"{
-//     export = map;
+// declare module "windeyMap"{
+//     export = windeyMap;
 // }
 
-// declare class map{
+// declare class windeyMap{
 //
 //     // constructor(mapOption: Maplib.mapOptions) // 构造器
 //     update:()=>boolean; // 更新
@@ -25,7 +25,7 @@ declare namespace Maplib {
         zoom: number; // 缩放级别
         changeTime?: number; // 允许google加载时间
         autoChange?: boolean; // 是否自动切换
-        style?: string; // 地图美化css
+        mapStyle?: string; // 地图美化css
         draggable?: boolean; // 是否可以拖动
         hideLogo?: boolean; // 是否显示地图logo
         width?: string; // 宽度，px单位
@@ -82,7 +82,7 @@ declare namespace Maplib {
         changeTime?: number; // 允许google加载时间
         type?: mapType[]; // map切换列表（切换顺序为数组下标）
         autoChange?: boolean; // 是否自动切换
-        style?: string; // 地图美化css
+        mapStyle?: string; // 地图美化css
         draggable?: boolean; // 是否可以拖动
         hideLogo?: boolean; // 是否显示地图logo
         width?: string; // 宽度，px单位

@@ -51,8 +51,8 @@ Vue.directive('has', {
 });
 // 为防止页面刷新动态添加的路由失效
 // 如果sessionStorage 中有允许路由，添加到当前路由中
-if ( sessionStorage.getItem('routerData') ) {
-    const routerData = sessionStorage.getItem('routerData');
+const routerData = sessionStorage.getItem('routerData');
+if ( routerData ) {
     const Router = util.getRouter(fullRouter.fullRouter.routes, routerData);
     router.addRoutes(Router as any);
 }
