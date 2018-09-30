@@ -20,7 +20,7 @@ declare namespace Maplib {
         // mapsOption: Maplib.mapOption;
         // marksOption: Maplib.markOption;
         mapKey: MapKey;
-        name: string; // map名称
+        name: string; // map名称 即 放置map的div
         center: LatLng; // 中心点
         zoom: number; // 缩放级别
         changeTime?: number; // 允许google加载时间
@@ -88,6 +88,13 @@ declare namespace Maplib {
         width?: string; // 宽度，px单位
         height?: string; // 高度，px单位
         loadCN?: boolean; // 是否加载中国google
+    }
+
+    // 地图对象内容
+    interface EmMap {
+       type : mapType;
+       name : string;
+       map : object;
     }
 
 }

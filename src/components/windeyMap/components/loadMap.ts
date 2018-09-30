@@ -1,9 +1,10 @@
-const loadMap = (mapKey: Maplib.MapKey[], allowTime: number | undefined, autoChange: boolean | undefined): Promise<any> => {
+const loadMap = (mapKey: Maplib.MapKey[], allowTime: number | undefined = 3, autoChange: boolean | undefined): Promise<Maplib.MapKey> => {
     if (mapKey.length > 0) {
         // 排序
         mapKey.sort((a, b) => {
             return a.ordered > b.ordered ? 1 : -1;
         });
+
         // 创建script
         if (typeof document === undefined) {
             throw new Error('document not found');
@@ -12,8 +13,27 @@ const loadMap = (mapKey: Maplib.MapKey[], allowTime: number | undefined, autoCha
 
         // 根据允许时间切换api对象
         const timePromise: Promise<any> = new Promise((resolve, reject) => {
-            mapKey.forEach((value, index) => {
+            // 判断是否加载过对应的js 如果加载过就在当前的mapKey中删除 并返回
+            mapKey = mapKey.filter((value) => {
+                // @ts-ignore
+                if (window[value.className]) {
+                    // @ts-ignore
+                    if (Object.keys(window[value.className]).length === 0) {
 
+                        return true;
+                    } else {
+                        resolve(value);
+                        return false;
+                    }
+                } else {
+                    return true;
+                }
+
+            });
+            if (mapKey.length === 0) {
+                return;
+            }
+            mapKey.forEach((value, index) => {
                 const mapScrpit = document.createElement('script');
                 let url = null;
                 if (value.loadCN) {
@@ -30,13 +50,27 @@ const loadMap = (mapKey: Maplib.MapKey[], allowTime: number | undefined, autoCha
                     // 创建一个定时器根据给定的加载时长依次判断地图api是否加载
                     // 未在给定时间内加载成功的地图api视为不可用
                     setTimeout(() => {
-                        if (Object.keys(value.className).length === 0) {
-                            throw new Error('给定时间未找到地图api' + value.type);
+                        // @ts-ignore
+                        if (window[value.className]) {
+                            // @ts-ignore
+                            if (Object.keys(window[value.className]).length === 0) {
+                                // 记录错误
+                                console.log('给定时间未找到地图api' + value.type);
+                                // 跳出当前循环
+                                return false;
+                                // throw new Error('给定时间未找到地图api' + value.type);
+                            } else {
+                                // 返回选用地图api的属性
+                                resolve(value);
+                            }
                         } else {
-                            // 返回选用地图api的属性
-                            resolve(value);
+                            // 记录错误
+                            console.log('给定时间未找到地图api' + value.type);
+                            // 跳出当前循环
+                            return false;
                         }
-                    }, (index + 1) * (allowTime || 5));
+
+                    }, (index + 1) * (allowTime) * 1000);
                 } else {
                     // 如果不允许直接切换只对第一个map做处理，每300毫秒判一次是否加载成功，成功返回
                     const timer = setInterval(() => {

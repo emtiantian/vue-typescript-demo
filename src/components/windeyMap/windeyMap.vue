@@ -1,5 +1,5 @@
 <template>
-    <div></div>
+    <div v-bind:id="name" v-bind:style="{width: width,height: height}"></div>
 </template>
 
 <script lang="ts">
@@ -8,7 +8,8 @@
     import err from './components/errorHandler';
     // 加载不同地图api
     import loadMaps from './components/loadMap';
-
+    // google-map初始化及操作
+    import googleApi from './components/googleMap';
 
     // 测试
     // TODO 暂时先把所有的方法写在一起,后面分成模块可使用option来配置是否启用
@@ -39,9 +40,9 @@
         @Prop(String) private name!: string;
         @Prop() private center!: Maplib.LatLng;
         @Prop() private mapKey!: Maplib.MapKey[];
-        @Prop({default: 5}) private allowTime?: number;
-        @Prop({default: '100%'}) private width?: string;
-        @Prop({default: '100%'}) private height?: string;
+        @Prop({default: 3}) private allowTime?: number;
+        @Prop({default: '400px'}) private width?: string;
+        @Prop({default: '400px'}) private height?: string;
         @Prop({default: true}) private autoChange?: boolean;
         @Prop({default: ''}) private mapStyle?: string;
         @Prop({default: true}) private draggable?: boolean;
@@ -51,15 +52,22 @@
         @Prop({default: ''}) private marks?: Maplib.Mark[];
         @Prop({default: true}) private autoMarksContent?: boolean;
         // TODO 这里应该是不太对为什么
-        private loadMap?: Promise<any>;
+        private loadMap?: Promise<Maplib.MapKey>;
+        private map?: any;
 
         // 生命周期钩子 在页面加载完成时触发
         public mounted() {
             console.log('缩放等级' + this.zoom);
             this.loadMap = loadMaps.loadMap(this.mapKey, this.allowTime, this.autoChange);
             console.log('开始加载地图');
-            throw new Error('测试错误');
+            // throw new Error('测试错误');
+            this.loadMap.then((value) => {
+                console.log('加载地图完成');
+                console.dir(value);
+                this.map = googleApi.init(value, this.zoom, this.name, this.center);
+            });
         }
+
 
         // 全局错误处理
 
