@@ -1,6 +1,6 @@
 <template>
     <div>
-        <WindeyMap v-bind:zoom="zoom" v-bind:name="name" v-bind:center="center" v-bind:map-key="mapKey"></WindeyMap>
+        <windey-map v-bind:zoom="zoom" v-bind:name="name" v-bind:center="center" v-bind:map-key="mapKey" ref="WindeyMap" ></windey-map>
     </div>
 </template>
 
@@ -43,6 +43,8 @@
                 apiUrlCn: 'https://maps.googleapis.com/maps/api/js',
             },
         ];
+
+
 
     }
 </script>

@@ -51,6 +51,7 @@
                 this.map = googleApi.init(value, this.zoom, this.name, this.center);
             });
         }
+
         // 处理地图样式
 
         // 处理韩国地图部分
