@@ -1,4 +1,4 @@
-const loadMap = (mapKey: Maplib.MapKey[], allowTime: number | undefined = 3, autoChange: boolean | undefined): Promise<Maplib.MapKey> => {
+const loadMap = (mapKey: Maplib.MapKey[], allowTime: number = 2, autoChange: boolean | undefined): Promise<Maplib.MapKey> => {
     if (mapKey.length > 0) {
         // 排序
         mapKey.sort((a, b) => {
@@ -10,16 +10,14 @@ const loadMap = (mapKey: Maplib.MapKey[], allowTime: number | undefined = 3, aut
             throw new Error('document not found');
         }
 
-
         // 根据允许时间切换api对象
-        const timePromise: Promise<any> = new Promise((resolve, reject) => {
+        const timePromise: Promise<Maplib.MapKey> = new Promise((resolve, reject) => {
             // 判断是否加载过对应的js 如果加载过就在当前的mapKey中删除 并返回
             mapKey = mapKey.filter((value) => {
                 // @ts-ignore
                 if (window[value.className]) {
                     // @ts-ignore
                     if (Object.keys(window[value.className]).length === 0) {
-
                         return true;
                     } else {
                         resolve(value);
@@ -33,6 +31,7 @@ const loadMap = (mapKey: Maplib.MapKey[], allowTime: number | undefined = 3, aut
             if (mapKey.length === 0) {
                 return;
             }
+            // 循环可能使用到的地图api
             mapKey.forEach((value, index) => {
                 const mapScrpit = document.createElement('script');
                 let url = null;

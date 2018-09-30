@@ -1,25 +1,8 @@
-// umd 规范
-// declare module "windeyMap"{
-//     export = windeyMap;
-// }
 
-// declare class windeyMap{
-//
-//     // constructor(mapOption: Maplib.mapOptions) // 构造器
-//     update:()=>boolean; // 更新
-//     reSize:()=>void; // 重绘
-//     Zoom:()=>void; // 修改缩放等级
-//     private mapEvents; // 地图事件 只能get events 在组件内只出发这个events 在组件外放入vuex中
-//     private markEvents; // mark事件
-//     panTO:()=>boolean; // 移动中心点
-// }
 
 declare namespace Maplib {
     // 自定义map配置类型
     interface mapOptions {
-        // mapsOption: Maplib.mapOption;
-        // marksOption: Maplib.markOption;
-        mapKey: MapKey;
         name: string; // map名称 即 放置map的div
         center: LatLng; // 中心点
         zoom: number; // 缩放级别
