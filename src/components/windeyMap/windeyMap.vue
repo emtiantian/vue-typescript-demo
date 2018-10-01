@@ -1,9 +1,12 @@
 <template>
-    <div v-bind:id="name" v-bind:style="{width: width,height: height}"></div>
+    <div>
+        <div v-bind:id="name" v-bind:style="{width: width,height: height}"></div>
+        <div>{{zoom}}</div>
+    </div>
 </template>
 
 <script lang="ts">
-    import {Component, Prop, Vue} from 'vue-property-decorator';
+    import {Component, Prop, Watch, Vue} from 'vue-property-decorator';
     // 全局错误处理
     import err from './components/errorHandler';
     // 加载不同地图api
@@ -15,29 +18,30 @@
 
     @Component
     export default class WindeyMap extends Vue {
-        // @Prop private mapsOption!: Maplib.mapOption;
-        // @Prop private marksOption!: Maplib.markOption;
+        // @Prop private mapsOption!: windeymap.mapOption;
+        // @Prop private marksOption!: windeymap.markOption;
 
         // 基础参数部分
 
         @Prop(Number) private zoom!: number;
         @Prop(String) private name!: string;
-        @Prop() private center!: Maplib.LatLng;
-        @Prop() private mapKey!: Maplib.MapKey[];
+        @Prop() private center!: windeymap.LatLng;
+        @Prop() private mapKey!: windeymap.MapKey[];
         @Prop({default: 2}) private allowTime?: number;
         @Prop({default: '400px'}) private width?: string;
         @Prop({default: '400px'}) private height?: string;
         @Prop({default: true}) private autoChange?: boolean;
-        @Prop({default: ''}) private mapStyle?: string;
+        @Prop({default: ''}) private mapStyle?: string[];
         @Prop({default: true}) private draggable?: boolean;
         @Prop({default: false}) private hideLogo?: boolean;
         @Prop({default: true}) private loadCN?: boolean;
+        @Prop({default: true}) private hideLogo?: boolean; // 是否显示地图logo
         // mark 参数部分
-        @Prop({default: ''}) private marks?: Maplib.Mark[];
+        @Prop({default: ''}) private marks?: windeymap.Mark[];
         @Prop({default: true}) private autoMarksContent?: boolean;
 
-        private loadMap?: Promise<Maplib.MapKey>;
-        private map?: any;
+        private loadMap?: Promise<windeymap.MapKey>;
+        private map?: windeymap.EmMap;
 
         // 生命周期钩子 在页面加载完成时触发
         public mounted() {
@@ -64,6 +68,12 @@
 
         // 处理动画部分
 
+        // 响应式改变对象属性
+        @Watch('zoom')
+        onZoomChange(newZoom: number, oldZoom: number){
+            this.map.map.setZoom(newZoom);
+        }
+        // 子组件发生变化 应该触发一个对象
 
     }
 </script>

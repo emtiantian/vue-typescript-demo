@@ -1,4 +1,4 @@
-const loadMap = (mapKey: Maplib.MapKey[], allowTime: number = 2, autoChange: boolean | undefined): Promise<Maplib.MapKey> => {
+const loadMap = (mapKey: windeymap.MapKey[], allowTime: number = 2, autoChange: boolean | undefined): Promise<windeymap.MapKey> => {
     if (mapKey.length > 0) {
         // 排序
         mapKey.sort((a, b) => {
@@ -11,7 +11,7 @@ const loadMap = (mapKey: Maplib.MapKey[], allowTime: number = 2, autoChange: boo
         }
 
         // 根据允许时间切换api对象
-        const timePromise: Promise<Maplib.MapKey> = new Promise((resolve, reject) => {
+        const timePromise: Promise<windeymap.MapKey> = new Promise((resolve, reject) => {
             // 判断是否加载过对应的js 如果加载过就在当前的mapKey中删除 并返回
             mapKey = mapKey.filter((value) => {
                 // @ts-ignore
@@ -90,7 +90,7 @@ const loadMap = (mapKey: Maplib.MapKey[], allowTime: number = 2, autoChange: boo
         });
 
 
-        // 返回一个promise对象 当加载完成时reslove 并带上当前使用的api的 Maplib.mapKey
+        // 返回一个promise对象 当加载完成时reslove 并带上当前使用的api的 windeymap.mapKey
         return timePromise;
 
     } else {

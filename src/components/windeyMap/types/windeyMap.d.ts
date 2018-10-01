@@ -1,6 +1,4 @@
-
-
-declare namespace Maplib {
+declare namespace windeymap {
     // 自定义map配置类型
     interface mapOptions {
         name: string; // map名称 即 放置map的div
@@ -75,9 +73,25 @@ declare namespace Maplib {
 
     // 地图对象内容
     interface EmMap {
-       type : mapType;
-       name : string;
-       map : object;
+        type: mapType;
+        name: string;
+        map: google.maps.Map;
+    }
+
+    // 定义api对象应该包含的方法
+    interface WindeyMapApi {
+        map: google.maps.Map; // 这里在扩展的时候可以有其他的map类型
+        name: string;
+        type: windeymap.mapType;
+
+        setMapStyle(style: google.maps.MapTypeStyle[]): void;
+
+        setZoom(): void;
+
+        onZoomChange(): number;
+
+        hideLogo():void;
+
     }
 
 }
