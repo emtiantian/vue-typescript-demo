@@ -1,6 +1,7 @@
 <template>
     <div>
-        <windey-map v-bind:zoom="zoom" v-bind:name="name" v-bind:center="center" v-bind:map-key="mapKey" ref="windeymap" ></windey-map>
+        <windey-map v-bind:zoom="zoom" v-bind:name="name" v-bind:center="center" v-bind:map-key="mapKey" ref="windeymap"
+                    v-bind:allowTime="allowTime"></windey-map>
     </div>
 </template>
 
@@ -26,6 +27,7 @@
                 apiUrlCn: 'https://maps.googleapis.com/maps/api/js',
             },
         ];
+        private allowTime = 50;
 
     }
 </script>

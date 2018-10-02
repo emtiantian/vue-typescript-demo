@@ -48,6 +48,7 @@ const loadMap = (mapKey: windeymap.MapKey[], allowTime: number = 2, autoChange: 
                 if (autoChange) {
                     // 创建一个定时器根据给定的加载时长依次判断地图api是否加载
                     // 未在给定时间内加载成功的地图api视为不可用
+                    // TODO 这里实现有点问题 最大等待时间不应该为每次等待时间
                     setTimeout(() => {
                         // @ts-ignore
                         if (window[value.className]) {
