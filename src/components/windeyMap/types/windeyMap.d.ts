@@ -73,16 +73,19 @@ declare namespace windeymap {
 
     // 地图对象内容
     interface EmMap {
-        type: mapType;
+        type: mapType; // 这里在扩展的时候可以有其他的map类型
         name: string;
         map: google.maps.Map;
     }
 
-    // 定义api对象应该包含的方法
+    // TODO 在typescript中
+    // interface WindeyMapConstructor {
+    //     new(value: windeymap.MapKey, zoom: number, name: string, center: windeymap.LatLng): EmMap;
+    // }
+
+    // 定义api对象应该包含的方法 给属性定义私有只能使用readonly
     interface WindeyMapApi {
-        map: google.maps.Map; // 这里在扩展的时候可以有其他的map类型
-        name: string;
-        type: windeymap.mapType;
+        readonly mapObject: EmMap;
 
         setMapStyle(style: google.maps.MapTypeStyle[]): void;
 
@@ -90,7 +93,7 @@ declare namespace windeymap {
 
         onZoomChange(): number;
 
-        hideLogo():void;
+        hideLogo(): void;
 
     }
 

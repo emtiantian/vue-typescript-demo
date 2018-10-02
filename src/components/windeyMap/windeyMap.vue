@@ -18,11 +18,7 @@
 
     @Component
     export default class WindeyMap extends Vue {
-        // @Prop private mapsOption!: windeymap.mapOption;
-        // @Prop private marksOption!: windeymap.markOption;
-
         // 基础参数部分
-
         @Prop(Number) private zoom!: number;
         @Prop(String) private name!: string;
         @Prop() private center!: windeymap.LatLng;
@@ -33,9 +29,8 @@
         @Prop({default: true}) private autoChange?: boolean;
         @Prop({default: ''}) private mapStyle?: string[];
         @Prop({default: true}) private draggable?: boolean;
-        @Prop({default: false}) private hideLogo?: boolean;
         @Prop({default: true}) private loadCN?: boolean;
-        @Prop({default: true}) private hideLogo?: boolean; // 是否显示地图logo
+        @Prop({default: false}) private hideLogo?: boolean; // 是否显示地图logo
         // mark 参数部分
         @Prop({default: ''}) private marks?: windeymap.Mark[];
         @Prop({default: true}) private autoMarksContent?: boolean;
@@ -70,9 +65,10 @@
 
         // 响应式改变对象属性
         @Watch('zoom')
-        onZoomChange(newZoom: number, oldZoom: number){
-            this.map.map.setZoom(newZoom);
+        onZoomChange(newZoom: number, oldZoom: number) {
+            // this.map.map.setZoom(newZoom);
         }
+
         // 子组件发生变化 应该触发一个对象
 
     }
