@@ -1,19 +1,4 @@
 declare namespace windeymap {
-    // 自定义map配置类型
-    interface mapOptions {
-        name: string; // map名称 即 放置map的div
-        center: LatLng; // 中心点
-        zoom: number; // 缩放级别
-        changeTime?: number; // 允许google加载时间
-        autoChange?: boolean; // 是否自动切换
-        mapStyle?: string; // 地图美化css
-        draggable?: boolean; // 是否可以拖动
-        hideLogo?: boolean; // 是否显示地图logo
-        width?: string; // 宽度，px单位
-        height?: string; // 高度，px单位
-        [index: number]: Mark; // marks 数组
-        autoMarksContent?: boolean; // 是否自动放置mark位置（保持markcontent 在地图可见区域）
-    }
 
     interface MapKey {
         key: string; // 地图授权key
@@ -37,12 +22,6 @@ declare namespace windeymap {
         lng: number; // 经度
     }
 
-    // marks需要包含内容
-    interface markOption {
-        [index: number]: Mark; // marks 数组
-        autoMarksContent?: boolean; // 是否自动放置mark位置（保持markcontent 在地图可见区域）
-    }
-
     // mark 需要包含的内容
     interface Mark {
         id: string; // 唯一标识
@@ -54,22 +33,6 @@ declare namespace windeymap {
         draggable?: boolean; // mark 是否可以被拖动
     }
 
-    // 地图初始化信息
-    interface mapOption {
-        key: string; // 地图授权key
-        name: string; // map名称
-        center: LatLng; // 中心点
-        zoom: number; // 缩放级别
-        changeTime?: number; // 允许google加载时间
-        type?: mapType[]; // map切换列表（切换顺序为数组下标）
-        autoChange?: boolean; // 是否自动切换
-        mapStyle?: string; // 地图美化css
-        draggable?: boolean; // 是否可以拖动
-        hideLogo?: boolean; // 是否显示地图logo
-        width?: string; // 宽度，px单位
-        height?: string; // 高度，px单位
-        loadCN?: boolean; // 是否加载中国google
-    }
 
     // 地图对象内容
     interface EmMap {
@@ -78,23 +41,21 @@ declare namespace windeymap {
         map: google.maps.Map;
     }
 
-    // TODO 在typescript中
-    // interface WindeyMapConstructor {
-    //     new(value: windeymap.MapKey, zoom: number, name: string, center: windeymap.LatLng): EmMap;
-    // }
 
-    // 定义api对象应该包含的方法 给属性定义私有只能使用readonly
+    // 定义api对象应该包含的方法
     interface WindeyMapApi {
-        readonly mapObject: EmMap;
+        mapObject: EmMap ;
 
         setMapStyle(style: google.maps.MapTypeStyle[]): void;
 
-        setZoom(): void;
 
         onZoomChange(): number;
 
         hideLogo(): void;
 
+
+        setZoom(newZoom: number): void;
     }
+
 
 }

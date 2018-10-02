@@ -1,5 +1,5 @@
 // 完成google map 对应的各种方法
-
+// 废弃 使用接口和实现类的方法方便以后扩展
 // init方法
 const init = (value: windeymap.MapKey, zoom: number, name: string, center: windeymap.LatLng): windeymap.EmMap => {
     if (!(value.type === 'google')) {
