@@ -27,7 +27,7 @@
         @Prop({default: '400px'}) private width?: string;
         @Prop({default: '400px'}) private height?: string;
         @Prop({default: true}) private autoChange?: boolean;
-        @Prop({default: ''}) private mapStyle?: string[];
+        @Prop({default: ''}) private mapStyle?: google.maps.MapTypeStyle[];
         @Prop({default: true}) private draggable?: boolean;
         @Prop({default: true}) private loadCN?: boolean;
         @Prop({default: false}) private hideLogo?: boolean; // 是否显示地图logo
@@ -59,14 +59,14 @@
             const value: windeymap.MapKey = await loadMaps.loadMap(this.mapKey, this.allowTime, this.autoChange);
             // TODO 这里应该判断使用哪一个地图api 这里应该调用自定义的类型 而不是使用魔法字符串
             switch (value.type) {
-                case "google":
-                    this.mapApi = new  GoogleMapApi(value, this.zoom, this.name, this.center);
+                case 'google':
+                    this.mapApi = new GoogleMapApi(value, this.zoom, this.name, this.center);
                     break;
-                case "baidu":
-                    this.mapApi = new  GoogleMapApi(value, this.zoom, this.name, this.center);
+                case 'baidu':
+                    this.mapApi = new GoogleMapApi(value, this.zoom, this.name, this.center);
                     break;
                 default:
-                    throw new Error("没有找到对应的地图类型");
+                    throw new Error('没有找到对应的地图类型');
             }
 
         }
@@ -101,6 +101,12 @@
             // @ts-ignore
             this.mapApi.setZoom(newZoom);
         }
+
+        // @Watch('mapStyle')
+        // public onStyleChange(newStyle: google.maps.MapTypeStyle[], oldStyle: google.maps.MapTypeStyle[]) {
+        //     // @ts-ignore
+        //     this.mapApi.setMapStyle(newStyle);
+        // }
 
         // 子组件发生变化 应该触发一个对象
 

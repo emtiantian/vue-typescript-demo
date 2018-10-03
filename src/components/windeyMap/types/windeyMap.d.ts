@@ -56,7 +56,7 @@ declare namespace windeymap {
 
         setCenter(newCenter: LatLng): void;
 
-        fixKoreaMap():void;
+        fixKoreaMap(): void;
 
     }
 

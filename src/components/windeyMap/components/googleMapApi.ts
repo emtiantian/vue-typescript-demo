@@ -1,3 +1,5 @@
+import fixKorea from './fixKoreaMap';
+
 export class GoogleMapApi implements windeymap.WindeyMapApi {
     public mapObject: windeymap.EmMap;
 
@@ -12,7 +14,6 @@ export class GoogleMapApi implements windeymap.WindeyMapApi {
             type: value.type,
         };
     }
-
 
 
     public hideLogo(): void {
@@ -36,12 +37,15 @@ export class GoogleMapApi implements windeymap.WindeyMapApi {
         this.mapObject.map.setZoom(newZoom);
     }
 
-    public setCenter(newCenter: windeymap.LatLng):void{
+    public setCenter(newCenter: windeymap.LatLng): void {
         this.mapObject.map.setCenter(newCenter);
     }
 
-    public fixKoreaMap(){
-        
+    public fixKoreaMap() {
+        const leftTop: windeymap.LatLng = {lat: 56.339, lng: 123.72};
+        const rightDown: windeymap.LatLng = {lat: 38.84, lng: 132.3};
+        fixKorea.fixedMap(leftTop, rightDown
+            , '../../../assets/logo.png', this.mapObject.map);
     }
 
 
