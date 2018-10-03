@@ -32,6 +32,7 @@
         @Prop({default: true}) private draggable?: boolean;
         @Prop({default: true}) private loadCN?: boolean;
         @Prop({default: false}) private hideLogo?: boolean; // 是否显示地图logo
+        @Prop({default: 300}) private intervals?: number;
         // mark 参数部分
         @Prop({default: ''}) private marks?: windeymap.Mark[];
         @Prop({default: true}) private autoMarksContent?: boolean;
