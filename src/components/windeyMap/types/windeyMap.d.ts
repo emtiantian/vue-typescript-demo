@@ -48,13 +48,12 @@ declare namespace windeymap {
 
         setMapStyle(style: google.maps.MapTypeStyle[]): void;
 
-
         onZoomChange(): number;
 
         hideLogo(): void;
 
-
         setZoom(newZoom: number): void;
+
     }
 
 

@@ -12,7 +12,6 @@
     // 加载不同地图api
     import loadMaps from './components/loadMap';
     // google-map初始化及操作
-    import googleApi from './components/googleMap';
     import {GoogleMapApi} from './components/googleMapApi';
 
     // TODO 暂时先把所有的方法写在一起,后面分成模块可使用option来配置是否启用
@@ -37,38 +36,41 @@
         @Prop({default: ''}) private marks?: windeymap.Mark[];
         @Prop({default: true}) private autoMarksContent?: boolean;
 
-        private mapApi?: windeymap.WindeyMapApi;
+        // TODO 这里是不是有一个ide问题 如果指定类型那么 在watch 或赋值之后都是不能找到对应的方法
+        // private mapApi?: windeymap.WindeyMapApi;
+        private mapApi?: any;
 
-        // constructor(){
-        //     super();
-        //     this.mapApi =  this.mounted()
-        // }
-        //
         // // TODO 使用异步的形式引入不同的api
-        // public async createApi(mapKey: windeymap.MapKey[], allowTime: number, autoChange: boolean, zoom: number, center: windeymap.LatLng): Promise<windeymap.WindeyMapApi> {
+        // public async createApi(mapKey: windeymap.MapKey[], allowTime: number, autoChange: boolean, zoom: number, center: windeymap.LatLng): windeymap.WindeyMapApi {
         //     console.log('加载地图完成');
         //     const value: windeymap.MapKey = await loadMaps.loadMap(mapKey, allowTime, autoChange);
         //     // 初始化地图及地图事件
-        //     return new Promise((resolve) => {
-        //         resolve(new GoogleMapApi(value, zoom, name, center);
-        //     )
-        //     });
+        //     return new GoogleMapApi(value, zoom, name, center);
         // }
         // // 生命周期钩子 在页面加载完成时触发
-        // public async mounted() : Promise<windeymap.WindeyMapApi> {
+        // public async mounted() : windeymap.WindeyMapApi{
         //     return this.createApi(this.mapKey, this.allowTime, this.autoChange, this.zoom, this.center);
         // }
 
-        // 生命周期钩子 在页面加载完成时触发 这种写法所有的事件都要写在这个then里
-        public mounted() {
+
+        public async mounted() {
             // 引入google地图api或者百度地图aip 返回一个promise对象
             console.log('开始加载地图');
-            loadMaps.loadMap(this.mapKey, this.allowTime, this.autoChange).then((value: windeymap.MapKey) => {
-                console.log('加载地图完成');
-                // 初始化地图及地图事件
-                this.mapApi = new GoogleMapApi(value, this.zoom, this.name, this.center);
-            });
+            const value: windeymap.MapKey = await loadMaps.loadMap(this.mapKey, this.allowTime, this.autoChange);
+            // TODO 这里应该判断使用哪一个地图api
+            this.mapApi = new  GoogleMapApi(value, this.zoom, this.name, this.center);
         }
+
+        // 生命周期钩子 在页面加载完成时触发 这种写法所有的事件都要写在这个then里
+        // public  mounted() {
+        //     // 引入google地图api或者百度地图aip 返回一个promise对象
+        //     console.log('开始加载地图');
+        //     loadMaps.loadMap(this.mapKey, this.allowTime, this.autoChange).then((value: windeymap.MapKey) => {
+        //         console.log('加载地图完成');
+        //         // 初始化地图及地图事件
+        //         this.mapApi = new GoogleMapApi(value, this.zoom, this.name, this.center);
+        //     });
+        // }
 
 
         // 处理地图样式
@@ -84,11 +86,12 @@
         // 处理动画部分
 
         // 响应式改变对象属性
-        // @Watch('zoom')
-        // public onZoomChange(newZoom: number, oldZoom: number) {
-        //     // this.map.map.setZoom(newZoom);
-        //     // this.mapApi.setZoom(newZoom);
-        // }
+        @Watch('zoom')
+        public onZoomChange(newZoom: number, oldZoom: number) {
+            // this.map.map.setZoom(newZoom);
+            // @ts-ignore
+            this.mapApi.setZoom(newZoom);
+        }
 
         // 子组件发生变化 应该触发一个对象
 
