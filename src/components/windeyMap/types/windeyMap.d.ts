@@ -54,6 +54,10 @@ declare namespace windeymap {
 
         setZoom(newZoom: number): void;
 
+        setCenter(newCenter: LatLng): void;
+
+        fixKoreaMap():void;
+
     }
 
 

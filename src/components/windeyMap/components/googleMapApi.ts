@@ -1,6 +1,7 @@
 export class GoogleMapApi implements windeymap.WindeyMapApi {
     public mapObject: windeymap.EmMap;
 
+
     constructor(value: windeymap.MapKey, zoom: number, name: string, center: windeymap.LatLng) {
         if (!value || !zoom || !name || !center) {
             throw new Error('GoogleMapApi arguments 不能为空');
@@ -15,7 +16,7 @@ export class GoogleMapApi implements windeymap.WindeyMapApi {
 
 
     public hideLogo(): void {
-        // 使用源生修改css
+        // FIXME 使用源生修改css
         document.getElementById(this.mapObject.name);
     }
 
@@ -35,6 +36,13 @@ export class GoogleMapApi implements windeymap.WindeyMapApi {
         this.mapObject.map.setZoom(newZoom);
     }
 
+    public setCenter(newCenter: windeymap.LatLng):void{
+        this.mapObject.map.setCenter(newCenter);
+    }
+
+    public fixKoreaMap(){
+        
+    }
 
 
 }

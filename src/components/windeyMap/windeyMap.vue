@@ -57,8 +57,18 @@
             // 引入google地图api或者百度地图aip 返回一个promise对象
             console.log('开始加载地图');
             const value: windeymap.MapKey = await loadMaps.loadMap(this.mapKey, this.allowTime, this.autoChange);
-            // TODO 这里应该判断使用哪一个地图api
-            this.mapApi = new  GoogleMapApi(value, this.zoom, this.name, this.center);
+            // TODO 这里应该判断使用哪一个地图api 这里应该调用自定义的类型 而不是使用魔法字符串
+            switch (value.type) {
+                case "google":
+                    this.mapApi = new  GoogleMapApi(value, this.zoom, this.name, this.center);
+                    break;
+                case "baidu":
+                    this.mapApi = new  GoogleMapApi(value, this.zoom, this.name, this.center);
+                    break;
+                default:
+                    throw new Error("没有找到对应的地图类型");
+            }
+
         }
 
         // 生命周期钩子 在页面加载完成时触发 这种写法所有的事件都要写在这个then里
@@ -88,7 +98,6 @@
         // 响应式改变对象属性
         @Watch('zoom')
         public onZoomChange(newZoom: number, oldZoom: number) {
-            // this.map.map.setZoom(newZoom);
             // @ts-ignore
             this.mapApi.setZoom(newZoom);
         }
