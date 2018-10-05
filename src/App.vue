@@ -8,6 +8,7 @@
             <router-link to="/login">login</router-link>
             |
             <router-link to="/monitor">monitor</router-link>
+            <button v-on:click="logoutAss">登出</button>
         </div>
         <!-- 触发器要写在路由引入部分上面 -->
         <router-view @login="loginAss" @logout="logoutAss"/>
@@ -36,7 +37,7 @@
             }
             // 设置请求头统一携带token
             // instance.defaults.headers.common['Authorization'] = 'Bearer token';
-            // instance.defaults.headers.common['Authorization'] = 'Bearer ' + localUser;
+            // TODO 这里没有使用请求级别拦截 即 当前端程序没有权限请求的时候在aoix层就被拦截
             instance.defaults.headers.common.Authorization = 'Bearer ' + localUser;
             // console.log('token：' + sessionStorage.getItem('user-token'));
             // 绑定token到拦截器上
@@ -101,6 +102,18 @@
                 duration: 0, // 不自动关闭
                 showClose: true, // 显示关闭按钮
             });
+            // 清除session
+            sessionStorage.setItem('menuData', '');
+            sessionStorage.setItem('userData', '');
+            sessionStorage.setItem('routerData', '');
+            // 清除请求，请求级别的权限控制 权限控制 例如 ：instance.interceptors.request.eject(myInterceptor);
+            // 清除菜单权限 例如： this.$root.hashMenus = {};
+            // 清除请求头token
+            instance.defaults.headers.common.Authorization = '';
+            // 回到登录页
+            this.$router.replace({path: '/login'});
+            // 刷新页面 清除动态添加进来的路由
+            location.reload();
         }
     }
 </script>

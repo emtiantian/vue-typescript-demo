@@ -36,7 +36,7 @@
         @Prop({default: ''}) private marks?: windeymap.Mark[];
         @Prop({default: true}) private autoMarksContent?: boolean;
 
-        // TODO 这里是不是有一个ide问题 如果指定类型那么 在watch 或赋值之后都是不能找到对应的方法
+        // TODO 这里是不是有一个ide问题 如果指定类型那么 在@watch 或赋值之后都是不能找到对应的方法
         // private mapApi?: windeymap.WindeyMapApi;
         private mapApi?: any;
 
