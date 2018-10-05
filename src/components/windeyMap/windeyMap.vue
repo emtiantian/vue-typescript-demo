@@ -27,7 +27,7 @@
         @Prop({default: '400px'}) private width?: string;
         @Prop({default: '400px'}) private height?: string;
         @Prop({default: true}) private autoChange?: boolean;
-        @Prop({default: ''}) private mapStyle?: google.maps.MapTypeStyle[];
+        @Prop({default: null}) private mapStyle?: google.maps.MapTypeStyle[];
         @Prop({default: true}) private draggable?: boolean;
         @Prop({default: true}) private loadCN?: boolean;
         @Prop({default: false}) private hideLogo?: boolean; // 是否显示地图logo
@@ -69,7 +69,10 @@
                 default:
                     throw new Error('没有找到对应的地图类型');
             }
-
+            if(!(this.mapStyle === null)){
+                // @ts-ignore
+                this.mapApi.setMapStyle(this.mapStyle);
+            }
         }
 
         // 生命周期钩子 在页面加载完成时触发 这种写法所有的事件都要写在这个then里
