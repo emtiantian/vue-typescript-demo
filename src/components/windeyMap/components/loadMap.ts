@@ -1,4 +1,4 @@
-const loadMap = (mapKey: windeymap.MapKey[], allowTime: number = 2, autoChange: boolean | undefined, intervals: number = 300): Promise<windeymap.MapKey> => {
+const loadMap = (mapKey: windeymap.MapKey[], allowTime: number = 2, autoChange: boolean | undefined, intervals: number = 500): Promise<windeymap.MapKey> => {
     if (mapKey.length > 0) {
         // 排序
         mapKey.sort((a, b) => {

@@ -31,7 +31,8 @@
         @Prop({default: true}) private draggable?: boolean;
         @Prop({default: true}) private loadCN?: boolean;
         @Prop({default: false}) private hideLogo?: boolean; // 是否显示地图logo
-        @Prop({default: 300}) private intervals?: number;
+        // FIXME 最小是400设置为300的时候会出现google加载未完成的问题
+        @Prop({default: 400}) private intervals?: number; // 间隔时间设为300 的时候 google 可能还没有加载完成
         // mark 参数部分
         @Prop({default: ''}) private marks?: windeymap.Mark[];
         @Prop({default: true}) private autoMarksContent?: boolean;
@@ -102,11 +103,11 @@
             this.mapApi.setZoom(newZoom);
         }
 
-        // @Watch('mapStyle')
-        // public onStyleChange(newStyle: google.maps.MapTypeStyle[], oldStyle: google.maps.MapTypeStyle[]) {
-        //     // @ts-ignore
-        //     this.mapApi.setMapStyle(newStyle);
-        // }
+        @Watch('mapStyle')
+        public onStyleChange(newStyle: google.maps.MapTypeStyle[], oldStyle: google.maps.MapTypeStyle[]) {
+            // @ts-ignore
+            this.mapApi.setMapStyle(newStyle);
+        }
 
         // 子组件发生变化 应该触发一个对象
 
