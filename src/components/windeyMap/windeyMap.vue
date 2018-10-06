@@ -75,6 +75,8 @@
                 // @ts-ignore
                 this.mapApi.setMapStyle(this.mapStyle);
             }
+            // @ts-ignore
+            this.mapApi.fixKoreaMap();
         }
 
         // 生命周期钩子 在页面加载完成时触发 这种写法所有的事件都要写在这个then里

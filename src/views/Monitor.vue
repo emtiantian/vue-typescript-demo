@@ -16,7 +16,7 @@
     export default class Monitor extends Vue {
         private zoom = 9;
         private name = 'haohe';
-        private center = {lat: -34.397, lng: 150.644};
+        private center = {lat: 28.998496, lng: 120.684515}; //28.998496, 120.684515
         private mapKey = [
             {
                 key: 'AIzaSyDsFI7tLklDsu2PYoUB_gIAJ1HtQZz18FQ', // 地图授权key

@@ -1,4 +1,6 @@
+// 加载韩国地图处理
 import fixKorea from './fixKoreaMap';
+// 加载韩国地图图片
 
 export class GoogleMapApi implements windeymap.WindeyMapApi {
     public mapObject: windeymap.EmMap;
