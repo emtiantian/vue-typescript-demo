@@ -31,8 +31,7 @@
         @Prop({default: true}) private draggable?: boolean;
         @Prop({default: true}) private loadCN?: boolean;
         @Prop({default: false}) private hideLogo?: boolean; // 是否显示地图logo
-        // FIXME 最小是400设置为300的时候会出现google加载未完成的问题
-        @Prop({default: 400}) private intervals?: number; // 间隔时间设为300 的时候 google 可能还没有加载完成
+        @Prop({default: 200}) private intervals?: number; // 间隔时间设为300 的时候 google 可能还没有加载完成
         // mark 参数部分
         @Prop({default: ''}) private marks?: windeymap.Mark[];
         @Prop({default: true}) private autoMarksContent?: boolean;
@@ -58,6 +57,8 @@
             // 引入google地图api或者百度地图aip 返回一个promise对象
             console.log('开始加载地图');
             const value: windeymap.MapKey = await loadMaps.loadMap(this.mapKey, this.allowTime, this.autoChange);
+            console.log('加载地图完成');
+            console.log(window)
             // TODO 这里应该判断使用哪一个地图api 这里应该调用自定义的类型 而不是使用魔法字符串
             switch (value.type) {
                 case 'google':
@@ -69,6 +70,7 @@
                 default:
                     throw new Error('没有找到对应的地图类型');
             }
+            // TODO 这种判断方法也是很坑啊
             if(!(this.mapStyle === null)){
                 // @ts-ignore
                 this.mapApi.setMapStyle(this.mapStyle);

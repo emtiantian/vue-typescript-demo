@@ -1,4 +1,4 @@
-const loadMap = (mapKey: windeymap.MapKey[], allowTime: number = 2, autoChange: boolean | undefined, intervals: number = 500): Promise<windeymap.MapKey> => {
+const loadMap = (mapKey: windeymap.MapKey[], allowTime: number = 2, autoChange: boolean | undefined, intervals: number = 200): Promise<windeymap.MapKey> => {
     if (mapKey.length > 0) {
         // 排序
         mapKey.sort((a, b) => {
@@ -50,25 +50,25 @@ const loadMap = (mapKey: windeymap.MapKey[], allowTime: number = 2, autoChange: 
                 if (autoChange) {
                     // 创建一个定时器根据给定的加载时长依次判断地图api是否加载
                     // 未在给定时间内加载成功的地图api视为不可用
-                    // TODO 这里实现有点问题 最大等待时间不应该为每次等待时间
+                    // Object.keys(value.className).length === 0 判断对象是否为空
 
                     const loader = setInterval(() => {
                         // @ts-ignore
-                        if (window[value.className] && Object.keys(value.className).length === 0) {
-                            // 记录错误
-                            console.log('给定间隔时间未找到地图api' + value.type);
-                        } else {
+                        if (window[value.className]) {
                             // 清除定时器
                             clearInterval(loader);
                             // 返回选用地图api的属性
                             resolve(value);
+                        } else {
+                            // 记录错误
+                            console.log('给定间隔时间'+intervals+'ms未找到地图api' + value.type);
                         }
                     }, intervals);
 
                     setTimeout(() => {
                         clearInterval(loader);
                         // @ts-ignore
-                        if (!window[value.className] && Object.keys(value.className).length === 0) {
+                        if (!(window[value.className])) {
                             throw new Error('给定时间' + allowTime + 's未找到地图api' + value.type);
                         }
                     }, (index + 1) * (allowTime) * 1000);
@@ -78,20 +78,20 @@ const loadMap = (mapKey: windeymap.MapKey[], allowTime: number = 2, autoChange: 
                     // 如果不允许直接切换只对第一个map做处理，每300毫秒判一次是否加载成功，成功返回
                     const timer = setInterval(() => {
                         // @ts-ignore
-                        if (window[value.className] && Object.keys(value.className).length === 0) {
-                            // 记录错误
-                            console.log('给定间隔时间未找到地图api' + value.type);
-                        } else {
+                        if (window[value.className]) {
                             // 清除定时器
                             clearInterval(timer);
                             // 返回选用地图api的属性 value
                             resolve(value);
+                        } else {
+                            // 记录错误
+                            console.log('给定间隔时间'+intervals+'ms未找到地图api' + value.type);
                         }
                     }, intervals);
                     setTimeout(() => {
                         clearInterval(timer);
                         // @ts-ignore
-                        if (!window[value.className] && Object.keys(value.className).length === 0) {
+                        if (!window[value.className]) {
                             throw new Error('给定时间' + allowTime + 's未找到地图api' + value.type);
                         }
                     }, allowTime * 1000);
