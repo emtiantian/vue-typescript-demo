@@ -1,7 +1,8 @@
 // 加载韩国地图处理
 import fixKorea from './fixKoreaMap';
 // 加载韩国地图图片
-const img1 = require('../../../assets/overmap.png');
+// tslint:disable-next-line
+const KoreaImg = require('../../../assets/overmap.png');
 
 export class GoogleMapApi implements windeymap.WindeyMapApi {
     public mapObject: windeymap.EmMap;
@@ -12,6 +13,7 @@ export class GoogleMapApi implements windeymap.WindeyMapApi {
             throw new Error('GoogleMapApi arguments 不能为空');
         }
         this.mapObject = {
+            // tslint:disable-next-line
             map: new google.maps.Map(document.getElementById(name), {zoom, center}),
             name,
             type: value.type,
@@ -21,7 +23,8 @@ export class GoogleMapApi implements windeymap.WindeyMapApi {
 
     public hideLogo(): void {
         // FIXME 使用源生修改css
-        // document.getElementById(this.mapObject.name).setAttribute("class");
+        // @ts-ignore
+        document.getElementById(this.mapObject.name).setAttribute('class', 'hideLogo');
     }
 
 
@@ -47,12 +50,12 @@ export class GoogleMapApi implements windeymap.WindeyMapApi {
         const leftTop: windeymap.LatLng = {lat: 56.339, lng: 123.72};
         const rightDown: windeymap.LatLng = {lat: 38.84, lng: 132.3};
         this.overMap(leftTop, rightDown
-            , img1, this.mapObject.map);
+            , KoreaImg, this.mapObject.map);
     }
 
-    public overMap(leftTop: windeymap.LatLng, rightDown: windeymap.LatLng, img1: any, map: google.maps.Map) {
+    public overMap(leftTop: windeymap.LatLng, rightDown: windeymap.LatLng, img: any, map: google.maps.Map) {
         fixKorea.fixedMap(leftTop, rightDown
-            , img1, map);
+            , img, map);
     }
 
 

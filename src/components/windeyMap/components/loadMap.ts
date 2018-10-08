@@ -61,7 +61,7 @@ const loadMap = (mapKey: windeymap.MapKey[], allowTime: number = 2, autoChange: 
                             resolve(value);
                         } else {
                             // 记录错误
-                            console.log('给定间隔时间'+intervals+'ms未找到地图api' + value.type);
+                            console.log('给定间隔时间' + intervals + 'ms未找到地图api' + value.type);
                         }
                     }, intervals);
 
@@ -85,7 +85,7 @@ const loadMap = (mapKey: windeymap.MapKey[], allowTime: number = 2, autoChange: 
                             resolve(value);
                         } else {
                             // 记录错误
-                            console.log('给定间隔时间'+intervals+'ms未找到地图api' + value.type);
+                            console.log('给定间隔时间' + intervals + 'ms未找到地图api' + value.type);
                         }
                     }, intervals);
                     setTimeout(() => {

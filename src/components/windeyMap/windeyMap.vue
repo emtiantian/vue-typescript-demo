@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-bind:id="name" v-bind:style="{width: width,height: height}"></div>
+        <div v-bind:id="name" v-bind:style="{width: width,height: height}" :class="hideLogo?'hideLogo':''"></div>
         <div>{{zoom}}</div>
     </div>
 </template>
@@ -58,7 +58,7 @@
             console.log('开始加载地图');
             const value: windeymap.MapKey = await loadMaps.loadMap(this.mapKey, this.allowTime, this.autoChange);
             console.log('加载地图完成');
-            console.log(window)
+            console.log(window);
             // TODO 这里应该判断使用哪一个地图api 这里应该调用自定义的类型 而不是使用魔法字符串
             switch (value.type) {
                 case 'google':
@@ -71,11 +71,16 @@
                     throw new Error('没有找到对应的地图类型');
             }
             // TODO 这种判断方法也是很坑啊
-            if(!(this.mapStyle === null)){
+            if (!(this.mapStyle === null)) {
                 // google地图对于韩国部分不能进行处理如果改变地图的配色 韩国地图部分需要做修改
                 // @ts-ignore
                 // 处理地图样式 处理韩国地图部分
                 this.mapApi.setMapStyle(this.mapStyle);
+            }
+            // TODO 这种判断方法也是很坑啊 这里应该启用状态驱动
+            if(this.hideLogo){
+                // @ts-ignore
+                this.mapApi.hideLogo();
             }
 
         }
@@ -119,5 +124,21 @@
 </script>
 
 <style scoped lang="less">
-
+    .hideLogo {
+        /*隐藏google logo
+        * 当前这个方法已经不起作用了
+        */
+        a[href^="http://maps.google.cn"] {
+            display: none !important
+        }
+        a[href^="https://maps.google.cn"] {
+            display: none !important
+        }
+        a[href^="http://maps.google.com/maps"] {
+            display: none !important
+        }
+        a[href^="https://maps.google.com/maps"] {
+            display: none !important
+        }
+    }
 </style>
