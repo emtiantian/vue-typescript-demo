@@ -1,5 +1,6 @@
 // google地图韩国地图有问题 需要采用遮罩层的方式遮盖原图
 // 实现一个方法用来覆盖地图上的遮罩层
+// 这个方法可以不单单作为覆盖地图使用
 const fixedMap = (leftTop: windeymap.LatLng, rightDown: windeymap.LatLng, imgSrc: string, map: google.maps.Map) => {
     // let overlay;
 

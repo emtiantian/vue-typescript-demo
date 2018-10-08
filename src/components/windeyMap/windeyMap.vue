@@ -72,11 +72,12 @@
             }
             // TODO 这种判断方法也是很坑啊
             if(!(this.mapStyle === null)){
+                // google地图对于韩国部分不能进行处理如果改变地图的配色 韩国地图部分需要做修改
                 // @ts-ignore
+                // 处理地图样式 处理韩国地图部分
                 this.mapApi.setMapStyle(this.mapStyle);
             }
-            // @ts-ignore
-            this.mapApi.fixKoreaMap();
+
         }
 
         // 生命周期钩子 在页面加载完成时触发 这种写法所有的事件都要写在这个then里
@@ -90,10 +91,6 @@
         //     });
         // }
 
-
-        // 处理地图样式
-
-        // 处理韩国地图部分
 
         // 处理mark内容，及mark事件
 

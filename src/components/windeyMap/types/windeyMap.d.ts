@@ -1,5 +1,6 @@
 declare namespace windeymap {
 
+
     interface MapKey {
         key: string; // 地图授权key
         type: mapType; // map切换列表（切换顺序为数组下标）
@@ -44,19 +45,19 @@ declare namespace windeymap {
 
     // 定义api对象应该包含的方法
     interface WindeyMapApi {
-        mapObject: EmMap ;
+        mapObject: EmMap ; // 自定义地图对象
 
-        setMapStyle(style: google.maps.MapTypeStyle[]): void;
+        setMapStyle(style: google.maps.MapTypeStyle[]): void; // 设置地图的样式
 
-        onZoomChange(): number;
+        hideLogo(): void; // 隐藏地图logo
 
-        hideLogo(): void;
+        setZoom(newZoom: number): void; // 修改地图缩放级别
 
-        setZoom(newZoom: number): void;
+        setCenter(newCenter: LatLng): void; // 设置地图中心点
 
-        setCenter(newCenter: LatLng): void;
+        fixKoreaMap(): void; // 韩国图片在google上 有问题使用这个方法覆盖
 
-        fixKoreaMap(): void;
+        overMap(leftTop:windeymap.LatLng,rightDown:windeymap.LatLng,img1:any,map:google.maps.Map):void // 覆盖地图某一部分
 
     }
 

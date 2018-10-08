@@ -1,6 +1,7 @@
 // 加载韩国地图处理
 import fixKorea from './fixKoreaMap';
 // 加载韩国地图图片
+const img1 = require('../../../assets/overmap.png');
 
 export class GoogleMapApi implements windeymap.WindeyMapApi {
     public mapObject: windeymap.EmMap;
@@ -20,12 +21,9 @@ export class GoogleMapApi implements windeymap.WindeyMapApi {
 
     public hideLogo(): void {
         // FIXME 使用源生修改css
-        document.getElementById(this.mapObject.name);
+        // document.getElementById(this.mapObject.name).setAttribute("class");
     }
 
-    public onZoomChange(): number {
-        return 0;
-    }
 
     public setMapStyle(style: google.maps.MapTypeStyle[]): void {
         const mapStyle = new google.maps.StyledMapType(style);
@@ -33,6 +31,7 @@ export class GoogleMapApi implements windeymap.WindeyMapApi {
         this.mapObject.map.mapTypes.set('styled_map', mapStyle);
         // 这里不太清楚是否有作用
         this.mapObject.map.setMapTypeId('styled_map');
+        this.fixKoreaMap();
     }
 
     public setZoom(newZoom: number): void {
@@ -43,11 +42,17 @@ export class GoogleMapApi implements windeymap.WindeyMapApi {
         this.mapObject.map.setCenter(newCenter);
     }
 
+    // 韩国图片在google上 有问题使用这个方法覆盖
     public fixKoreaMap() {
         const leftTop: windeymap.LatLng = {lat: 56.339, lng: 123.72};
         const rightDown: windeymap.LatLng = {lat: 38.84, lng: 132.3};
+        this.overMap(leftTop, rightDown
+            , img1, this.mapObject.map);
+    }
+
+    public overMap(leftTop: windeymap.LatLng, rightDown: windeymap.LatLng, img1: any, map: google.maps.Map) {
         fixKorea.fixedMap(leftTop, rightDown
-            , '../../../assets/logo.png', this.mapObject.map);
+            , img1, map);
     }
 
 
