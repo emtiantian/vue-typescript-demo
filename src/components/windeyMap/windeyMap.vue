@@ -18,23 +18,24 @@
 
     @Component
     export default class WindeyMap extends Vue {
+        // TODO typescript 在vue中怎么限制参数类型
         // 基础参数部分
         @Prop(Number) private zoom!: number;
         @Prop(String) private name!: string;
-        @Prop() private center!: windeymap.LatLng;
-        @Prop() private mapKey!: windeymap.MapKey[];
-        @Prop({default: 2}) private allowTime?: number;
-        @Prop({default: '400px'}) private width?: string;
-        @Prop({default: '400px'}) private height?: string;
-        @Prop({default: true}) private autoChange?: boolean;
-        @Prop({default: null}) private mapStyle?: google.maps.MapTypeStyle[];
-        @Prop({default: true}) private draggable?: boolean;
-        @Prop({default: true}) private loadCN?: boolean;
-        @Prop({default: false}) private hideLogo?: boolean; // 是否显示地图logo
-        @Prop({default: 200}) private intervals?: number; // 间隔时间设为300 的时候 google 可能还没有加载完成
+        @Prop({type: Object}) private center!: windeymap.LatLng;
+        @Prop({type: Object}) private mapKey!: windeymap.MapKey[];
+        @Prop({type: Number, default: 2}) private allowTime?: number; // 允许api加载时长
+        @Prop({type: String, default: '400px'}) private width?: string;
+        @Prop({type: String, default: '400px'}) private height?: string;
+        @Prop({type: Boolean, default: true}) private autoChange?: boolean;
+        @Prop({type: Object, default: null}) private mapStyle?: google.maps.MapTypeStyle[];
+        @Prop({type: Boolean, default: true}) private draggable?: boolean;
+        @Prop({type: Boolean, default: true}) private loadCN?: boolean;
+        @Prop({type: Boolean, default: false}) private hideLogo?: boolean; // 是否显示地图logo
+        @Prop({type: Number, default: 200}) private intervals?: number; // 扫描api是否加载完成的时间间隔
         // mark 参数部分
-        @Prop({default: ''}) private marks?: windeymap.Mark[];
-        @Prop({default: true}) private autoMarksContent?: boolean;
+        @Prop({type: String, default: ''}) private marks?: windeymap.Mark[];
+        @Prop({type: Boolean, default: true}) private autoMarksContent?: boolean;
 
         // TODO 这里是不是有一个ide问题 如果指定类型那么 在@watch 或赋值之后都是不能找到对应的方法
         // private mapApi?: windeymap.WindeyMapApi;
@@ -78,10 +79,10 @@
                 this.mapApi.setMapStyle(this.mapStyle);
             }
             // TODO 这种判断方法也是很坑啊 这里应该启用状态驱动
-            if(this.hideLogo){
-                // @ts-ignore
-                this.mapApi.hideLogo();
-            }
+            // if (this.hideLogo) {
+            //     // @ts-ignore
+            //     this.mapApi.hideLogo();
+            // }
 
         }
 

@@ -1,6 +1,7 @@
 // 加载韩国地图处理
 import fixKorea from './fixKoreaMap';
 // 加载韩国地图图片
+// 隐藏下方代码的tslint错误
 // tslint:disable-next-line
 const KoreaImg = require('../../../assets/overmap.png');
 

@@ -2,7 +2,7 @@
     <div>
         <windey-map v-bind:zoom="zoom" v-bind:name="name" v-bind:center="center" v-bind:map-key="mapKey"
                     ref="windeymap"
-                    v-bind:allowTime="allowTime" v-bind:mapStyle="mapStyle" ></windey-map>
+                    v-bind:allowTime="allowTime" v-bind:mapStyle="mapStyle" v-bind:loadCN="loadCN"></windey-map>
     </div>
 </template>
 
@@ -16,7 +16,7 @@
     export default class Monitor extends Vue {
         private zoom = 9;
         private name = 'haohe';
-        private center = {lat: 28.998496, lng: 120.684515 }; // 28.998496, 120.684515
+        private center = {lat: 28.998496, lng: 120.684515}; // 28.998496, 120.684515
         private mapKey = [
             {
                 key: 'AIzaSyDsFI7tLklDsu2PYoUB_gIAJ1HtQZz18FQ', // 地图授权key
@@ -29,12 +29,13 @@
             },
         ];
         private allowTime = 50;
-        private mapStyle = [{
-            elementType: 'geometry',
-            stylers: [{
-                color: '#1d2c4d',
-            }],
-        },
+        private mapStyle = [
+            {
+                elementType: 'geometry',
+                stylers: [{
+                    color: '#1d2c4d',
+                }],
+            },
             {
                 elementType: 'labels',
                 stylers: [{
@@ -256,7 +257,8 @@
                 }],
             },
         ];
-        private  hideLogo = true;
+        private hideLogo = true;
+        private loadCN = true;
 
 
     }
