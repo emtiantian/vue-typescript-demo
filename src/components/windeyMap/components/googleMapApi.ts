@@ -1,5 +1,6 @@
 // 加载韩国地图处理
 import fixKorea from './fixKoreaMap';
+import {windeymap} from '@/components/windeyMap/types/windeyMap';
 // 加载韩国地图图片
 // 隐藏下方代码的tslint错误
 // tslint:disable-next-line
@@ -14,7 +15,6 @@ export class GoogleMapApi implements windeymap.WindeyMapApi {
             throw new Error('GoogleMapApi arguments 不能为空');
         }
         this.mapObject = {
-            // tslint:disable-next-line
             map: new google.maps.Map(document.getElementById(name), {zoom, center}),
             name,
             type: value.type,
@@ -23,7 +23,7 @@ export class GoogleMapApi implements windeymap.WindeyMapApi {
 
 
     public hideLogo(): void {
-        // FIXME 使用源生修改css
+        // TODO 这里没有分离好 应该在这个实现类中定义样式
         // @ts-ignore
         document.getElementById(this.mapObject.name).setAttribute('class', 'hideLogo');
     }

@@ -1,3 +1,5 @@
+import {windeymap} from '@/components/windeyMap/types/windeyMap';
+
 const loadMap = (mapKey: windeymap.MapKey[], allowTime: number = 2, autoChange: boolean | undefined, intervals: number = 200): Promise<windeymap.MapKey> => {
     if (mapKey.length > 0) {
         // 排序

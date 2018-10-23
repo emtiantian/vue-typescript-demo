@@ -1,3 +1,5 @@
+import { mapType } from './types/windeyMap'
+import { mapType } from './types/windeyMap'
 <template>
     <div>
         <div v-bind:id="name" v-bind:style="{width: width,height: height}" :class="hideLogo?'hideLogo':''"></div>
@@ -6,19 +8,20 @@
 </template>
 
 <script lang="ts">
-    import {Component, Prop, Watch, Vue} from 'vue-property-decorator';
+    import {Component, Prop, Vue, Watch} from 'vue-property-decorator';
     // 全局错误处理
-    import err from './components/errorHandler';
     // 加载不同地图api
     import loadMaps from './components/loadMap';
     // google-map初始化及操作
     import {GoogleMapApi} from './components/googleMapApi';
+    // 引入自定义说明文件
+    import {windeymap} from './types/windeyMap';
+
 
     // TODO 暂时先把所有的方法写在一起,后面分成模块可使用option来配置是否启用
 
     @Component
     export default class WindeyMap extends Vue {
-        // TODO typescript 在vue中怎么限制参数类型
         // 基础参数部分
         @Prop(Number) private zoom!: number;
         @Prop(String) private name!: string;
@@ -37,9 +40,9 @@
         @Prop({type: String, default: ''}) private marks?: windeymap.Mark[];
         @Prop({type: Boolean, default: true}) private autoMarksContent?: boolean;
 
-        // TODO 这里是不是有一个ide问题 如果指定类型那么 在@watch 或赋值之后都是不能找到对应的方法
-        // private mapApi?: windeymap.WindeyMapApi;
-        private mapApi?: any;
+        // @ts-ignore
+        private mapApi: windeymap.WindeyMapApi;
+
 
         // // TODO 使用异步的形式引入不同的api
         // public async createApi(mapKey: windeymap.MapKey[], allowTime: number, autoChange: boolean, zoom: number, center: windeymap.LatLng): windeymap.WindeyMapApi {
@@ -59,28 +62,24 @@
             console.log('开始加载地图');
             const value: windeymap.MapKey = await loadMaps.loadMap(this.mapKey, this.allowTime, this.autoChange);
             console.log('加载地图完成');
-            console.log(window);
-            // TODO 这里应该判断使用哪一个地图api 这里应该调用自定义的类型 而不是使用魔法字符串
             switch (value.type) {
-                case 'google':
+                case windeymap.mapType.google:
                     this.mapApi = new GoogleMapApi(value, this.zoom, this.name, this.center);
                     break;
-                case 'baidu':
+                case windeymap.mapType.baidu:
                     this.mapApi = new GoogleMapApi(value, this.zoom, this.name, this.center);
                     break;
                 default:
                     throw new Error('没有找到对应的地图类型');
             }
             // TODO 这种判断方法也是很坑啊
-            if (!(this.mapStyle === null)) {
+            if (!(this.mapStyle === null || this.mapStyle === undefined)) {
                 // google地图对于韩国部分不能进行处理如果改变地图的配色 韩国地图部分需要做修改
-                // @ts-ignore
                 // 处理地图样式 处理韩国地图部分
                 this.mapApi.setMapStyle(this.mapStyle);
             }
             // TODO 这种判断方法也是很坑啊 这里应该启用状态驱动
             // if (this.hideLogo) {
-            //     // @ts-ignore
             //     this.mapApi.hideLogo();
             // }
 
@@ -109,13 +108,11 @@
         // 响应式改变对象属性
         @Watch('zoom')
         public onZoomChange(newZoom: number, oldZoom: number) {
-            // @ts-ignore
             this.mapApi.setZoom(newZoom);
         }
 
         @Watch('mapStyle')
         public onStyleChange(newStyle: google.maps.MapTypeStyle[], oldStyle: google.maps.MapTypeStyle[]) {
-            // @ts-ignore
             this.mapApi.setMapStyle(newStyle);
         }
 

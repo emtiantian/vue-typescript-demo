@@ -1,7 +1,7 @@
-declare namespace windeymap {
+export declare namespace windeymap {
 
 
-    interface MapKey {
+    export interface MapKey {
         key: string; // 地图授权key
         type: mapType; // map切换列表（切换顺序为数组下标）
         className: string; // 地图对象名称（用于判断地图是否加载成功）
@@ -12,19 +12,19 @@ declare namespace windeymap {
     }
 
     // maptype的枚举类型
-    enum mapType {
+    export enum mapType {
         google = 'google',
         baidu = 'baidu',
     }
 
     // 地理位置信息
-    interface LatLng {
+    export interface LatLng {
         lat: number; // 纬度
         lng: number; // 经度
     }
 
     // mark 需要包含的内容
-    interface Mark {
+    export interface Mark {
         id: string; // 唯一标识
         position: LatLng; // 标记位置
         content?: Document; // mark的解释内容
@@ -36,7 +36,7 @@ declare namespace windeymap {
 
 
     // 地图对象内容
-    interface EmMap {
+    export interface EmMap {
         type: mapType; // 这里在扩展的时候可以有其他的map类型
         name: string;
         map: google.maps.Map;
@@ -44,7 +44,7 @@ declare namespace windeymap {
 
 
     // 定义api对象应该包含的方法
-    interface WindeyMapApi {
+    export interface  WindeyMapApi {
         mapObject: EmMap ; // 自定义地图对象
 
         setMapStyle(style: google.maps.MapTypeStyle[]): void; // 设置地图的样式
