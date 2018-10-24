@@ -8,7 +8,7 @@
 
 <script lang="ts">
     import {Component, Vue} from 'vue-property-decorator';
-    import WindeyMap from '../components/windeyMap/windeyMap.vue';
+    import WindeyMap from '../components/windeyMap/WindeyMap.vue';
 
     @Component({
         components: {WindeyMap},
@@ -259,7 +259,8 @@
         ];
         private hideLogo = true;
         private loadCN = true;
-
+        // TODO 自定义组件名称不起作用
+        // TODO 自定义错误处理
 
     }
 </script>

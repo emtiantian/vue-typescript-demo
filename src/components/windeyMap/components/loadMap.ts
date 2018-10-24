@@ -1,6 +1,5 @@
-import {windeymap} from '@/components/windeyMap/types/windeyMap';
 
-const loadMap = (mapKey: windeymap.MapKey[], allowTime: number = 2, autoChange: boolean | undefined, intervals: number = 200): Promise<windeymap.MapKey> => {
+const loadMap = (mapKey: WindeyMap.MapKey[], allowTime: number = 2, autoChange: boolean | undefined, intervals: number = 200): Promise<WindeyMap.MapKey> => {
     if (mapKey.length > 0) {
         // 排序
         mapKey.sort((a, b) => {
@@ -13,7 +12,7 @@ const loadMap = (mapKey: windeymap.MapKey[], allowTime: number = 2, autoChange: 
         }
 
         // 根据允许时间切换api对象
-        const timePromise: Promise<windeymap.MapKey> = new Promise((resolve, reject) => {
+        const timePromise: Promise<WindeyMap.MapKey> = new Promise((resolve, reject) => {
             // 判断是否加载过对应的js 如果加载过就在当前的mapKey中删除 并返回
             mapKey = mapKey.filter((value) => {
                 // @ts-ignore

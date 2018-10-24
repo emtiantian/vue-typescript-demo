@@ -1,4 +1,7 @@
-export declare namespace windeymap {
+
+// @ts-ignore
+// import * as google from 'googlemaps';
+   declare namespace Windey {
 
 
     export interface MapKey {
@@ -39,7 +42,7 @@ export declare namespace windeymap {
     export interface EmMap {
         type: mapType; // 这里在扩展的时候可以有其他的map类型
         name: string;
-        map: google.maps.Map;
+        map: google.maps.Map; // 这里扩展的时候也要加上对应的地图对象
     }
 
 
@@ -57,9 +60,7 @@ export declare namespace windeymap {
 
         fixKoreaMap(): void; // 韩国图片在google上 有问题使用这个方法覆盖
 
-        overMap(leftTop:windeymap.LatLng,rightDown:windeymap.LatLng,img1:any,map:google.maps.Map):void // 覆盖地图某一部分
+        overMap(leftTop:LatLng,rightDown:LatLng,img1:any,map:google.maps.Map):void // 覆盖地图某一部分
 
     }
-
-
 }

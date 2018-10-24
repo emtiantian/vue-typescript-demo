@@ -1,5 +1,4 @@
-import { mapType } from './types/windeyMap'
-import { mapType } from './types/windeyMap'
+
 <template>
     <div>
         <div v-bind:id="name" v-bind:style="{width: width,height: height}" :class="hideLogo?'hideLogo':''"></div>
@@ -14,8 +13,7 @@ import { mapType } from './types/windeyMap'
     import loadMaps from './components/loadMap';
     // google-map初始化及操作
     import {GoogleMapApi} from './components/googleMapApi';
-    // 引入自定义说明文件
-    import {windeymap} from './types/windeyMap';
+
 
 
     // TODO 暂时先把所有的方法写在一起,后面分成模块可使用option来配置是否启用
@@ -25,8 +23,8 @@ import { mapType } from './types/windeyMap'
         // 基础参数部分
         @Prop(Number) private zoom!: number;
         @Prop(String) private name!: string;
-        @Prop({type: Object}) private center!: windeymap.LatLng;
-        @Prop({type: Object}) private mapKey!: windeymap.MapKey[];
+        @Prop({type: Object}) private center!: WindeyMapTypes.LatLng;
+        @Prop({type: Object}) private mapKey!: WindeyMapTypes.MapKey[];
         @Prop({type: Number, default: 2}) private allowTime?: number; // 允许api加载时长
         @Prop({type: String, default: '400px'}) private width?: string;
         @Prop({type: String, default: '400px'}) private height?: string;
@@ -37,22 +35,23 @@ import { mapType } from './types/windeyMap'
         @Prop({type: Boolean, default: false}) private hideLogo?: boolean; // 是否显示地图logo
         @Prop({type: Number, default: 200}) private intervals?: number; // 扫描api是否加载完成的时间间隔
         // mark 参数部分
-        @Prop({type: String, default: ''}) private marks?: windeymap.Mark[];
+        @Prop({type: String, default: ''}) private marks?: WindeyMapTypes.Mark[];
         @Prop({type: Boolean, default: true}) private autoMarksContent?: boolean;
 
+        // TODO 探讨构造时如果不实例化对象 应该怎么办
         // @ts-ignore
-        private mapApi: windeymap.WindeyMapApi;
+        private mapApi: WindeyMapTypes.WindeyMapApi;
 
 
         // // TODO 使用异步的形式引入不同的api
-        // public async createApi(mapKey: windeymap.MapKey[], allowTime: number, autoChange: boolean, zoom: number, center: windeymap.LatLng): windeymap.WindeyMapApi {
+        // public async createApi(mapKey: WindeyMapTypes.MapKey[], allowTime: number, autoChange: boolean, zoom: number, center: WindeyMapTypes.LatLng): WindeyMapTypes.WindeyMapTypesApi {
         //     console.log('加载地图完成');
-        //     const value: windeymap.MapKey = await loadMaps.loadMap(mapKey, allowTime, autoChange);
+        //     const value: WindeyMapTypes.MapKey = await loadMaps.loadMap(mapKey, allowTime, autoChange);
         //     // 初始化地图及地图事件
         //     return new GoogleMapApi(value, zoom, name, center);
         // }
         // // 生命周期钩子 在页面加载完成时触发
-        // public async mounted() : windeymap.WindeyMapApi{
+        // public async mounted() : WindeyMapTypes.WindeyMapTypesApi{
         //     return this.createApi(this.mapKey, this.allowTime, this.autoChange, this.zoom, this.center);
         // }
 
@@ -60,13 +59,13 @@ import { mapType } from './types/windeyMap'
         public async mounted() {
             // 引入google地图api或者百度地图aip 返回一个promise对象
             console.log('开始加载地图');
-            const value: windeymap.MapKey = await loadMaps.loadMap(this.mapKey, this.allowTime, this.autoChange);
+            const value: WindeyMapTypes.MapKey = await loadMaps.loadMap(this.mapKey, this.allowTime, this.autoChange);
             console.log('加载地图完成');
             switch (value.type) {
-                case windeymap.mapType.google:
+                case WindeyMapTypes.mapType.google:
                     this.mapApi = new GoogleMapApi(value, this.zoom, this.name, this.center);
                     break;
-                case windeymap.mapType.baidu:
+                case WindeyMapTypes.mapType.baidu:
                     this.mapApi = new GoogleMapApi(value, this.zoom, this.name, this.center);
                     break;
                 default:
@@ -89,13 +88,14 @@ import { mapType } from './types/windeyMap'
         // public  mounted() {
         //     // 引入google地图api或者百度地图aip 返回一个promise对象
         //     console.log('开始加载地图');
-        //     loadMaps.loadMap(this.mapKey, this.allowTime, this.autoChange).then((value: windeymap.MapKey) => {
+        //     loadMaps.loadMap(this.mapKey, this.allowTime, this.autoChange).then((value: WindeyMapTypes.MapKey) => {
         //         console.log('加载地图完成');
         //         // 初始化地图及地图事件
         //         this.mapApi = new GoogleMapApi(value, this.zoom, this.name, this.center);
         //     });
         // }
 
+        // TODO 使用solt模式做成组件
 
         // 处理mark内容，及mark事件
 
