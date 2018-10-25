@@ -5,11 +5,11 @@ import fixKorea from './fixKoreaMap';
 // tslint:disable-next-line
 const KoreaImg = require('../../../assets/overmap.png');
 
-export class GoogleMapApi implements WindeyMap.WindeyMapApi {
-    public mapObject: WindeyMap.EmMap;
+export class GoogleMapApi implements WindeyMapTypes.WindeyMapApi {
+    public mapObject: WindeyMapTypes.EmMap;
 
 
-    constructor(value: WindeyMap.MapKey, zoom: number, name: string, center: WindeyMap.LatLng) {
+    constructor(value: WindeyMapTypes.MapKey, zoom: number, name: string, center: WindeyMapTypes.LatLng) {
         if (!value || !zoom || !name || !center) {
             throw new Error('GoogleMapApi arguments 不能为空');
         }
@@ -41,19 +41,19 @@ export class GoogleMapApi implements WindeyMap.WindeyMapApi {
         this.mapObject.map.setZoom(newZoom);
     }
 
-    public setCenter(newCenter: WindeyMap.LatLng): void {
+    public setCenter(newCenter: WindeyMapTypes.LatLng): void {
         this.mapObject.map.setCenter(newCenter);
     }
 
     // 韩国图片在google上 有问题使用这个方法覆盖
     public fixKoreaMap() {
-        const leftTop: WindeyMap.LatLng = {lat: 56.339, lng: 123.72};
-        const rightDown: WindeyMap.LatLng = {lat: 38.84, lng: 132.3};
+        const leftTop: WindeyMapTypes.LatLng = {lat: 56.339, lng: 123.72};
+        const rightDown: WindeyMapTypes.LatLng = {lat: 38.84, lng: 132.3};
         this.overMap(leftTop, rightDown
             , KoreaImg, this.mapObject.map);
     }
 
-    public overMap(leftTop: WindeyMap.LatLng, rightDown: WindeyMap.LatLng, img: any, map: google.maps.Map) {
+    public overMap(leftTop: WindeyMapTypes.LatLng, rightDown: WindeyMapTypes.LatLng, img: any, map: google.maps.Map) {
         fixKorea.fixedMap(leftTop, rightDown
             , img, map);
     }

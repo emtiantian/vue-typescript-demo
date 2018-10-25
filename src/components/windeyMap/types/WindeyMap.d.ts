@@ -1,5 +1,4 @@
-
-   declare namespace WindeyMap {
+declare namespace WindeyMapTypes {
 
 
     export interface MapKey {
@@ -13,7 +12,7 @@
     }
 
     // maptype的枚举类型
-    export enum mapType {
+   export enum mapType {
         google = 'google',
         baidu = 'baidu',
     }
@@ -45,8 +44,8 @@
 
 
     // 定义api对象应该包含的方法
-    export interface  WindeyMapApi {
-        mapObject: EmMap ; // 自定义地图对象
+    export interface WindeyMapApi {
+        mapObject: EmMap; // 自定义地图对象
 
         setMapStyle(style: google.maps.MapTypeStyle[]): void; // 设置地图的样式
 
@@ -58,7 +57,7 @@
 
         fixKoreaMap(): void; // 韩国图片在google上 有问题使用这个方法覆盖
 
-        overMap(leftTop:LatLng,rightDown:LatLng,img1:any,map:google.maps.Map):void // 覆盖地图某一部分
+        overMap(leftTop: LatLng, rightDown: LatLng, img1: any, map: google.maps.Map): void // 覆盖地图某一部分
 
     }
 

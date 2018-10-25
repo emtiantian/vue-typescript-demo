@@ -61,11 +61,13 @@
             console.log('开始加载地图');
             const value: WindeyMapTypes.MapKey = await loadMaps.loadMap(this.mapKey, this.allowTime, this.autoChange);
             console.log('加载地图完成');
+            // TODO 不能用魔法字符串
+
             switch (value.type) {
-                case WindeyMapTypes.mapType.google:
+                case 'google':
                     this.mapApi = new GoogleMapApi(value, this.zoom, this.name, this.center);
                     break;
-                case WindeyMapTypes.mapType.baidu:
+                case 'baidu':
                     this.mapApi = new GoogleMapApi(value, this.zoom, this.name, this.center);
                     break;
                 default:

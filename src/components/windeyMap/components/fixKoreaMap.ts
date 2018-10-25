@@ -4,7 +4,7 @@
 // 实现一个方法用来覆盖地图上的遮罩层
 // 这个方法可以不单单作为覆盖地图使用
 
-const fixedMap = (leftTop: WindeyMap.LatLng, rightDown: WindeyMap.LatLng, imgSrc: string, map: google.maps.Map) => {
+const fixedMap = (leftTop: WindeyMapTypes.LatLng, rightDown: WindeyMapTypes.LatLng, imgSrc: string, map: google.maps.Map) => {
     // let overlay;
 
     function createOverlay() {
