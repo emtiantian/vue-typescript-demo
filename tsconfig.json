@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "noEmit":true,
+
     "declaration":true,
     "target": "esnext",
     "module": "esnext",
@@ -13,6 +13,7 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
+    "outDir": "temp/",
     "types": [
       "node",
       "mocha",
