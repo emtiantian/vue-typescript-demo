@@ -1,29 +1,20 @@
+
+
+
 declare namespace WindeyMapTypes {
 
-    // export type GOOGLE = 'google';
-    // export type BAIDU = 'baidu';
-    // export type mapName = 'google' | 'baidu';
+
+    export type mapName = 'google' | 'baidu';
 
     export interface MapKey {
         key: string; // 地图授权key
-        type: mapType; // map切换列表（切换顺序为数组下标）
+        type: mapName; // map切换列表（切换顺序为数组下标）
         className: string; // 地图对象名称（用于判断地图是否加载成功）
         ordered: number; // 优先顺序
         loadCN?: boolean; // 是否加载中国google
         apiUrl?: string;
         apiUrlCn?: string;
     }
-
-    // maptype的枚举类型
-    // export enum mapType {
-    //     google = 'google',
-    //     baidu = 'baidu',
-    // }
-    export const enum mapType {
-        GOOGLE = 'google',
-        BAIDU = 'baidu',
-    }
-
 
     // 地理位置信息
     export interface LatLng {
@@ -42,14 +33,12 @@ declare namespace WindeyMapTypes {
         draggable?: boolean; // mark 是否可以被拖动
     }
 
-
     // 地图对象内容
     export interface EmMap {
-        type: mapType; // 这里在扩展的时候可以有其他的map类型
+        type: mapName; // 这里在扩展的时候可以有其他的map类型
         name: string;
         map: google.maps.Map; // 这里扩展的时候也要加上对应的地图对象
     }
-
 
     // 定义api对象应该包含的方法
     export interface WindeyMapApi {
@@ -68,6 +57,4 @@ declare namespace WindeyMapTypes {
         overMap(leftTop: LatLng, rightDown: LatLng, img1: any, map: google.maps.Map): void // 覆盖地图某一部分
 
     }
-
-
 }

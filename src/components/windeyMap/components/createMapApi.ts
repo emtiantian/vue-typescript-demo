@@ -1,17 +1,14 @@
 import {GoogleMapApi} from '@/components/windeyMap/components/googleMapApi';
+import {mapTypes} from '@/components/windeyMap/components/mapTypes';
 
-const  enum mapType {
-    GOOGle = WindeyMapTypes.mapType.GOOGLE,
-    BAIDU = WindeyMapTypes.mapType.BAIDU,
-}
 
 const createMapApi = (value: WindeyMapTypes.MapKey, zoom: number, name: string, center: WindeyMapTypes.LatLng): WindeyMapTypes.WindeyMapApi => {
     let mapApi: WindeyMapTypes.WindeyMapApi;
     switch (value.type) {
-        case WindeyMapTypes.mapType.GOOGLE:
+        case mapTypes.GOOGLE:
             mapApi = new GoogleMapApi(value, zoom, name, center);
             break;
-        case WindeyMapTypes.mapType.BAIDU:
+        case mapTypes.BAIDU:
             mapApi = new GoogleMapApi(value, zoom, name, center);
             break;
         default:

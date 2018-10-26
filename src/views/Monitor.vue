@@ -10,6 +10,7 @@
     import {Component, Vue} from 'vue-property-decorator';
     import WindeyMap from '../components/windeyMap/WindeyMap.vue';
 
+
     @Component({
         components: {WindeyMap},
     })
@@ -20,7 +21,7 @@
         private mapKey = [
             {
                 key: 'AIzaSyDsFI7tLklDsu2PYoUB_gIAJ1HtQZz18FQ', // 地图授权key
-                type: 'google', // map切换列表（切换顺序为数组下标）
+                type:  'google', // map切换列表（切换顺序为数组下标）
                 className: 'google', // 地图对象名称（用于判断地图是否加载成功）
                 ordered: 1, // 优先顺序
                 loadCN: true, // 是否加载中国google

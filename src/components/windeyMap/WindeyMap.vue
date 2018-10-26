@@ -23,12 +23,12 @@
         @Prop(Number) private zoom!: number;
         @Prop(String) private name!: string;
         @Prop({type: Object}) private center!: WindeyMapTypes.LatLng;
-        @Prop({type: Object}) private mapKey!: WindeyMapTypes.MapKey[];
+        @Prop({type: Array}) private mapKey!: WindeyMapTypes.MapKey[];
         @Prop({type: Number, default: 2}) private allowTime?: number; // 允许api加载时长
         @Prop({type: String, default: '400px'}) private width?: string;
         @Prop({type: String, default: '400px'}) private height?: string;
         @Prop({type: Boolean, default: true}) private autoChange?: boolean;
-        @Prop({type: Object, default: null}) private mapStyle?: google.maps.MapTypeStyle[];
+        @Prop({type: Array, default: null}) private mapStyle?: google.maps.MapTypeStyle[];
         @Prop({type: Boolean, default: true}) private draggable?: boolean;
         @Prop({type: Boolean, default: true}) private loadCN?: boolean;
         @Prop({type: Boolean, default: false}) private hideLogo?: boolean; // 是否显示地图logo

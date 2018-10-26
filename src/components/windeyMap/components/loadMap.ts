@@ -1,5 +1,12 @@
 import createMapApi from '@/components/windeyMap/components/createMapApi';
 
+/**
+ *
+ * @param mapKey
+ * @param autoChange
+ * @param allowTime
+ * @param intervals
+ */
 const loadMap = (mapKey: WindeyMapTypes.MapKey[], autoChange: boolean | undefined, allowTime: number = 2, intervals: number = 200): Promise<WindeyMapTypes.MapKey> => {
     if (mapKey.length > 0) {
         // 排序
