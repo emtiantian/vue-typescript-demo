@@ -11,8 +11,7 @@
     // 全局错误处理
     // 加载不同地图api
     import loadMaps from './components/loadMap';
-    // google-map初始化及操作
-    import {GoogleMapApi} from './components/googleMapApi';
+
 
 
 
@@ -57,22 +56,8 @@
 
 
         public async mounted() {
-            // 引入google地图api或者百度地图aip 返回一个promise对象
-            console.log('开始加载地图');
-            const value: WindeyMapTypes.MapKey = await loadMaps.loadMap(this.mapKey, this.allowTime, this.autoChange);
-            console.log('加载地图完成');
-            // TODO 不能用魔法字符串
-
-            switch (value.type) {
-                case 'google':
-                    this.mapApi = new GoogleMapApi(value, this.zoom, this.name, this.center);
-                    break;
-                case 'baidu':
-                    this.mapApi = new GoogleMapApi(value, this.zoom, this.name, this.center);
-                    break;
-                default:
-                    throw new Error('没有找到对应的地图类型');
-            }
+            // 创建地图api
+            this.mapApi = await loadMaps.createApi(this.mapKey, this.autoChange, this.zoom, this.name, this.center, this.allowTime, this.intervals);
             // TODO 这种判断方法也是很坑啊
             if (!(this.mapStyle === null || this.mapStyle === undefined)) {
                 // google地图对于韩国部分不能进行处理如果改变地图的配色 韩国地图部分需要做修改

@@ -1,5 +1,6 @@
+import createMapApi from '@/components/windeyMap/components/createMapApi';
 
-const loadMap = (mapKey: WindeyMapTypes.MapKey[], allowTime: number = 2, autoChange: boolean | undefined, intervals: number = 200): Promise<WindeyMapTypes.MapKey> => {
+const loadMap = (mapKey: WindeyMapTypes.MapKey[], autoChange: boolean | undefined, allowTime: number = 2, intervals: number = 200): Promise<WindeyMapTypes.MapKey> => {
     if (mapKey.length > 0) {
         // 排序
         mapKey.sort((a, b) => {
@@ -112,6 +113,24 @@ const loadMap = (mapKey: WindeyMapTypes.MapKey[], allowTime: number = 2, autoCha
 
 };
 
+/**
+ *
+ * @param mapKey 地图相关
+ * @param autoChange
+ * @param zoom
+ * @param name
+ * @param center
+ * @param intervals
+ * @param allowTime
+ */
+const createApi = async (mapKey: WindeyMapTypes.MapKey[], autoChange: boolean | undefined, zoom: number, name: string, center: WindeyMapTypes.LatLng, intervals: number = 200, allowTime: number = 2): Promise<WindeyMapTypes.WindeyMapApi> => {
+    // 引入google地图api或者百度地图aip 返回一个promise对象
+    console.log('开始加载地图');
+    const value: WindeyMapTypes.MapKey = await loadMap(mapKey, autoChange, allowTime, intervals);
+    console.log('加载地图完成');
+    return createMapApi.createMapApi(value, zoom, name, center);
+};
 export default {
     loadMap,
+    createApi,
 };

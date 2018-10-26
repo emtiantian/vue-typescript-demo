@@ -1,5 +1,8 @@
 declare namespace WindeyMapTypes {
 
+    // export type GOOGLE = 'google';
+    // export type BAIDU = 'baidu';
+    // export type mapName = 'google' | 'baidu';
 
     export interface MapKey {
         key: string; // 地图授权key
@@ -12,10 +15,15 @@ declare namespace WindeyMapTypes {
     }
 
     // maptype的枚举类型
-   export enum mapType {
-        google = 'google',
-        baidu = 'baidu',
+    // export enum mapType {
+    //     google = 'google',
+    //     baidu = 'baidu',
+    // }
+    export const enum mapType {
+        GOOGLE = 'google',
+        BAIDU = 'baidu',
     }
+
 
     // 地理位置信息
     export interface LatLng {
