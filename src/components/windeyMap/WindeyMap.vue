@@ -12,9 +12,6 @@
     // 加载不同地图api
     import loadMaps from './components/loadMap';
 
-
-
-
     // TODO 暂时先把所有的方法写在一起,后面分成模块可使用option来配置是否启用
 
     @Component
@@ -42,19 +39,6 @@
         private mapApi: WindeyMapTypes.WindeyMapApi;
 
 
-        // // TODO 使用异步的形式引入不同的api
-        // public async createApi(mapKey: WindeyMapTypes.MapKey[], allowTime: number, autoChange: boolean, zoom: number, center: WindeyMapTypes.LatLng): WindeyMapTypes.WindeyMapTypesApi {
-        //     console.log('加载地图完成');
-        //     const value: WindeyMapTypes.MapKey = await loadMaps.loadMap(mapKey, allowTime, autoChange);
-        //     // 初始化地图及地图事件
-        //     return new GoogleMapApi(value, zoom, name, center);
-        // }
-        // // 生命周期钩子 在页面加载完成时触发
-        // public async mounted() : WindeyMapTypes.WindeyMapTypesApi{
-        //     return this.createApi(this.mapKey, this.allowTime, this.autoChange, this.zoom, this.center);
-        // }
-
-
         public async mounted() {
             // 创建地图api
             this.mapApi = await loadMaps.createApi(this.mapKey, this.autoChange, this.zoom, this.name, this.center, this.allowTime, this.intervals);
@@ -71,18 +55,7 @@
 
         }
 
-        // 生命周期钩子 在页面加载完成时触发 这种写法所有的事件都要写在这个then里
-        // public  mounted() {
-        //     // 引入google地图api或者百度地图aip 返回一个promise对象
-        //     console.log('开始加载地图');
-        //     loadMaps.loadMap(this.mapKey, this.allowTime, this.autoChange).then((value: WindeyMapTypes.MapKey) => {
-        //         console.log('加载地图完成');
-        //         // 初始化地图及地图事件
-        //         this.mapApi = new GoogleMapApi(value, this.zoom, this.name, this.center);
-        //     });
-        // }
-
-        // TODO 使用solt模式做成组件
+        // TODO 使用slot模式做成组件
 
         // 处理mark内容，及mark事件
 

@@ -130,7 +130,7 @@ const loadMap = (mapKey: WindeyMapTypes.MapKey[], autoChange: boolean | undefine
  * @param intervals
  * @param allowTime
  */
-const createApi = async (mapKey: WindeyMapTypes.MapKey[], autoChange: boolean | undefined, zoom: number, name: string, center: WindeyMapTypes.LatLng, intervals: number = 200, allowTime: number = 2): Promise<WindeyMapTypes.WindeyMapApi> => {
+const createApi = async (mapKey: WindeyMapTypes.MapKey[], autoChange: boolean | undefined, zoom: number, name: string, center: WindeyMapTypes.LatLng, allowTime: number = 2, intervals: number = 200): Promise<WindeyMapTypes.WindeyMapApi> => {
     // 引入google地图api或者百度地图aip 返回一个promise对象
     console.log('开始加载地图');
     const value: WindeyMapTypes.MapKey = await loadMap(mapKey, autoChange, allowTime, intervals);
