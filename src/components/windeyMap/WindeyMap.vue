@@ -52,7 +52,6 @@
             // if (this.hideLogo) {
             //     this.mapApi.hideLogo();
             // }
-
         }
 
         // TODO 使用slot模式做成组件

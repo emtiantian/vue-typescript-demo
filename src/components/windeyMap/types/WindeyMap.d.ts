@@ -1,10 +1,8 @@
-
-
-
 declare namespace WindeyMapTypes {
 
 
-    export type mapName = 'google' | 'baidu';
+    export type mapName = 'google' | 'baidu'; // 这里在扩展的时候可以有其他的map类型
+    export type mapApi = google.maps.Map; // 这里扩展的时候也要加上对应的地图对象
 
     export interface MapKey {
         key: string; // 地图授权key
@@ -31,13 +29,14 @@ declare namespace WindeyMapTypes {
         onTouch?: () => void; // 点击事件
         onMouseOver?: () => void; // 悬停事件
         draggable?: boolean; // mark 是否可以被拖动
+        autoMove?:boolean; // 是否启动自动移动位置
     }
 
     // 地图对象内容
     export interface EmMap {
-        type: mapName; // 这里在扩展的时候可以有其他的map类型
+        type: mapName;
         name: string;
-        map: google.maps.Map; // 这里扩展的时候也要加上对应的地图对象
+        map: mapApi;
     }
 
     // 定义api对象应该包含的方法
