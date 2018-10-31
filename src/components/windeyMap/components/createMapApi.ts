@@ -1,7 +1,13 @@
 import {GoogleMapApi} from '@/components/windeyMap/components/googleMapApi';
 import {mapTypes} from '@/components/windeyMap/components/mapTypes';
 
-
+/**
+ *
+ * @param value
+ * @param zoom
+ * @param name
+ * @param center
+ */
 const createMapApi = (value: WindeyMapTypes.MapKey, zoom: number, name: string, center: WindeyMapTypes.LatLng): WindeyMapTypes.WindeyMapApi => {
     let mapApi: WindeyMapTypes.WindeyMapApi;
     switch (value.type) {

@@ -2,7 +2,7 @@
     <div>
         <windey-map v-bind:zoom="zoom" v-bind:name="name" v-bind:center="center" v-bind:map-key="mapKey"
                     ref="windeymap"
-                    v-bind:allowTime="allowTime" v-bind:mapStyle="mapStyle" v-bind:loadCN="loadCN"></windey-map>
+                    v-bind:allowTime="allowTime" v-bind:mapStyle="mapStyle" v-bind:loadCN="loadCN" v-bind:hideLogo="hideLogo"></windey-map>
     </div>
 </template>
 

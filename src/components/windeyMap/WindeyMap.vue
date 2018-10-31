@@ -1,4 +1,3 @@
-
 <template>
     <div>
         <div v-bind:id="name" v-bind:style="{width: width,height: height}" :class="hideLogo?'hideLogo':''"></div>
@@ -79,11 +78,15 @@
 
     }
 </script>
-
+<!--本地css 只会影响当前创建的dom结构，其他方式创建的dom结构不能起作用，可以用深度作用选择器 >>>-->
+<!--<style scoped>-->
+    <!--.a >>> .b { /* ... */ }-->
+<!--</style>-->
+<!--上述代码将会编译成：-->
+<!--.a[data-v-f3f3eg9] .b { /* ... */ }-->
 <style scoped lang="less">
-    .hideLogo {
+    .hideLogo >>>{
         /*隐藏google logo
-        * 当前这个方法已经不起作用了
         */
         a[href^="http://maps.google.cn"] {
             display: none !important
@@ -98,4 +101,25 @@
             display: none !important
         }
     }
+
 </style>
+<!--<style lang="less">-->
+    <!--/** 全局css 作用就是会影响期所有子dom-->
+     <!--*/-->
+    <!--.hideLogo{-->
+        <!--/*隐藏google logo-->
+        <!--*/-->
+        <!--a[href^="http://maps.google.cn"] {-->
+            <!--display: none !important-->
+        <!--}-->
+        <!--a[href^="https://maps.google.cn"] {-->
+            <!--display: none !important-->
+        <!--}-->
+        <!--a[href^="http://maps.google.com/maps"] {-->
+            <!--display: none !important-->
+        <!--}-->
+        <!--a[href^="https://maps.google.com/maps"] {-->
+            <!--display: none !important-->
+        <!--}-->
+    <!--}-->
+<!--</style>-->
