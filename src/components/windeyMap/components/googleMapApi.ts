@@ -58,5 +58,11 @@ export class GoogleMapApi implements WindeyMapTypes.WindeyMapApi {
             , img, map);
     }
 
+    setMarker(markerOption: google.maps.MarkerOptions, autoMarksContent: boolean): string {
+        return "";
+    }
+
+
+
 
 }

@@ -30,7 +30,7 @@
         @Prop({type: Boolean, default: false}) private hideLogo?: boolean; // 是否显示地图logo
         @Prop({type: Number, default: 200}) private intervals?: number; // 扫描api是否加载完成的时间间隔
         // mark 参数部分
-        @Prop({type: String, default: ''}) private marks?: WindeyMapTypes.Mark[];
+        @Prop({type: String, default: ''}) private mark?: google.maps.MarkerOptions;
         @Prop({type: Boolean, default: true}) private autoMarksContent?: boolean;
 
         // TODO 探讨构造时如果不实例化对象 应该怎么办
@@ -85,19 +85,20 @@
 <!--上述代码将会编译成：-->
 <!--.a[data-v-f3f3eg9] .b { /* ... */ }-->
 <style scoped lang="less">
-    .hideLogo >>>{
+    .hideLogo {
         /*隐藏google logo
+        * /deep/ 是深度选择器
         */
-        a[href^="http://maps.google.cn"] {
+        /deep/ a[href^="http://maps.google.cn"] {
             display: none !important
         }
-        a[href^="https://maps.google.cn"] {
+        /deep/ a[href^="https://maps.google.cn"] {
             display: none !important
         }
-        a[href^="http://maps.google.com/maps"] {
+        /deep/ a[href^="http://maps.google.com/maps"] {
             display: none !important
         }
-        a[href^="https://maps.google.com/maps"] {
+        /deep/  a[href^="https://maps.google.com/maps"] {
             display: none !important
         }
     }

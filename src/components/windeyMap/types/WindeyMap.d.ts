@@ -1,6 +1,7 @@
 declare namespace WindeyMapTypes {
 
 
+    import MarkerOptions = google.maps.MarkerOptions;
     export type mapName = 'google' | 'baidu'; // 这里在扩展的时候可以有其他的map类型
     export type mapApi = google.maps.Map; // 这里扩展的时候也要加上对应的地图对象
 
@@ -20,17 +21,17 @@ declare namespace WindeyMapTypes {
         lng: number; // 经度
     }
 
-    // mark 需要包含的内容
-    export interface Mark {
-        id: string; // 唯一标识
-        position: LatLng; // 标记位置
-        content?: Document; // mark的解释内容
-        icon?: string;  // mark图片或者样式
-        onTouch?: () => void; // 点击事件
-        onMouseOver?: () => void; // 悬停事件
-        draggable?: boolean; // mark 是否可以被拖动
-        autoMove?:boolean; // 是否启动自动移动位置
-    }
+    // mark 需要包含的内容  现在使用@types 提供的google.map的类型说明
+    // export interface Mark {
+    //     id: string; // 唯一标识
+    //     position: LatLng; // 标记位置
+    //     content?: Document; // mark的解释内容
+    //     icon?: string;  // mark图片或者样式
+    //     onTouch?: () => void; // 点击事件
+    //     onMouseOver?: () => void; // 悬停事件
+    //     draggable?: boolean; // mark 是否可以被拖动
+    //     autoMove?:boolean; // 是否启动自动移动位置
+    // }
 
     // 地图对象内容
     export interface EmMap {
@@ -54,6 +55,8 @@ declare namespace WindeyMapTypes {
         fixKoreaMap(): void; // 韩国图片在google上 有问题使用这个方法覆盖
 
         overMap(leftTop: LatLng, rightDown: LatLng, img1: any, map: google.maps.Map): void // 覆盖地图某一部分
+
+        setMarker(markerOption: MarkerOptions, autoMarksContent:boolean):string;
 
     }
 }
