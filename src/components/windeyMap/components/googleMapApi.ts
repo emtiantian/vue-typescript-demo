@@ -22,7 +22,6 @@ export class GoogleMapApi implements WindeyMapTypes.WindeyMapApi {
 
 
     public hideLogo(): void {
-        // TODO 这里没有分离好 应该在这个实现类中定义样式
         // @ts-ignore
         document.getElementById(this.mapObject.name).setAttribute('class', 'hideLogo');
     }
@@ -58,10 +57,13 @@ export class GoogleMapApi implements WindeyMapTypes.WindeyMapApi {
             , img, map);
     }
 
-    setMarker(markerOption: google.maps.MarkerOptions, autoMarksContent: boolean): string {
-        return "";
+    setInfoWindow(): object {
+        return {};
     }
 
+    setMarker(markerOption: google.maps.MarkerOptions, autoMarksContent: boolean): object {
+        return {};
+    }
 
 
 

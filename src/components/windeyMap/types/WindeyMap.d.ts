@@ -56,7 +56,9 @@ declare namespace WindeyMapTypes {
 
         overMap(leftTop: LatLng, rightDown: LatLng, img1: any, map: google.maps.Map): void // 覆盖地图某一部分
 
-        setMarker(markerOption: MarkerOptions, autoMarksContent:boolean):string;
+        setMarker(markerOption: MarkerOptions, autoMarksContent:boolean):object;
+
+        setInfoWindow():object;
 
     }
 }
