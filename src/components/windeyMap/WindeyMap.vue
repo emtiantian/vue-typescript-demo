@@ -47,15 +47,11 @@
                 // 处理地图样式 处理韩国地图部分
                 this.mapApi.setMapStyle(this.mapStyle);
             }
-            // TODO 这种判断方法也是很坑啊 这里应该启用状态驱动
-            // if (this.hideLogo) {
-            //     this.mapApi.hideLogo();
-            // }
         }
 
         // TODO 使用slot模式做成组件
 
-        // 处理mark内容，及mark事件
+        // 处理infoWindow内容，及mark事件
 
         // 处理mark摆放位置问题
 

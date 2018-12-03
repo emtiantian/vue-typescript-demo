@@ -57,14 +57,12 @@ export class GoogleMapApi implements WindeyMapTypes.WindeyMapApi {
             , img, map);
     }
 
-    setInfoWindow(): object {
+    public setInfoWindow(InfoWindowOption: google.maps.InfoWindowOptions): object {
         return {};
     }
 
-    setMarker(markerOption: google.maps.MarkerOptions, autoMarksContent: boolean): object {
+    public setMarker(markerOption: google.maps.MarkerOptions, autoMarksContent: boolean): object {
         return {};
     }
-
-
 
 }
